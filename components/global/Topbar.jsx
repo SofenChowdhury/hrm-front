@@ -140,7 +140,7 @@ const Topbar = ({ token, isCollapsed, name }) => {
             <LogoutIcon />
           </IconButton> */}
 
-          <Button disabled style={{ color: "orange", fontSize: "14px" }} className="me-4">
+          <Button disabled style={{ color: "blue", fontSize: "14px" }} className="me-4">
             {moment(currentTime).format("hh:mm:ss a")}
           </Button>
           <Button

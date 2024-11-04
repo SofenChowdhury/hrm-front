@@ -121,7 +121,7 @@ const Login = ({ isLoggedIn, message }) => {
                     alt="fairvat-logo"
                     width={192}
                     height={59}
-                    src={`../../assets/images/logo.png`}
+                    src={`../../assets/images/ftl_logo.png`}
                     style={{ cursor: "pointer" }}
                   />
                 </div>

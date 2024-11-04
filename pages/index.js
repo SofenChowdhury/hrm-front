@@ -39,14 +39,14 @@ const Home = ({ roles, userName }) => {
       <div className="row">
         <div className="col-md-12 text-center">
           <Typography variant="h1" color={colors.greenAccent[300]}>
-            Hello {userName}, Welcome to FairVAT!
+            Hello {userName}, Welcome to HR-Management!!!
           </Typography>
         </div>
       </div>
 
       {roles[0].id === 5 ? (
         <>
-          <div className="row">
+          {/* <div className="row">
             <div className="col-md-3">
               <Card className="mt-5">
                 <CardContent className="text-center">
@@ -141,11 +141,11 @@ const Home = ({ roles, userName }) => {
                 </CardActions>
               </Card>
             </div>
-          </div>
+          </div> */}
         </>
       ) : (
         <>
-          <Charts />
+          {/* <Charts />
           <div className="row">
             <div className="col-md-3">
               <Card className="mt-5">
@@ -418,7 +418,7 @@ const Home = ({ roles, userName }) => {
                 </CardActions>
               </Card>
             </div>
-          </div>
+          </div> */}
         </>
       )}
     </>

@@ -283,7 +283,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     alt="profile-user"
                     width="130px"
                     height="40px"
-                    src={`../../assets/images/logo.png`}
+                    src={`../../assets/images/ftl_logo.png`}
                     style={{ cursor: "pointer" }}
                   />
                   <IconButton onClick={change}>
@@ -319,7 +319,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       <b>{roles[0]?.name}</b>
                     </Typography>
                   )}
-                  {company && (
+                  {/* {company && (
                     <Typography variant="h5" color={colors.greenAccent[300]}>
                       <b>{company?.slug}</b>
                     </Typography>
@@ -328,7 +328,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     <Typography variant="h5" color={colors.greenAccent[500]}>
                       <b>[BIN-{company?.company_bin}]</b>
                     </Typography>
-                  )}
+                  )} */}
                 </Box>
               </Box>
             )}
@@ -349,7 +349,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   />
 
                   {/* MUSHAK */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="Mushak"
                     icon={<ReceiptLongIcon />}
                     style={{
@@ -503,10 +503,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                         width={width}
                       />
                     </SubMenu>
-                  </SubMenu>
+                  </SubMenu> */}
 
                   {/* Purchases */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="Purchase"
                     icon={<ShoppingCartIcon />}
                     style={{
@@ -526,10 +526,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                  </SubMenu>
+                  </SubMenu> */}
 
                   {/* Vendors */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="Vendors"
                     icon={<StoreIcon />}
                     style={{
@@ -549,10 +549,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                  </SubMenu>
+                  </SubMenu> */}
 
                   {/* Customers */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="Customers"
                     icon={<FaceIcon />}
                     style={{
@@ -572,10 +572,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                  </SubMenu>
+                  </SubMenu> */}
 
                   {/* Products */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="Products"
                     icon={<FaceIcon />}
                     style={{
@@ -606,10 +606,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                         width={width}
                       />
                     )}
-                  </SubMenu>
+                  </SubMenu> */}
 
                   {/* Branches */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="Branches"
                     icon={<AccountTreeIcon />}
                     style={{
@@ -629,10 +629,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                  </SubMenu>
+                  </SubMenu> */}
 
                   {/* Reports */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="MIS Reports"
                     icon={<ReceiptIcon />}
                     style={{
@@ -803,10 +803,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                  </SubMenu>
+                  </SubMenu> */}
 
                   {/* CA Reports */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="CA Firm Reports"
                     icon={<BookIcon />}
                     style={{
@@ -826,7 +826,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                  </SubMenu>
+                  </SubMenu> */}
                 </>
               ) : (
                 <>
@@ -841,7 +841,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   />
 
                   {/* Purchases */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="Purchase"
                     icon={<ShoppingCartIcon />}
                     style={{
@@ -879,7 +879,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                    {/* <Item
+                    <Item
                       title="Bulk Purchase"
                       to="/purchases/bulkPurchase"
                       icon={<ShoppingBasketIcon />}
@@ -887,7 +887,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       setSelected={setSelected}
                       change={change}
                       width={width}
-                    /> */}
+                    />
                     <Item
                       title="Purchase List"
                       to="/purchases/purchaseList"
@@ -915,10 +915,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                  </SubMenu>
+                  </SubMenu> */}
 
                   {/* Orders */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="Sale Order"
                     icon={<ShoppingBagIcon />}
                     style={{
@@ -983,10 +983,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                  </SubMenu>
+                  </SubMenu> */}
 
                   {/* Vendors */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="Manage Vendors"
                     icon={<StoreIcon />}
                     style={{
@@ -1015,10 +1015,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                  </SubMenu>
+                  </SubMenu> */}
 
                   {/* Customers */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="Manage Customers"
                     icon={<FaceIcon />}
                     style={{
@@ -1038,7 +1038,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                    {/* <Item
+                    <Item
                       title="Bulk Create Customer"
                       to="/customers/bulkCustomer"
                       icon={<AddIcon />}
@@ -1046,7 +1046,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       setSelected={setSelected}
                       change={change}
                       width={width}
-                    /> */}
+                    />
                     <Item
                       title="Customer List"
                       to="/customers/customerList"
@@ -1056,10 +1056,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                  </SubMenu>
+                  </SubMenu> */}
 
                   {/* MUSHAK */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="Mushak"
                     icon={<ReceiptIcon />}
                     style={{
@@ -1204,10 +1204,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                         width={width}
                       />
                     </SubMenu>
-                  </SubMenu>
+                  </SubMenu> */}
 
                   {/* Products */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="Manage Products"
                     icon={<CategoryIcon />}
                     style={{
@@ -1227,7 +1227,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                    {/* <Item
+                    <Item
                       title="Bulk Product Upload"
                       to="/products/bulkProduct"
                       icon={<AddIcon />}
@@ -1235,7 +1235,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       setSelected={setSelected}
                       change={change}
                       width={width}
-                    /> */}
+                    />
                     <Item
                       title="Finished Goods"
                       to="/products/finishedGoodList"
@@ -1272,10 +1272,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                  </SubMenu>
+                  </SubMenu> */}
 
                   {/* Stock */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="Manage Stock"
                     icon={<InventoryIcon />}
                     style={{
@@ -1331,10 +1331,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                  </SubMenu>
+                  </SubMenu> */}
 
                   {/* Stock Transfer */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="Transfer Stock"
                     icon={<MoveDownIcon />}
                     style={{
@@ -1372,10 +1372,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                  </SubMenu>
+                  </SubMenu> */}
 
                   {/* BOM */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="Manage BOM"
                     icon={<ReceiptIcon />}
                     style={{
@@ -1404,7 +1404,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                    {/* <Item
+                    <Item
                       title="BOM Template"
                       to="/bom/bomTemplate"
                       icon={<ReceiptLongIcon />}
@@ -1412,7 +1412,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       setSelected={setSelected}
                       change={change}
                       width={width}
-                    /> */}
+                    />
                     <Item
                       title="Value Addition Settings"
                       to="/settings/vatSettings_4_3"
@@ -1422,7 +1422,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                  </SubMenu>
+                  </SubMenu> */}
 
                   {/* Companies */}
                   <SubMenu
@@ -1457,7 +1457,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   </SubMenu>
 
                   {/* Branches */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="Manage Branch"
                     icon={<AccountTreeIcon />}
                     style={{
@@ -1486,10 +1486,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                  </SubMenu>
+                  </SubMenu> */}
 
                   {/* HS Codes */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="Manage HS Codes"
                     icon={<CodeIcon />}
                     style={{
@@ -1509,7 +1509,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                  </SubMenu>
+                  </SubMenu> */}
 
                   {/* User */}
                   <SubMenu
@@ -1624,7 +1624,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   </SubMenu>
 
                   {/* Categories */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="Manage Categories"
                     icon={<ReceiptIcon />}
                     style={{
@@ -1653,10 +1653,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                  </SubMenu>
+                  </SubMenu> */}
 
                   {/* Company Settings */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="Company Settings"
                     icon={<SettingsApplicationsIcon />}
                     style={{
@@ -1676,10 +1676,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                  </SubMenu>
+                  </SubMenu> */}
 
                   {/* UoM */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="Units of Materials"
                     icon={<ScaleIcon />}
                     style={{
@@ -1708,10 +1708,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                  </SubMenu>
+                  </SubMenu> */}
 
                   {/* Reports */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="MIS Reports"
                     icon={<ReceiptIcon />}
                     style={{
@@ -1874,10 +1874,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                  </SubMenu>
+                  </SubMenu> */}
 
                   {/* CA Reports */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="CA Firm Reports"
                     icon={<ReceiptIcon />}
                     style={{
@@ -1906,10 +1906,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                  </SubMenu>
+                  </SubMenu> */}
 
                   {/* UoM */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="Activity Log"
                     icon={<BookIcon />}
                     style={{
@@ -1929,10 +1929,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                  </SubMenu>
+                  </SubMenu> */}
 
                   {/* Ticket */}
-                  <SubMenu
+                  {/* <SubMenu
                     title="Ticket"
                     icon={<MarkUnreadChatAltIcon />}
                     style={{
@@ -1961,7 +1961,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                  </SubMenu>
+                  </SubMenu> */}
                 </>
               )}
             </Box>
