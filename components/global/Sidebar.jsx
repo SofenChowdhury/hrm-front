@@ -187,6 +187,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
       name: "ca-firm",
       isOpen: false,
     },
+    {
+      name: "employee",
+      isOpen: false,
+    },
   ]);
 
   // SET WINDOW SIZE
@@ -1457,7 +1461,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                   </SubMenu>
 
                   {/* Branches */}
-                  {/* <SubMenu
+                  <SubMenu
                     title="Manage Branch"
                     icon={<AccountTreeIcon />}
                     style={{
@@ -1486,7 +1490,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
-                  </SubMenu> */}
+                  </SubMenu>
 
                   {/* HS Codes */}
                   {/* <SubMenu
@@ -1962,6 +1966,127 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       width={width}
                     />
                   </SubMenu> */}
+
+                  {/* Employee */}
+                  <SubMenu
+                    title="Employee"
+                    icon={<KeyIcon />}
+                    style={{
+                      color: colors.grey[100],
+                    }}
+                    onOpenChange={() => {
+                      handleChange("employee");
+                    }}
+                    open={opened[22].isOpen}
+                  >
+                    {/* <MenuItem
+                      active={selected === "Profile"}
+                      style={{
+                        color: colors.grey[100],
+                      }}
+                      onClick={() => {
+                        setSelected("Create Employee");
+                        setShowPermModal(true);
+                        window.scrollTo({
+                          top: 0,
+                          behavior: "instant",
+                        });
+                      }}
+                      icon={<AddIcon />}
+                    >
+                      <Typography>Create Permission</Typography>
+                    </MenuItem> */}
+                    <Item
+                      title="Profile"
+                      to="/permissions/permissionList"
+                      icon={<ReceiptIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+                    <Item
+                      title="Employees"
+                      to="/permissions/permissionList"
+                      icon={<ReceiptIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+                    <Item
+                      title="Document Requests"
+                      to="/permissions/permissionList"
+                      icon={<ReceiptIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+                    <Item
+                      title="Shift Requests"
+                      to="/permissions/permissionList"
+                      icon={<ReceiptIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+                    <Item
+                      title="Work Type Requests"
+                      to="/permissions/permissionList"
+                      icon={<ReceiptIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+                    <Item
+                      title="Rotating Shift Assign"
+                      to="/permissions/permissionList"
+                      icon={<ReceiptIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+                    <Item
+                      title="Rotating Work Type Assign"
+                      to="/permissions/permissionList"
+                      icon={<ReceiptIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+                    <Item
+                      title="Disciplinary Actions"
+                      to="/permissions/permissionList"
+                      icon={<ReceiptIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+                    <Item
+                      title="Policies"
+                      to="/permissions/permissionList"
+                      icon={<ReceiptIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+                    <Item
+                      title="Organization Chart"
+                      to="/permissions/permissionList"
+                      icon={<ReceiptIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+                  </SubMenu>
                 </>
               )}
             </Box>
