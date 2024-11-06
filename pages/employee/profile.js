@@ -6,13 +6,9 @@ import { Button } from 'reactstrap'
 const profile = () => {
     
   return (
-    <div>
-      {/* <About /> */}
-      {/* < Button>
-
-      </Button> */}
+    <>
       <About />
-    </div>
+    </>
   )
 }
 
