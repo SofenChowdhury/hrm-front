@@ -46,11 +46,11 @@ const About = () => {
       case "Work Type & Shift":
         return <WorkTypeShift />;
       case "Attendance":
-        return <Attendance />;
+        // return <Attendance />;
       case "Leave":
-        return <Leave />;
+        // return <Leave />;
       case "Payroll":
-        return <Payroll />;
+        // return <Payroll />;
 
       default:
         return (
