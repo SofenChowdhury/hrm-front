@@ -21,6 +21,7 @@ import {
 } from "react-icons/fi";
 import Router from "next/router";
 import WorkTypeShift from "./WorkTypeShift";
+import Attendance from "./Attendance";
 
 const About = () => {
   const [activeTab, setActiveTab] = useState("About");
@@ -46,7 +47,7 @@ const About = () => {
       case "Work Type & Shift":
         return <WorkTypeShift />;
       case "Attendance":
-        // return <Attendance />;
+        return <Attendance />;
       case "Leave":
         // return <Leave />;
       case "Payroll":

@@ -14,7 +14,7 @@ import {
 import { FiX } from "react-icons/fi";
 import Switch from "@mui/material/Switch";
 
-const WorkTypeRequest = ({ isOpen, toggle }) => {
+const CreateShiftRequest = ({ isOpen, toggle }) => {
   const today = new Date().toISOString().split("T")[0];
   const [formData, setFormData] = useState({
     employee: "Adam Luis",
@@ -26,17 +26,24 @@ const WorkTypeRequest = ({ isOpen, toggle }) => {
   });
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: value,
+    }));
+  };
+
+  const handleSwitchChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      isPermanent: e.target.checked,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    toggle(); // Close modal after submit
+    toggle();
   };
 
   const modalStyles = {
@@ -64,7 +71,9 @@ const WorkTypeRequest = ({ isOpen, toggle }) => {
     },
     label: {
       fontWeight: "500",
+      fontSize: "0.9rem",
       marginBottom: "8px",
+      display: "block",
     },
     required: {
       color: "#dc3545",
@@ -74,14 +83,6 @@ const WorkTypeRequest = ({ isOpen, toggle }) => {
       borderRadius: "4px",
       border: "1px solid #ced4da",
       padding: "0.375rem 0.75rem",
-    },
-    saveButton: {
-      backgroundColor: "#F1592A",
-      border: "none",
-      borderRadius: "4px",
-      padding: "8px 24px",
-      float: "right",
-      marginTop: "20px",
     },
   };
 
@@ -96,7 +97,7 @@ const WorkTypeRequest = ({ isOpen, toggle }) => {
           <FiX size={24} />
         </button>
 
-        <h5 style={modalStyles.title}>Work Type Request</h5>
+        <h5 style={modalStyles.title}>Create Shift Request</h5>
         <hr />
 
         <Form onSubmit={handleSubmit} className="mt-4">
@@ -155,6 +156,8 @@ const WorkTypeRequest = ({ isOpen, toggle }) => {
                 />
               </FormGroup>
             </Col>
+
+            {!formData.isPermanent && (
             <Col md={6}>
               <FormGroup>
                 <Label style={modalStyles.label}>Requested Till</Label>
@@ -167,6 +170,7 @@ const WorkTypeRequest = ({ isOpen, toggle }) => {
                 />
               </FormGroup>
             </Col>
+            )}
           </Row>
 
           <FormGroup className="mt-3">
@@ -189,9 +193,7 @@ const WorkTypeRequest = ({ isOpen, toggle }) => {
             <Label style={ {...modalStyles.label, display: 'block', marginBottom: '3px'}}>Permanent Request</Label>
             <Switch
               checked={formData.isPermanent}
-              onChange={(e) =>
-                setFormData({ ...formData, isPermanent: e.target.checked })
-              }
+              onChange={handleSwitchChange}
               color="secondary"
               inputProps={{ "aria-label": "secondary switch" }}
             />
@@ -224,4 +226,4 @@ const WorkTypeRequest = ({ isOpen, toggle }) => {
   );
 };
 
-export default WorkTypeRequest;
+export default CreateShiftRequest;

@@ -17,7 +17,12 @@ import {
   FiCopy,
   FiTrash2,
 } from "react-icons/fi";
-import WorkTypeRequest from "../modalForms_evan/WorkTypeRequest";
+import PlusButton from "../../../Button/PlusButton";
+import WorkTypeRequest from "../modalForms_evan/WorkType&Shift/WorkTypeRequest";
+import RotatingWorkTypeAssign from "../modalForms_evan/WorkType&Shift/RotatingWorkTypeAssign";
+import CreateShiftRequest from "../modalForms_evan/WorkType&Shift/CreateShiftRequest";
+import RotatingshiftAssign from "../modalForms_evan/WorkType&Shift/RotatingshiftAssign";
+import ShiftRequest from "../modalForms_evan/WorkType&Shift/ShiftRequest";
 
 const ActionButton = ({ id, color, bgColor, icon: Icon, tooltip }) => {
   return (
@@ -138,9 +143,13 @@ const NotAvailableComponent = ({ componentName }) => (
 
 const WorkTypeShift = () => {
   const [activeComponent, setActiveComponent] = useState("workTypeRequest");
+  const [modalType, setModalType] = useState(null);
 
-  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
-  const toggleModal = () => setIsModalOpen(!isModalOpen);
+  // const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
+  // const toggleModal = () => setIsModalOpen(!isModalOpen);
+  const toggleModal = (type = null) => {
+    setModalType(type);
+  };
 
   const renderComponent = () => {
     switch (activeComponent) {
@@ -167,6 +176,7 @@ const WorkTypeShift = () => {
             color="danger"
             className="ms-4"
             style={{ backgroundColor: "#DC3545" }}
+            onClick={() => toggleModal("ShiftRequest")}
           >
             <FiPlus className="me-1" /> Reallocate Shift
           </Button>
@@ -194,16 +204,12 @@ const WorkTypeShift = () => {
               />
               <span>Work type request</span>
             </div>
-            <Button
-              color="link"
-              className="text-danger p-0"
-              onClick={(e) => {
-                e.stopPropagation();
-                toggleModal();
-              }}
-            >
-              <FiPlus size={20} />
-            </Button>
+            <PlusButton
+              id="plusWorkTypeRequest"
+              tooltip="Add Work Type Request"
+              // onClick={toggleModal}
+              onClick={() => toggleModal("WorkTypeRequest")}
+            />
           </div>
         </Col>
 
@@ -227,9 +233,12 @@ const WorkTypeShift = () => {
               />
               <span>Rotating work type</span>
             </div>
-            <Button color="link" className="text-danger p-0">
-              <FiPlus size={20} />
-            </Button>
+            <PlusButton
+              id="plusrotatingWorkType"
+              tooltip="Add Rotating Work Type"
+              // onClick={toggleModal}
+              onClick={() => toggleModal("RotatingWorkTypeAssign")}
+            />
           </div>
         </Col>
         <Col md={3}>
@@ -252,9 +261,13 @@ const WorkTypeShift = () => {
               />
               <span>Shift request</span>
             </div>
-            <Button color="link" className="text-danger p-0">
-              <FiPlus size={20} />
-            </Button>
+            <PlusButton
+              id="plusShiftRequest"
+              tooltip="Add shift Request"
+              // onClick={toggleModal}
+              onClick={() => toggleModal("CreateShiftRequest")}
+
+            />
           </div>
         </Col>
         <Col md={3}>
@@ -277,16 +290,42 @@ const WorkTypeShift = () => {
               />
               <span>Rotating Shift</span>
             </div>
-            <Button color="link" className="text-danger p-0">
-              <FiPlus size={20} />
-            </Button>
+            <PlusButton
+              id="plusRotatingShift"
+              tooltip="Add Rotating Shift"
+              // onClick={toggleModal}
+              onClick={() => toggleModal("RotatingshiftAssign")}
+
+            />
           </div>
         </Col>
       </Row>
 
       {renderComponent()}
 
-      <WorkTypeRequest isOpen={isModalOpen} toggle={toggleModal} />
+      {/* <WorkTypeRequest isOpen={isModalOpen} toggle={toggleModal} />
+      <RotatingWorkTypeAssign isOpen={isModalOpen} toggle={toggleModal} /> */}
+
+      {modalType === "ShiftRequest" && (
+        <ShiftRequest isOpen={modalType === "ShiftRequest"} toggle={() => toggleModal(null)} />
+      )}
+      
+      {modalType === "WorkTypeRequest" && (
+        <WorkTypeRequest isOpen={modalType === "WorkTypeRequest"} toggle={() => toggleModal(null)} />
+      )}
+
+      {modalType === "RotatingWorkTypeAssign" && (
+        <RotatingWorkTypeAssign isOpen={modalType === "RotatingWorkTypeAssign"} toggle={() => toggleModal(null)} />
+      )}
+
+      {modalType === "CreateShiftRequest" && (
+        <CreateShiftRequest isOpen={modalType === "CreateShiftRequest"} toggle={() => toggleModal(null)} />
+      )}
+
+      {modalType === "RotatingshiftAssign" && (
+        <RotatingshiftAssign isOpen={modalType === "RotatingshiftAssign"} toggle={() => toggleModal(null)} />
+      )}
+
     </Container>
   );
 };
