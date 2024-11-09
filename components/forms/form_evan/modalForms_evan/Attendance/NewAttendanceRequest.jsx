@@ -86,21 +86,21 @@ const NewAttendanceRequest = ({ isOpen, toggle }) => {
             <Row className="mt-3">
               <Col md="6">
                 <FormGroup>
-                  <Label style={labelStyles} for="attendanceDate">
+                  <Label style={labelStyles} for="date">
                     {createBulk ? "From Date" : "Attendance Date"}{" "}
                     <span style={{ color: "#dc3545" }}>*</span>
                   </Label>
                   <Input
                     type="date"
-                    id="attendanceDate"
-                    name="attendanceDate"
+                    id={createBulk ? "fromDate" : "attendanceDate"}
+                    name="date"
                     style={inputStyles}
                   />
                 </FormGroup>
               </Col>
               <Col md="6">
                 <FormGroup>
-                  <Label style={labelStyles} for="toDate">
+                  <Label style={labelStyles} for="shiftOrToDate">
                     {createBulk ? "To Date" : "Shift"}{" "}
                     <span style={{ color: "#dc3545" }}>*</span>
                   </Label>
@@ -126,40 +126,71 @@ const NewAttendanceRequest = ({ isOpen, toggle }) => {
               </Col>
             </Row>
 
-            {createBulk ? null : (
-              <>
-                <Row className="mt-3">
-                  <Col md="6">
-                    <FormGroup>
-                      <Label style={labelStyles} for="workType">
-                        Work Type
-                      </Label>
-                      <Input
-                        type="select"
-                        id="workType"
-                        name="workType"
-                        style={inputStyles}
-                      >
-                        <option>---Choose Work Type---</option>
-                      </Input>
-                    </FormGroup>
-                  </Col>
-                  <Col md="6">
-                    <FormGroup>
-                      <Label style={labelStyles} for="checkInDate">
-                        Check-In Date{" "}
-                        <span style={{ color: "#dc3545" }}>*</span>
-                      </Label>
-                      <Input
-                        type="date"
-                        id="checkInDate"
-                        name="checkInDate"
-                        style={inputStyles}
-                      />
-                    </FormGroup>
-                  </Col>
-                </Row>
-              </>
+            {createBulk ? (
+              <Row className="mt-3">
+                <Col md="6">
+                  <FormGroup>
+                    <Label style={labelStyles} for="shift">
+                      Shift <span style={{ color: "#dc3545" }}>*</span>
+                    </Label>
+                    <Input
+                      type="select"
+                      id="shift"
+                      name="shift"
+                      style={inputStyles}
+                    >
+                      <option>---Choose Shift---</option>
+                      <option>Regular Shift</option>
+                    </Input>
+                  </FormGroup>
+                </Col>
+                <Col md="6">
+                  <FormGroup>
+                    <Label style={labelStyles} for="workType">
+                      Work Type
+                    </Label>
+                    <Input
+                      type="select"
+                      id="workType"
+                      name="workType"
+                      style={inputStyles}
+                    >
+                      <option>---Choose Work Type---</option>
+                    </Input>
+                  </FormGroup>
+                </Col>
+              </Row>
+            ) : (
+              <Row className="mt-3">
+                <Col md="6">
+                  <FormGroup>
+                    <Label style={labelStyles} for="workType">
+                      Work Type
+                    </Label>
+                    <Input
+                      type="select"
+                      id="workType"
+                      name="workType"
+                      style={inputStyles}
+                    >
+                      <option>---Choose Work Type---</option>
+                    </Input>
+                  </FormGroup>
+                </Col>
+                <Col md="6">
+                  <FormGroup>
+                    <Label style={labelStyles} for="checkInDate">
+                      Check-In Date <span style={{ color: "#dc3545" }}>*</span>
+                    </Label>
+                    <Input
+                      type="date"
+                      id="checkInDate"
+                      name="checkInDate"
+                      style={inputStyles}
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
             )}
 
             <Row className="mt-3">
@@ -168,34 +199,139 @@ const NewAttendanceRequest = ({ isOpen, toggle }) => {
                   <Label style={labelStyles} for="checkIn">
                     Check-In <span style={{ color: "#dc3545" }}>*</span>
                   </Label>
-                  <InputGroup>
-                    <Input
-                      type="time"
-                      id="checkIn"
-                      name="checkIn"
-                      style={inputStyles}
-                    />
-                  </InputGroup>
+                  <Input
+                    type="time"
+                    id="checkIn"
+                    name="checkIn"
+                    style={inputStyles}
+                  />
                 </FormGroup>
               </Col>
-              <Col md="6">
-                <FormGroup>
-                  <Label style={labelStyles} for="checkOut">
-                    Check-Out <span style={{ color: "#dc3545" }}>*</span>
-                  </Label>
-                  <InputGroup>
+              {!createBulk ? (
+                <Col md="6">
+                  <FormGroup>
+                    <Label style={labelStyles} for="checkOutDate">
+                      Check-Out Date <span style={{ color: "#dc3545" }}>*</span>
+                    </Label>
+                    <Input
+                      type="date"
+                      id="checkOutDate"
+                      name="checkOutDate"
+                      style={inputStyles}
+                    />
+                  </FormGroup>
+                </Col>
+              ) : (
+                <Col md="6">
+                  <FormGroup>
+                    <Label style={labelStyles} for="checkOut">
+                      Check-Out <span style={{ color: "#dc3545" }}>*</span>
+                    </Label>
                     <Input
                       type="time"
                       id="checkOut"
                       name="checkOut"
                       style={inputStyles}
                     />
-                  </InputGroup>
+                  </FormGroup>
+                </Col>
+              )}
+            </Row>
+
+            {!createBulk && (
+              <Row className="mt-3">
+                <Col md="6">
+                  <FormGroup>
+                    <Label style={labelStyles} for="checkOut">
+                      Check-Out <span style={{ color: "#dc3545" }}>*</span>
+                    </Label>
+                    <Input
+                      type="time"
+                      id="checkOut"
+                      name="checkOut"
+                      style={inputStyles}
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+            )}
+
+            <Row className="mt-3">
+              <Col md="6">
+                <FormGroup>
+                  <Label style={labelStyles} for="minimumHour">
+                    Minimum Hour <span style={{ color: "#dc3545" }}>*</span>
+                  </Label>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <Input
+                      type="number"
+                      id="minimumHours"
+                      name="minimumHours"
+                      placeholder="HH"
+                      min="0"
+                      max="23"
+                      style={{
+                        width: "70px",
+                        marginRight: "5px",
+                        ...inputStyles,
+                      }}
+                    />
+                    <span>:</span>
+                    <Input
+                      type="number"
+                      id="minimumMinutes"
+                      name="minimumMinutes"
+                      placeholder="MM"
+                      min="0"
+                      max="59"
+                      style={{
+                        width: "70px",
+                        marginLeft: "5px",
+                        ...inputStyles,
+                      }}
+                    />
+                  </div>
+                </FormGroup>
+              </Col>
+              <Col md="6">
+                <FormGroup>
+                  <Label style={labelStyles} for="workedHours">
+                    Worked Hours <span style={{ color: "#dc3545" }}>*</span>
+                  </Label>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <Input
+                      type="number"
+                      id="workedHours"
+                      name="workedHours"
+                      placeholder="HH"
+                      min="0"
+                      max="23"
+                      style={{
+                        width: "70px",
+                        marginRight: "5px",
+                        ...inputStyles,
+                      }}
+                    />
+                    <span>:</span>
+                    <Input
+                      type="number"
+                      id="workedMinutes"
+                      name="workedMinutes"
+                      placeholder="MM"
+                      min="0"
+                      max="59"
+                      style={{
+                        width: "70px",
+                        marginLeft: "5px",
+                        ...inputStyles,
+                      }}
+                    />
+                  </div>
                 </FormGroup>
               </Col>
             </Row>
 
-            <Row className="mt-3">
+            {/* <Row className="mt-3">
               <Col md="6">
                 <FormGroup>
                   <Label style={labelStyles} for="minimumHour">
@@ -224,7 +360,7 @@ const NewAttendanceRequest = ({ isOpen, toggle }) => {
                   />
                 </FormGroup>
               </Col>
-            </Row>
+            </Row> */}
 
             <Row className="mt-3">
               <Col md="12">

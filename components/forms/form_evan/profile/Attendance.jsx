@@ -16,15 +16,15 @@ const Attendance = () => {
     },
     header: {
       display: 'flex',
-      justifyContent: 'flex-end',
-      marginBottom: '15px'
+      justifyContent: 'flex-start',
+      marginBottom: '25px'
     },
     createButton: {
       backgroundColor: '#DC3545',
       border: 'none',
       borderRadius: '4px',
       padding: '6px 12px',
-      color: '#fff'
+      color: '#fff',
     },
     tableContainer: {
       position: 'relative',
@@ -137,6 +137,21 @@ const Attendance = () => {
       overtime: '04:00'
     },
     {
+        employee: 'Adam Luis',
+        date: 'Aug. 26, 2024',
+        day: 'Monday',
+        checkIn: '3:10 p.m.',
+        inDate: 'Aug. 26, 2024',
+        checkOut: '12:52 p.m.',
+        outDate: 'Sep. 25, 2024',
+        shift: 'Regular Shift',
+        workType: 'None',
+        minHour: '08:15',
+        atWork: '717:42',
+        overtime: '04:00'
+      },
+
+      {
         employee: 'Adam Luis',
         date: 'Aug. 26, 2024',
         day: 'Monday',
