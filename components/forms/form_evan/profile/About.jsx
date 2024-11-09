@@ -22,6 +22,7 @@ import {
 import Router from "next/router";
 import WorkTypeShift from "./WorkTypeShift";
 import Attendance from "./Attendance";
+import Leave from "./Leave";
 
 const About = () => {
   const [activeTab, setActiveTab] = useState("About");
@@ -49,7 +50,7 @@ const About = () => {
       case "Attendance":
         return <Attendance />;
       case "Leave":
-        // return <Leave />;
+        return <Leave />;
       case "Payroll":
         // return <Payroll />;
 
