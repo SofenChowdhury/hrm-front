@@ -19,6 +19,15 @@ import {
   FiTrash2,
   FiPlus,
 } from "react-icons/fi";
+import SpeedDial from '@mui/material/SpeedDial';
+import SpeedDialIcon from '@mui/material/SpeedDialIcon';
+import SpeedDialAction from '@mui/material/SpeedDialAction';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import WorkIcon from '@mui/icons-material/Work';
+import EventIcon from '@mui/icons-material/Event';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import PaymentIcon from '@mui/icons-material/Payment';
+
 import Router from "next/router";
 import WorkTypeShift from "./WorkTypeShift";
 import Attendance from "./Attendance";
@@ -27,6 +36,14 @@ import Leave from "./Leave";
 const About = () => {
   const [activeTab, setActiveTab] = useState("About");
   const [activeSection, setActiveSection] = useState("workInfo");
+
+  const speedDialActions = [
+    { icon: <PersonAddIcon />, name: 'Add Employee' },
+    { icon: <WorkIcon />, name: 'Add Work Type' },
+    { icon: <EventIcon />, name: 'Add Shift' },
+    { icon: <AssignmentIcon />, name: 'Add Document' },
+    { icon: <PaymentIcon />, name: 'Add Payroll' },
+  ];
 
   const navItems = [
     "About",
@@ -352,7 +369,33 @@ const About = () => {
       <hr />
 
       {/* Floating Button */}
-      <Button
+        <SpeedDial
+          ariaLabel="Employee actions speed dial"
+          sx={{
+            position: 'fixed',
+            bottom: 30,
+            right: 30,
+            zIndex: 10,
+            '& .MuiSpeedDial-fab': {
+              bgcolor: '#dc3545',
+              '&:hover': {
+                bgcolor: '#bb2d3b', 
+              }
+            }
+          }}
+          icon={<SpeedDialIcon />}
+        >
+          {speedDialActions.map((action) => (
+            <SpeedDialAction
+              key={action.name}
+              icon={action.icon}
+              tooltipTitle={action.name}
+              onClick={() => handleSpeedDialAction(action.name)}
+            />
+          ))}
+        </SpeedDial>
+
+      {/* <Button
         color="danger"
         style={{
           position: "fixed",
@@ -370,7 +413,7 @@ const About = () => {
         }}
       >
         <FiPlus size={24} />
-      </Button>
+      </Button> */}
 
       {renderContent()}
     </Container>
