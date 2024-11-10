@@ -32,6 +32,11 @@ import Router from "next/router";
 import WorkTypeShift from "./WorkTypeShift";
 import Attendance from "./Attendance";
 import Leave from "./Leave";
+import Payroll from "./Payroll";
+import AllowanceDeduction from "./AllowanceDeduction";
+import PenaltyAccount from "./PenaltyAccount";
+import Documents from "./Documents";
+import Assets from "./Assets";
 
 const About = () => {
   const [activeTab, setActiveTab] = useState("About");
@@ -44,6 +49,10 @@ const About = () => {
     { icon: <AssignmentIcon />, name: 'Add Document' },
     { icon: <PaymentIcon />, name: 'Add Payroll' },
   ];
+
+  const handleSpeedDialAction = () => {
+
+  };
 
   const navItems = [
     "About",
@@ -69,7 +78,15 @@ const About = () => {
       case "Leave":
         return <Leave />;
       case "Payroll":
-        // return <Payroll />;
+        return <Payroll />;
+      case "Allowance & Deduction":
+        return <AllowanceDeduction />
+      case "Penalty Account":
+        return <PenaltyAccount />
+      case "Assets":
+        return <Assets />
+      case "Documents":
+        return <Documents />
 
       default:
         return (

@@ -136,7 +136,7 @@ const WorkTypeRequestComponent = () => (
 const NotAvailableComponent = ({ componentName }) => (
   <div className="text-center mt-4 p-5 bg-light rounded">
     <h4 className="text-muted">
-      The {componentName} component is not available at this moment.
+      No {componentName} has been assigned.
     </h4>
   </div>
 );
