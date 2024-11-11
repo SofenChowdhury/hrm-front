@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { Container, Table, Button } from 'reactstrap';
-import AssetsRequest from '../modalForms_evan/Assets/AssetsRequest';
-import AssetsInformation from '../modalForms_evan/Assets/AssetsInformation';
+import React, { useState } from "react";
+import { Container, Table, Button } from "reactstrap";
+import AssetsRequest from "../modalForms_evan/Assets/AssetsRequest";
+import AssetsInformation from "../modalForms_evan/Assets/AssetsInformation";
 
 const Assets = () => {
   const [modalType, setModalType] = useState(null);
-  const [selectedAsset, setSelectedAsset] = useState(null);
+  // const [selectedAsset, setSelectedAsset] = useState(null);
+  const [selectedAssetIndex, setSelectedAssetIndex] = useState(null);
 
   const toggleModal = (type = null) => {
     setModalType(type);
@@ -13,29 +14,51 @@ const Assets = () => {
   const assetsData = [
     {
       id: 1,
-      name: 'BMW',
-      initials: 'BM',
-      status: 'In use',
-      assignedDate: 'May. 24, 2024',
-      trackingId: 'CRT0004',
-      batchNo: 'CRB001',
-      category: 'Car',
-      assignedBy: 'Adam Luis',
-      description: 'None'
+      name: "BMW",
+      initials: "BM",
+      status: "In use",
+      assignedDate: "May. 24, 2024",
+      trackingId: "CRT0004",
+      batchNo: "CRB001",
+      category: "Car",
+      assignedBy: "Adam Luis",
+      description: "None",
     },
-    // Add more assets as needed
+    {
+      id: 2,
+      name: "Tesla",
+      initials: "TS",
+      status: "Available",
+      assignedDate: "Jun. 10, 2024",
+      trackingId: "CRT0005",
+      batchNo: "CRB002",
+      category: "Electric Car",
+      assignedBy: "Elon Musk",
+      description: "Electric vehicle",
+    },
   ];
 
-  const handleRowClick = (asset) => {
-    setSelectedAsset(asset);
-    setModalType('information');
+  const handleRowClick = (index) => {
+    setSelectedAssetIndex(index);
+    setModalType("information");
+  };
+
+  const handleNavigateAsset = (direction) => {
+    if (direction === "previous" && selectedAssetIndex > 0) {
+      setSelectedAssetIndex(selectedAssetIndex - 1);
+    } else if (
+      direction === "next" &&
+      selectedAssetIndex < assetsData.length - 1
+    ) {
+      setSelectedAssetIndex(selectedAssetIndex + 1);
+    }
   };
 
   return (
     <Container fluid className="p-4">
       <div className="d-flex justify-content-end mb-3">
-        <Button 
-          color="danger" 
+        <Button
+          color="danger"
           className="px-4"
           style={{ backgroundColor: "#DC3545" }}
           onClick={() => toggleModal("AssetsRequest")}
@@ -55,8 +78,12 @@ const Assets = () => {
           </tr>
         </thead>
         <tbody>
-          {assetsData.map((asset) => (
-            <tr key={asset.id} onClick={() => handleRowClick(asset)} style={{ cursor: 'pointer' }}>
+          {assetsData.map((asset, index) => (
+            <tr
+              key={asset.id}
+              onClick={() => handleRowClick(index)}
+              style={{ cursor: "pointer" }}
+            >
               <td>
                 <div className="d-flex align-items-center">
                   <div
@@ -70,7 +97,7 @@ const Assets = () => {
                       justifyContent: "center",
                       color: "white",
                       marginRight: "10px",
-                      fontSize: "14px"
+                      fontSize: "14px",
                     }}
                   >
                     {asset.initials}
@@ -80,38 +107,38 @@ const Assets = () => {
               </td>
               <td>
                 <div className="d-flex align-items-center">
-                  <span 
-                    style={{ 
-                      width: "8px", 
-                      height: "8px", 
-                      borderRadius: "50%", 
+                  <span
+                    style={{
+                      width: "8px",
+                      height: "8px",
+                      borderRadius: "50%",
                       backgroundColor: "#FFA500",
-                      marginRight: "8px"
-                    }} 
+                      marginRight: "8px",
+                    }}
                   />
                   {asset.status}
                 </div>
               </td>
               <td>
                 <div className="d-flex align-items-center">
-                  <span 
-                    style={{ 
-                      width: "8px", 
-                      height: "8px", 
-                      borderRadius: "50%", 
+                  <span
+                    style={{
+                      width: "8px",
+                      height: "8px",
+                      borderRadius: "50%",
                       backgroundColor: "#4CAF50",
-                      marginRight: "8px"
-                    }} 
+                      marginRight: "8px",
+                    }}
                   />
                   {asset.assignedDate}
                 </div>
               </td>
               <td>
-                <Button 
-                  color="danger" 
-                  style={{ 
+                <Button
+                  color="danger"
+                  style={{
                     backgroundColor: "#DC3545",
-                    border: "none"
+                    border: "none",
                   }}
                   onClick={(e) => {
                     e.stopPropagation();
@@ -127,17 +154,21 @@ const Assets = () => {
       </Table>
 
       {modalType === "AssetsRequest" && (
-        <AssetsRequest 
-          isOpen={modalType === "AssetsRequest"} 
-          toggle={() => toggleModal(null)} 
+        <AssetsRequest
+          isOpen={modalType === "AssetsRequest"}
+          toggle={() => toggleModal(null)}
         />
       )}
 
-      {modalType === "information" && selectedAsset && (
-        <AssetsInformation 
-          isOpen={true}
-          toggle={() => toggleModal(null)}
-          assetData={selectedAsset}
+      {modalType === "information" && selectedAssetIndex !== null && (
+        <AssetsInformation
+          open={true}
+          onClose={() => toggleModal(null)}
+          assetData={assetsData[selectedAssetIndex]}
+          currentIndex={selectedAssetIndex}
+          onNavigate={handleNavigateAsset}
+          hasPrevious={selectedAssetIndex > 0}
+          hasNext={selectedAssetIndex < assetsData.length - 1}
         />
       )}
     </Container>

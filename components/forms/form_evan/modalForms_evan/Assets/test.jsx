@@ -62,9 +62,28 @@ const AssetReturnForm = ({ open, onClose }) => {
       marginLeft: "4px",
     },
     input: {
+      // borderRadius: "4px",
+      // border: "1px solid #ced4da",
+      // padding: "0.375rem 0.75rem",
+
+      width: '100%',
       borderRadius: "4px",
       border: "1px solid #ced4da",
       padding: "0.375rem 0.75rem",
+      backgroundColor: '#fff', // Add this
+      color: '#333', // Add this
+      resize: 'vertical',
+    },
+
+    textarea: {  // Add separate style for textarea
+      width: '100%',
+      borderRadius: "4px",
+      border: "1px solid #ced4da",
+      padding: "0.375rem 0.75rem",
+      backgroundColor: '#fff',
+      color: '#333',
+      resize: 'vertical',
+      minHeight: '100px',
     },
 
     buttonContainer: {
@@ -138,7 +157,9 @@ const AssetReturnForm = ({ open, onClose }) => {
             <Row>
               <Col md={6}>
                 <FormGroup>
-                  <Label style={modalStyles.label}>Return Status</Label>
+                  <Label style={modalStyles.label}>
+                    Return Status
+                  </Label>
                   <Input
                     type="select"
                     name="returnStatus"
@@ -156,7 +177,9 @@ const AssetReturnForm = ({ open, onClose }) => {
               </Col>
               <Col md={6}>
                 <FormGroup>
-                  <Label style={modalStyles.label}>Return Date</Label>
+                  <Label style={modalStyles.label}>
+                    Return Date
+                  </Label>
                   <Input
                     type="date"
                     name="returnDate"
@@ -169,16 +192,18 @@ const AssetReturnForm = ({ open, onClose }) => {
             </Row>
 
             <FormGroup className="mt-3">
-              <Label style={modalStyles.label}>Return Condition</Label>
+              <Label style={modalStyles.label}>
+                Return Condition
+              </Label>
               <Input
-                type="textarea"
-                name="returnCondition"
-                value={formData.returnCondition}
-                onChange={handleChange}
-                rows="4"
-                style={modalStyles.input}
-                placeholder="Enter return condition details..."
-              />
+        type="textarea"
+        name="returnCondition"
+        value={formData.returnCondition}
+        onChange={handleChange}
+        rows="4"
+        style={modalStyles.textarea}  // Use the textarea-specific style
+        placeholder="Enter return condition details..."
+      />
             </FormGroup>
 
             <FormGroup className="mt-3">
