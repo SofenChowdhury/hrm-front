@@ -66,7 +66,6 @@ const AssetReturnForm = ({ open, onClose }) => {
       border: "1px solid #ced4da",
       padding: "0.375rem 0.75rem",
     },
-
     buttonContainer: {
       display: "flex",
       gap: "10px",
@@ -138,7 +137,9 @@ const AssetReturnForm = ({ open, onClose }) => {
             <Row>
               <Col md={6}>
                 <FormGroup>
-                  <Label style={modalStyles.label}>Return Status</Label>
+                  <Label style={modalStyles.label}>
+                    Return Status
+                  </Label>
                   <Input
                     type="select"
                     name="returnStatus"
@@ -156,7 +157,9 @@ const AssetReturnForm = ({ open, onClose }) => {
               </Col>
               <Col md={6}>
                 <FormGroup>
-                  <Label style={modalStyles.label}>Return Date</Label>
+                  <Label style={modalStyles.label}>
+                    Return Date
+                  </Label>
                   <Input
                     type="date"
                     name="returnDate"
@@ -169,7 +172,9 @@ const AssetReturnForm = ({ open, onClose }) => {
             </Row>
 
             <FormGroup className="mt-3">
-              <Label style={modalStyles.label}>Return Condition</Label>
+              <Label style={modalStyles.label}>
+                Return Condition
+              </Label>
               <Input
                 type="textarea"
                 name="returnCondition"
