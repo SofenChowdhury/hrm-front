@@ -37,6 +37,9 @@ import AllowanceDeduction from "./AllowanceDeduction";
 import PenaltyAccount from "./PenaltyAccount";
 import Documents from "./Documents";
 import Assets from "./Assets";
+import BonusPoints from "./BonusPoints";
+import ScheduledInterview from "./ScheduledInterview";
+import Performance from "./Performance";
 
 const About = () => {
   const [activeTab, setActiveTab] = useState("About");
@@ -85,8 +88,14 @@ const About = () => {
         return <PenaltyAccount />
       case "Assets":
         return <Assets />
+      case "Performance":
+        return <Performance />
       case "Documents":
         return <Documents />
+      case "Bonus Points":
+        return <BonusPoints />
+      case "Scheduled Interview":
+        return <ScheduledInterview />
 
       default:
         return (
