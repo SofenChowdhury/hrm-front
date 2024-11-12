@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { Container, Table, Button } from "reactstrap";
 import AssetsRequest from "../modalForms_evan/Assets/AssetsRequest";
 import AssetsInformation from "../modalForms_evan/Assets/AssetsInformation";
+import { Dialog, DialogContent, Typography, Box } from "@mui/material";
+import { FaRegQuestionCircle  } from "react-icons/fa";
 
 const Assets = () => {
   const [modalType, setModalType] = useState(null);
-  // const [selectedAsset, setSelectedAsset] = useState(null);
   const [selectedAssetIndex, setSelectedAssetIndex] = useState(null);
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
   const toggleModal = (type = null) => {
     setModalType(type);
@@ -53,6 +55,72 @@ const Assets = () => {
       setSelectedAssetIndex(selectedAssetIndex + 1);
     }
   };
+
+  const handleReturnRequest = (e, index) => {
+    e.stopPropagation();
+    setSelectedAssetIndex(index);
+    setShowConfirmDialog(true);
+  };
+
+  const handleConfirmReturn = () => {
+    setShowConfirmDialog(false); // normally set close form
+  };
+
+  const styles = {
+    confirmDialog: {
+      "& .MuiDialog-paper": {
+        width: "400px",
+        borderRadius: "8px",
+        boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+      },
+    },
+    dialogContent: {
+      padding: "40px 20px",
+      textAlign: "center",
+    },
+    questionIcon: {
+      width: "80px",
+      height: "80px",
+      borderRadius: "50%",
+      backgroundColor: "#f02c2c",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      margin: "0 auto 20px",
+      fontSize: "40px",
+      color: "#A0A0A0",
+    },
+    confirmText: {
+      fontSize: "20px",
+      color: "#333",
+      marginBottom: "30px",
+    },
+    buttonContainer: {
+      display: "flex",
+      justifyContent: "center",
+      gap: "10px",
+    },
+    cancelButton: {
+      padding: "8px 24px",
+      backgroundColor: "#DC3545",
+      color: "white",
+      border: "none",
+      borderRadius: "4px",
+      cursor: "pointer",
+      fontSize: "16px",
+    },
+    confirmButton: {
+      padding: "8px 24px",
+      backgroundColor: "#008000",
+      color: "white",
+      border: "none",
+      borderRadius: "4px",
+      cursor: "pointer",
+      fontSize: "16px",
+    },
+  };
+
+
 
   return (
     <Container fluid className="p-4">
@@ -140,10 +208,7 @@ const Assets = () => {
                     backgroundColor: "#DC3545",
                     border: "none",
                   }}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    // Handle return request
-                  }}
+                  onClick={(e) => handleReturnRequest(e, index)}
                 >
                   ↵ Return Request
                 </Button>
@@ -152,6 +217,50 @@ const Assets = () => {
           ))}
         </tbody>
       </Table>
+
+
+       {/* When Row Return Click this Dialog box open */}
+       <Dialog
+        open={showConfirmDialog}
+        onClose={() => setShowConfirmDialog(false)}
+        sx={styles.confirmDialog}
+      >
+        <DialogContent sx={styles.dialogContent}>
+          <Box> <FaRegQuestionCircle  size={80} /></Box>
+          <Typography sx={styles.confirmText}>
+            Are you sure you want to return this asset?
+          </Typography>
+          <Box sx={styles.buttonContainer}>
+            <button
+              onClick={() => setShowConfirmDialog(false)}
+              style={styles.cancelButton}
+
+              onMouseOver={(e) =>
+                (e.currentTarget.style.backgroundColor = "#8B0000")
+              }
+              onMouseOut={(e) =>
+                (e.currentTarget.style.backgroundColor = "#DC3545")
+              }
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleConfirmReturn}
+              style={styles.confirmButton}
+              onMouseOver={(e) =>
+                (e.currentTarget.style.backgroundColor = "#006400")
+              }
+              onMouseOut={(e) =>
+                (e.currentTarget.style.backgroundColor = "#008000")
+              }
+            >
+              Confirm
+            </button>
+          </Box>
+        </DialogContent>
+      </Dialog>
+
+
 
       {modalType === "AssetsRequest" && (
         <AssetsRequest
@@ -171,6 +280,7 @@ const Assets = () => {
           hasNext={selectedAssetIndex < assetsData.length - 1}
         />
       )}
+      
     </Container>
   );
 };

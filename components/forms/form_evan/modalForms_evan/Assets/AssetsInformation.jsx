@@ -216,10 +216,13 @@ const AssetsInformation = ({
           />
         </div>
       )} */}
-      <AssetReturnForm
-        open={showReturnForm}
-        onClose={() => setShowReturnForm(false)}
-      />
+
+      {showReturnForm && (
+        <AssetReturnForm
+          open={showReturnForm}
+          onClose={() => setShowReturnForm(false)}
+        />
+      )}
     </>
   );
 };
