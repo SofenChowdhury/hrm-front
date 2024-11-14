@@ -2016,7 +2016,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     />
                     <Item
                       title="Document Requests"
-                      to="/permissions/permissionList"
+                      to="/employee/documentRequest"
                       icon={<ReceiptIcon />}
                       selected={selected}
                       setSelected={setSelected}
