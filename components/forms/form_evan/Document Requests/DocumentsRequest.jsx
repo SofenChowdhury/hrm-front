@@ -127,7 +127,7 @@ const DocumentRequests = () => {
               marginRight: "10px",
               borderRadius: "8px",
               borderColor: "#ccc",
-              padding: "5px 10px",
+              padding: "8px 10px",
               width: "250px",
             }}
           />

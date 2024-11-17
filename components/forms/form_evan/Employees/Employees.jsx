@@ -92,7 +92,7 @@ const Employees = () => {
         <Col>
           <h3>Employees</h3>
         </Col>
-        <Col md="10" className="d-flex align-items-center">
+        <Col md="8" className="d-flex align-items-center">
           <Input
             type="text"
             placeholder="Search"
@@ -100,7 +100,8 @@ const Employees = () => {
               marginRight: '10px',
               borderRadius: '8px',
               borderColor: '#ccc',
-              padding: '5px 10px',
+              padding: '8px 10px',
+              width: "250px",
             }}
           />
           <Button outline color="secondary" style={{ marginRight: '5px', width: '80px' }}>

@@ -2025,7 +2025,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     />
                     <Item
                       title="Shift Requests"
-                      to="/permissions/permissionList"
+                      to="/employee/shiftRequests"
                       icon={<ReceiptIcon />}
                       selected={selected}
                       setSelected={setSelected}
