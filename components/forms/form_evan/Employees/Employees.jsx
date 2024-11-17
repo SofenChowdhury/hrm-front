@@ -6,45 +6,57 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import Router from "next/router";
+import Avatar from '@mui/material/Avatar';
 
 
-// Function to generate color based on initials
-const getColorFromInitials = (initials) => {
-  const colors = [
-    '#FFA726', '#AB47BC', '#29B6F6', '#66BB6A', '#FF7043', '#EC407A', '#FFCA28', '#8D6E63', '#78909C'
-  ];
-  let charCodeSum = 0;
-  for (let i = 0; i < initials.length; i++) {
-    charCodeSum += initials.charCodeAt(i);
+// Generate color based on string
+const stringToColor = (string) => {
+  let hash = 0;
+  for (let i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
   }
-  return colors[charCodeSum % colors.length];
+  let color = '#';
+  for (let i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += `00${value.toString(16)}`.slice(-2);
+  }
+  return color;
+};
+
+// Generate initials from the name
+const getInitials = (name) => {
+  return name
+    .split(' ')
+    .map((word) => word[0])
+    .join('')
+    .toUpperCase();
 };
 
 const employeesData = [
-  { initials: 'AR', name: 'Abigail Roberts', email: 'abigail.roberts@horilla.com', role: 'Sales Man - (Sales Dept)', status: 'Offline', id: '#PEP15' },
-  { initials: 'AL', name: 'Adam Luis', email: 'adam.luis@horilla.com', role: 'None', status: 'Offline', id: '' },
-  { initials: 'AM', name: 'Aiden Murphy', email: 'aiden.murphy@horilla.com', role: 'Financial Analyst - (Finance Dept)', status: 'Offline', id: '#PEP40' },
+  { name: 'Abigail Roberts', email: 'abigail.roberts@horilla.com', role: 'Sales Man - (Sales Dept)', status: 'Offline', id: '#PEP15' },
+  { name: 'Adam Luis', email: 'adam.luis@horilla.com', role: 'None', status: 'Offline', id: '' },
+  { name: 'Aiden Murphy', email: 'aiden.murphy@horilla.com', role: 'Financial Analyst - (Finance Dept)', status: 'Offline', id: '#PEP40' },
 
-  { initials: 'LA', name: 'Luis Adam', email: 'adam.luis@horilla.com', role: 'None', status: 'Offline', id: '', color: 'lightyellow' },
-  { initials: 'MA', name: 'Murphy Aiden', email: 'aiden.murphy@horilla.com', role: 'Financial Analyst - (Finance Dept)', status: 'Offline', id: '#PEP40', color: 'lightcoral' },
-  { initials: 'RA', name: 'Roberts Abigail', email: 'abigail.roberts@horilla.com', role: 'Sales Man - (Sales Dept)', status: 'Offline', id: '#PEP15', color: 'orange' },
+  { name: 'Luis Adam', email: 'adam.luis@horilla.com', role: 'None', status: 'Offline', id: '', color: 'lightyellow' },
+  { name: 'Murphy Aiden', email: 'aiden.murphy@horilla.com', role: 'Financial Analyst - (Finance Dept)', status: 'Offline', id: '#PEP40', color: 'lightcoral' },
+  { name: 'Roberts Abigail', email: 'abigail.roberts@horilla.com', role: 'Sales Man - (Sales Dept)', status: 'Offline', id: '#PEP15', color: 'orange' },
 
-  { initials: 'MM', name: 'Md. Mahadi', email: 'md.mahadi@horilla.com', role: 'Software Engineer - (IT Dept)', status: 'Offline', id: '', color: 'lightyellow' },
-  { initials: 'RC', name: 'Rabby Chowdhury', email: 'rabby.chowdhury@horilla.com', role: 'Software Engineer - (IT Dept)', status: 'Offline', id: '#PEP15', color: 'orange' },
-  { initials: 'AE', name: 'Ariful Evan', email: 'md.arifulevan@horilla.com', role: 'Software Engineer - (IT Dept)', status: 'Offline', id: '#PEP40', color: 'lightcoral' },
+  { name: 'Md. Mahadi', email: 'md.mahadi@horilla.com', role: 'Software Engineer - (IT Dept)', status: 'Offline', id: '', color: 'lightyellow' },
+  { name: 'Rabby Chowdhury', email: 'rabby.chowdhury@horilla.com', role: 'Software Engineer - (IT Dept)', status: 'Offline', id: '#PEP15', color: 'orange' },
+  { name: 'Ariful Evan', email: 'md.arifulevan@horilla.com', role: 'Software Engineer - (IT Dept)', status: 'Offline', id: '#PEP40', color: 'lightcoral' },
 
 
-{ initials: 'AR', name: 'Abigail Roberts', email: 'abigail.roberts@horilla.com', role: 'Sales Man - (Sales Dept)', status: 'Offline', id: '#PEP15' },
-{ initials: 'AL', name: 'Adam Luis', email: 'adam.luis@horilla.com', role: 'None', status: 'Offline', id: '' },
+{ name: 'Abigail Roberts', email: 'abigail.roberts@horilla.com', role: 'Sales Man - (Sales Dept)', status: 'Offline', id: '#PEP15' },
+{ name: 'Adam Luis', email: 'adam.luis@horilla.com', role: 'None', status: 'Offline', id: '' },
 { initials: 'AM', name: 'Aiden Murphy', email: 'aiden.murphy@horilla.com', role: 'Financial Analyst - (Finance Dept)', status: 'Offline', id: '#PEP40' },
 
-{ initials: 'LA', name: 'Luis Adam', email: 'adam.luis@horilla.com', role: 'None', status: 'Offline', id: '', color: 'lightyellow' },
-{ initials: 'MA', name: 'Murphy Aiden', email: 'aiden.murphy@horilla.com', role: 'Financial Analyst - (Finance Dept)', status: 'Offline', id: '#PEP40', color: 'lightcoral' },
-{ initials: 'RA', name: 'Roberts Abigail', email: 'abigail.roberts@horilla.com', role: 'Sales Man - (Sales Dept)', status: 'Offline', id: '#PEP15', color: 'orange' },
+{ name: 'Luis Adam', email: 'adam.luis@horilla.com', role: 'None', status: 'Offline', id: '', color: 'lightyellow' },
+{ name: 'Murphy Aiden', email: 'aiden.murphy@horilla.com', role: 'Financial Analyst - (Finance Dept)', status: 'Offline', id: '#PEP40', color: 'lightcoral' },
+{ name: 'Roberts Abigail', email: 'abigail.roberts@horilla.com', role: 'Sales Man - (Sales Dept)', status: 'Offline', id: '#PEP15', color: 'orange' },
 
-{ initials: 'MM', name: 'Md. Mahadi', email: 'md.mahadi@horilla.com', role: 'Software Engineer - (IT Dept)', status: 'Offline', id: '', color: 'lightyellow' },
-{ initials: 'RC', name: 'Rabby Chowdhury', email: 'rabby.chowdhury@horilla.com', role: 'Software Engineer - (IT Dept)', status: 'Offline', id: '#PEP15', color: 'orange' },
-{ initials: 'AE', name: 'Ariful Evan', email: 'md.arifulevan@horilla.com', role: 'Software Engineer - (IT Dept)', status: 'Offline', id: '#PEP40', color: 'lightcoral' },
+{ name: 'Md. Mahadi', email: 'md.mahadi@horilla.com', role: 'Software Engineer - (IT Dept)', status: 'Offline', id: '', color: 'lightyellow' },
+{ name: 'Rabby Chowdhury', email: 'rabby.chowdhury@horilla.com', role: 'Software Engineer - (IT Dept)', status: 'Offline', id: '#PEP15', color: 'orange' },
+{ name: 'Ariful Evan', email: 'md.arifulevan@horilla.com', role: 'Software Engineer - (IT Dept)', status: 'Offline', id: '#PEP40', color: 'lightcoral' },
 
 ];
 
@@ -125,23 +137,16 @@ const Employees = () => {
           <Col md="4" key={index} className="mb-4">
             <Card style={{ height: '150px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px' }}>
               <CardBody className="d-flex align-items-center">
-                <div
-                  style={{
-                    backgroundColor: getColorFromInitials(employee.initials),
-                    color: 'white',
-                    fontWeight: 'bold',
-                    fontSize: '18px',
-                    borderRadius: '50%',
-                    width: '50px',
-                    height: '50px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+              <Avatar
+                  sx={{
+                    bgcolor: stringToColor(employee.name),
+                    width: 50,
+                    height: 50,
                     marginRight: '10px',
                   }}
                 >
-                  {employee.initials}
-                </div>
+                  {getInitials(employee.name)}
+                </Avatar>
                 <div style={{ flex: 1 }}>
                   <h5 style={{ margin: 0, fontWeight: 'bold', fontSize: '14px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     {employee.name} {employee.id && `(${employee.id})`}
