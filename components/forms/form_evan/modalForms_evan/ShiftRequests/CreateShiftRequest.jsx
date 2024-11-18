@@ -16,7 +16,7 @@ import Switch from "@mui/material/Switch";
 
 
 const CreateShiftRequest = ({ isOpen, toggle }) => {
-    const today = new Date().toISOString().split("T")[0];
+  const today = new Date().toISOString().split("T")[0];
   const [formData, setFormData] = useState({
     employee: "Adam Luis",
     requestingWorkType: "",

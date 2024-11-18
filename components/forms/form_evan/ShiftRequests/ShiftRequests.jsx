@@ -20,6 +20,8 @@ import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import TopBarComponet from "../modalForms_evan/TopComponent/TopBarComponet";
 import CreateShiftRequest from "../modalForms_evan/ShiftRequests/CreateShiftRequest";
+import ShiftRequestsDetails from "../modalForms_evan/ShiftRequests/ShiftRequestsDetails";
+import UpdateRequest from "../modalForms_evan/ShiftRequests/UpdateRequest";
 
 const styles = {
   pageWrapper: {
@@ -150,6 +152,12 @@ const ShiftRequests = () => {
   const [activeView, setActiveView] = useState("requests");
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
+
+  const [selectedRowData, setSelectedRowData] = useState(null);
+  const [isDetailsModalOpen, setDetailsModalOpen] = useState(false);
+
+  const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
+  const [updateData, setUpdateData] = useState(null);
 
   // Generate color based on string
 const stringToColor = (string) => {
@@ -314,6 +322,28 @@ const getInitials = (name) => {
     }
   };
 
+    // Open the selected row's data
+  const handleRowClick = (data,index) => {
+    setSelectedRowData(index);
+    setDetailsModalOpen(true); 
+  };
+
+  // Close the modal
+  const toggleDetailsModal = () => {
+    setDetailsModalOpen(!isDetailsModalOpen);
+  };
+
+  const handleNavigateAsset = (direction) => {
+    if (direction === "previous" && selectedRowData > 0) {
+      setSelectedRowData(selectedRowData - 1);
+    } else if (
+      direction === "next" &&
+      selectedRowData < shiftData.length - 1
+    ) {
+      setSelectedRowData(selectedRowData + 1);
+    }
+  };
+
   const [isCreateModalOpen, setCreateModalOpen] = useState(false);
 
   // Function to toggle modal visibility
@@ -321,7 +351,18 @@ const getInitials = (name) => {
     setCreateModalOpen(!isCreateModalOpen);
   };
 
-  const ActionButton = ({ id, color, bgColor, icon: Icon, tooltip }) => {
+  // Edit click
+  const handleEditClick = (data) => {
+    setUpdateData(data);
+    setUpdateModalOpen(true);
+  };
+  
+  const toggleUpdateModal = () => {
+    setUpdateModalOpen(!isUpdateModalOpen);
+  };
+
+
+  const ActionButton = ({ id, color, bgColor, icon: Icon, tooltip, onClick  }) => {
     return (
       <>
         <button
@@ -340,6 +381,10 @@ const getInitials = (name) => {
             padding: "0",
             transition: "all 0.2s ease-in-out",
             marginTop: "10px"
+          }}
+          onClick={(e) => {
+            e.stopPropagation();
+            if (onClick) onClick(e);
           }}
           onMouseOver={(e) => {
             e.currentTarget.style.opacity = "0.8";
@@ -385,10 +430,12 @@ const getInitials = (name) => {
           </tr>
         </thead>
         <tbody>
-          {currentEmployees.map((item) => (
+          {currentEmployees.map((item, index) => (
             <tr
               key={item.id}
+              onClick={() => handleRowClick(item, index)}
               style={{
+                cursor: "pointer",
                 backgroundColor: selectedRows.includes(item.id)
                   ? "#FFF3E0"
                   : "white",
@@ -455,6 +502,10 @@ const getInitials = (name) => {
                     bgColor="#eef2ff"
                     icon={FiEdit2}
                     tooltip="Edit"
+                    onClick={(e) => {
+                      handleEditClick(item);
+                    }}
+                  
                   />
                   <ActionButton
                     id={`copyBtn-${item.id}`}
@@ -611,6 +662,27 @@ const getInitials = (name) => {
       </Row>
         </CardBody>
       </Card>
+
+       {/* Details Modal */}
+       {isDetailsModalOpen && (
+  <ShiftRequestsDetails
+    isOpen={isDetailsModalOpen}
+    toggle={toggleDetailsModal}
+    data={shiftData[selectedRowData]}
+    onNavigate={handleNavigateAsset}
+    hasPrevious={selectedRowData > 0}
+    hasNext={selectedRowData < shiftData.length - 1}
+  />
+)}
+
+{isUpdateModalOpen && (
+  <UpdateRequest
+    isOpen={isUpdateModalOpen}
+    toggle={toggleUpdateModal}
+    data={updateData}
+  />
+)}
+
     </Container>
   );
 };
