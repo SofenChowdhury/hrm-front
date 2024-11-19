@@ -1,16 +1,7 @@
 import React, { useState, useEffect } from "react";
-import {
-  Modal,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Button,
-  Row,
-  Col,
-} from "reactstrap";
+import { Dialog, DialogContent, DialogTitle, IconButton, Switch } from "@mui/material";
+import { Form, FormGroup, Label, Input, Button, Row, Col } from "reactstrap";
 import { FiX } from "react-icons/fi";
-import Switch from "@mui/material/Switch";
 
 const UpdateRequest = ({ isOpen, toggle, data }) => {
   const [formData, setFormData] = useState({
@@ -56,86 +47,85 @@ const UpdateRequest = ({ isOpen, toggle, data }) => {
     toggle();
   };
 
-  const modalStyles = {
-    header: {
-      borderBottom: "none",
-      paddingBottom: "0",
+  const styles = {
+    dialog: {
+      "& .MuiDialog-paper": {
+        padding: "20px",
+        width: "90%",
+        maxWidth: "800px",
+        borderRadius: "10px",
+      },
     },
     closeButton: {
-      background: "none",
-      border: "none",
-      padding: "0",
       position: "absolute",
-      right: "20px",
-      top: "20px",
-      cursor: "pointer",
+      right: 8,
+      top: 8,
     },
     title: {
       fontSize: "1.25rem",
       fontWeight: "500",
       color: "#333",
-      marginBottom: "20px",
     },
     form: {
-      padding: "20px",
-    },
-    label: {
-      fontWeight: "500",
-      fontSize: "0.9rem",
-      marginBottom: "8px",
-      display: "block",
-    },
-    required: {
-      color: "#dc3545",
-      marginLeft: "4px",
+      marginTop: "20px",
     },
     input: {
       borderRadius: "4px",
       border: "1px solid #ced4da",
       padding: "0.375rem 0.75rem",
     },
+    button: {
+      backgroundColor: "#e54f37",
+      border: "none",
+      padding: "10px 20px",
+      borderRadius: "5px",
+      fontWeight: "400",
+      marginTop: "20px",
+      transition: "background-color 0.3s ease",
+    },
+    buttonHover: {
+      backgroundColor: "#c44232",
+    },
   };
 
   return (
-    <Modal isOpen={isOpen} toggle={toggle} size="lg">
-      <div style={modalStyles.form}>
-        <button
-          onClick={toggle}
-          style={modalStyles.closeButton}
-          aria-label="Close"
-        >
-          <FiX size={24} />
-        </button>
+    <Dialog open={isOpen} onClose={toggle} sx={styles.dialog}>
+      <DialogTitle sx={{ position: "relative" }}>
+        <span style={styles.title}>Update Shift Request</span>
+        <IconButton aria-label="close" onClick={toggle} sx={styles.closeButton}>
+          <FiX />
+        </IconButton>
+      <hr />
+      </DialogTitle>
 
-        <h5 style={modalStyles.title}>Update Shift Request</h5>
-        <hr />
-
-        <Form onSubmit={handleSubmit} className="mt-4">
+      <DialogContent>
+        <Form onSubmit={handleSubmit} style={styles.form}>
           <Row>
             <Col md={6}>
               <FormGroup>
-                <Label style={modalStyles.label}>
-                  Employee<span style={modalStyles.required}>*</span>
+                <Label>
+                  Employee<span style={{ color: "#dc3545", marginLeft: "4px" }}>*</span>
                 </Label>
                 <Input
                   type="text"
                   name="employee"
                   value={formData.employee}
-                  style={modalStyles.input}
+                  style={styles.input}
+                  onChange={handleChange}
                 />
               </FormGroup>
             </Col>
             <Col md={6}>
               <FormGroup>
-                <Label style={modalStyles.label}>
-                  Requesting Shift<span style={modalStyles.required}>*</span>
+                <Label>
+                  Requesting Shift<span style={{ color: "#dc3545", marginLeft: "4px" }}>*</span>
                 </Label>
                 <Input
                   type="select"
                   name="requestedShift"
                   value={formData.requestedShift}
                   onChange={handleChange}
-                  style={modalStyles.input}
+                  style={styles.input}
                 >
                   <option value="">---Choose Requesting Shift---</option>
                   <option value="regular">Regular Shift</option>
@@ -149,37 +139,37 @@ const UpdateRequest = ({ isOpen, toggle, data }) => {
           <Row className="mt-3">
             <Col md={6}>
               <FormGroup>
-                <Label style={modalStyles.label}>
-                  Requested Date<span style={modalStyles.required}>*</span>
+                <Label>
+                  Requested Date<span style={{ color: "#dc3545", marginLeft: "4px" }}>*</span>
                 </Label>
                 <Input
                   type="date"
                   name="requestedDate"
                   value={formData.requestedDate}
                   onChange={handleChange}
-                  style={modalStyles.input}
+                  style={styles.input}
                 />
               </FormGroup>
             </Col>
-             {!formData.isPermanent && (
-            <Col md={6}>
-              <FormGroup>
-                <Label style={modalStyles.label}>Requested Till</Label>
-                <Input
-                  type="date"
-                  name="requestedTill"
-                  value={formData.requestedTill}
-                  onChange={handleChange}
-                  style={modalStyles.input}
-                />
-              </FormGroup>
-            </Col>
-             )}
+            {!formData.isPermanent && (
+              <Col md={6}>
+                <FormGroup>
+                  <Label>Requested Till</Label>
+                  <Input
+                    type="date"
+                    name="requestedTill"
+                    value={formData.requestedTill}
+                    onChange={handleChange}
+                    style={styles.input}
+                  />
+                </FormGroup>
+              </Col>
+            )}
           </Row>
 
           <FormGroup className="mt-3">
-            <Label style={modalStyles.label}>
-              Description<span style={modalStyles.required}>*</span>
+            <Label>
+              Description<span style={{ color: "#dc3545", marginLeft: "4px" }}>*</span>
             </Label>
             <Input
               type="textarea"
@@ -188,14 +178,12 @@ const UpdateRequest = ({ isOpen, toggle, data }) => {
               onChange={handleChange}
               placeholder="Description"
               rows="4"
-              style={modalStyles.input}
+              style={styles.input}
             />
           </FormGroup>
 
           <FormGroup className="mt-3">
-            <Label style={{ ...modalStyles.label, marginBottom: "3px" }}>
-              Permanent Request
-            </Label>
+            <Label style={{ marginBottom: "3px" }}>Permanent Request</Label>
             <Switch
               checked={formData.isPermanent}
               onChange={handleSwitchChange}
@@ -206,29 +194,17 @@ const UpdateRequest = ({ isOpen, toggle, data }) => {
 
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <Button
-              style={{
-                backgroundColor: "#e54f37",
-                border: "#e54f37",
-                padding: "10px 20px",
-                borderRadius: "5px",
-                fontWeight: "400",
-                marginTop: "20px",
-                transition: "background-color 0.3s ease",
-              }}
-              onMouseOver={(e) =>
-                (e.currentTarget.style.backgroundColor = "#c44232")
-              }
-              onMouseOut={(e) =>
-                (e.currentTarget.style.backgroundColor = "#e54f37")
-              }
+              style={styles.button}
+              onMouseOver={(e) => (e.currentTarget.style.backgroundColor = styles.buttonHover.backgroundColor)}
+              onMouseOut={(e) => (e.currentTarget.style.backgroundColor = styles.button.backgroundColor)}
               type="submit"
             >
               Save
             </Button>
           </div>
         </Form>
-      </div>
-    </Modal>
+      </DialogContent>
+    </Dialog>
   );
 };
 

@@ -12,16 +12,21 @@ import {
   Tooltip,
   UncontrolledTooltip,
 } from "reactstrap";
-import { IoCheckmarkOutline,IoCloseOutline,IoEllipsisVertical } from "react-icons/io5";
-import Pagination from '@mui/material/Pagination';
+import {
+  IoCheckmarkOutline,
+  IoCloseOutline,
+  IoEllipsisVertical,
+} from "react-icons/io5";
+import Pagination from "@mui/material/Pagination";
 import { FiEdit2, FiCopy, FiTrash2, FiFileText } from "react-icons/fi";
 import { MdDone, MdDelete } from "react-icons/md";
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
 import TopBarComponet from "../modalForms_evan/TopComponent/TopBarComponet";
 import CreateShiftRequest from "../modalForms_evan/ShiftRequests/CreateShiftRequest";
 import ShiftRequestsDetails from "../modalForms_evan/ShiftRequests/ShiftRequestsDetails";
 import UpdateRequest from "../modalForms_evan/ShiftRequests/UpdateRequest";
+import ViewComments from "../modalForms_evan/ShiftRequests/ViewComments";
 
 const styles = {
   pageWrapper: {
@@ -109,7 +114,7 @@ const styles = {
   },
   activeTab: {
     color: "#d9534f",
-    borderBottom: "2px solid #d9534f", 
+    borderBottom: "2px solid #d9534f",
     fontWeight: "500",
     "&:after": {
       content: '""',
@@ -160,28 +165,27 @@ const ShiftRequests = () => {
   const [updateData, setUpdateData] = useState(null);
 
   // Generate color based on string
-const stringToColor = (string) => {
-  let hash = 0;
-  for (let i = 0; i < string.length; i += 1) {
-    hash = string.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  let color = '#';
-  for (let i = 0; i < 3; i += 1) {
-    const value = (hash >> (i * 8)) & 0xff;
-    color += `00${value.toString(16)}`.slice(-2);
-  }
-  return color;
-};
+  const stringToColor = (string) => {
+    let hash = 0;
+    for (let i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    let color = "#";
+    for (let i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.slice(-2);
+    }
+    return color;
+  };
 
-// Generate initials from the name
-const getInitials = (name) => {
-  return name
-    .split(' ')
-    .map((word) => word[0])
-    .join('')
-    .toUpperCase();
-};
-
+  // Generate initials from the name
+  const getInitials = (name) => {
+    return name
+      .split(" ")
+      .map((word) => word[0])
+      .join("")
+      .toUpperCase();
+  };
 
   const shiftData = [
     {
@@ -288,7 +292,6 @@ const getInitials = (name) => {
       status: "Requested",
       description: "shift change",
     },
-    
   ];
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -302,8 +305,10 @@ const getInitials = (name) => {
   const totalPages = Math.ceil(shiftData.length / employeesPerPage);
   const indexOfLastEmployee = currentPage * employeesPerPage;
   const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
-  const currentEmployees = shiftData.slice(indexOfFirstEmployee, indexOfLastEmployee);
-
+  const currentEmployees = shiftData.slice(
+    indexOfFirstEmployee,
+    indexOfLastEmployee
+  );
 
   const handleSelectAll = () => {
     if (selectAll) {
@@ -322,10 +327,10 @@ const getInitials = (name) => {
     }
   };
 
-    // Open the selected row's data
-  const handleRowClick = (data,index) => {
+  // Open the selected row's data
+  const handleRowClick = (data, index) => {
     setSelectedRowData(index);
-    setDetailsModalOpen(true); 
+    setDetailsModalOpen(true);
   };
 
   // Close the modal
@@ -336,17 +341,14 @@ const getInitials = (name) => {
   const handleNavigateAsset = (direction) => {
     if (direction === "previous" && selectedRowData > 0) {
       setSelectedRowData(selectedRowData - 1);
-    } else if (
-      direction === "next" &&
-      selectedRowData < shiftData.length - 1
-    ) {
+    } else if (direction === "next" && selectedRowData < shiftData.length - 1) {
       setSelectedRowData(selectedRowData + 1);
     }
   };
 
+  // Function to toggle modal visibility
   const [isCreateModalOpen, setCreateModalOpen] = useState(false);
 
-  // Function to toggle modal visibility
   const toggleCreateModal = () => {
     setCreateModalOpen(!isCreateModalOpen);
   };
@@ -356,13 +358,28 @@ const getInitials = (name) => {
     setUpdateData(data);
     setUpdateModalOpen(true);
   };
-  
+
   const toggleUpdateModal = () => {
     setUpdateModalOpen(!isUpdateModalOpen);
   };
 
+// View Comments
+  const [isCommentsOpen, setCommentsOpen] = useState(false);
+  const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
 
-  const ActionButton = ({ id, color, bgColor, icon: Icon, tooltip, onClick  }) => {
+  const handleViewComments = (index) => {
+    setSelectedRowIndex(index);
+    setCommentsOpen(true);
+  };
+
+  const ActionButton = ({
+    id,
+    color,
+    bgColor,
+    icon: Icon,
+    tooltip,
+    onClick,
+  }) => {
     return (
       <>
         <button
@@ -380,7 +397,7 @@ const getInitials = (name) => {
             border: "none",
             padding: "0",
             transition: "all 0.2s ease-in-out",
-            marginTop: "10px"
+            marginTop: "10px",
           }}
           onClick={(e) => {
             e.stopPropagation();
@@ -450,16 +467,16 @@ const getInitials = (name) => {
               </td>
               <td style={styles.tableCell}>
                 <div style={{ display: "flex", alignItems: "center" }}>
-                <Avatar
-                  sx={{
-                    bgcolor: stringToColor(item.employee.name),
-                    width: 30,
-                    height: 30,
-                    marginRight: '10px',
-                  }}
-                >
-                  {getInitials(item.employee.name)}
-                </Avatar>
+                  <Avatar
+                    sx={{
+                      bgcolor: stringToColor(item.employee.name),
+                      width: 30,
+                      height: 30,
+                      marginRight: "10px",
+                    }}
+                  >
+                    {getInitials(item.employee.name)}
+                  </Avatar>
                   <div>
                     <div style={{ fontWeight: "500" }}>
                       {item.employee.name}
@@ -481,6 +498,10 @@ const getInitials = (name) => {
                   color="link"
                   className="p-0"
                   id={`viewComments-${item.id}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleViewComments(index);
+                  }}
                 >
                   <FiFileText />
                 </Button>
@@ -505,7 +526,6 @@ const getInitials = (name) => {
                     onClick={(e) => {
                       handleEditClick(item);
                     }}
-                  
                   />
                   <ActionButton
                     id={`copyBtn-${item.id}`}
@@ -582,8 +602,14 @@ const getInitials = (name) => {
 
   return (
     <Container fluid className="p-3" style={{ width: "1200px" }}>
-      <TopBarComponet headerName="Shift Request"onCreateClick={toggleCreateModal}/>
-      <CreateShiftRequest isOpen={isCreateModalOpen} toggle={toggleCreateModal} />
+      <TopBarComponet
+        headerName="Shift Request"
+        onCreateClick={toggleCreateModal}
+      />
+      <CreateShiftRequest
+        isOpen={isCreateModalOpen}
+        toggle={toggleCreateModal}
+      />
       <div>
         <TopButtons />
       </div>
@@ -647,42 +673,48 @@ const getInitials = (name) => {
           )}
 
           {/* Pagination */}
-      <Row className="mt-3">
-        <Col className="d-flex justify-content-end">
-          <Stack spacing={2}>
-            <Pagination
-              count={totalPages}
-              page={currentPage}
-              onChange={handlePageChange}
-              variant="outlined"
-              shape="rounded"
-            />
-          </Stack>
-        </Col>
-      </Row>
+          <Row className="mt-3">
+            <Col className="d-flex justify-content-end">
+              <Stack spacing={2}>
+                <Pagination
+                  count={totalPages}
+                  page={currentPage}
+                  onChange={handlePageChange}
+                  variant="outlined"
+                  shape="rounded"
+                />
+              </Stack>
+            </Col>
+          </Row>
         </CardBody>
       </Card>
 
-       {/* Details Modal */}
-       {isDetailsModalOpen && (
-  <ShiftRequestsDetails
-    isOpen={isDetailsModalOpen}
-    toggle={toggleDetailsModal}
-    data={shiftData[selectedRowData]}
-    onNavigate={handleNavigateAsset}
-    hasPrevious={selectedRowData > 0}
-    hasNext={selectedRowData < shiftData.length - 1}
-  />
-)}
+      {/* Details Modal */}
+      {isDetailsModalOpen && (
+        <ShiftRequestsDetails
+          isOpen={isDetailsModalOpen}
+          toggle={toggleDetailsModal}
+          data={shiftData[selectedRowData]}
+          onNavigate={handleNavigateAsset}
+          hasPrevious={selectedRowData > 0}
+          hasNext={selectedRowData < shiftData.length - 1}
+        />
+      )}
 
-{isUpdateModalOpen && (
-  <UpdateRequest
-    isOpen={isUpdateModalOpen}
-    toggle={toggleUpdateModal}
-    data={updateData}
-  />
-)}
+      {isUpdateModalOpen && (
+        <UpdateRequest
+          isOpen={isUpdateModalOpen}
+          toggle={toggleUpdateModal}
+          data={updateData}
+        />
+      )}
 
+      <ViewComments
+        isOpen={isCommentsOpen}
+        onClose={() => setCommentsOpen(false)}
+        rowIndex={selectedRowIndex}
+        data={shiftData}
+      />
     </Container>
   );
 };

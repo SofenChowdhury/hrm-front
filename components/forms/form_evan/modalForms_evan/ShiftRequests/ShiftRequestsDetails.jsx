@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Dialog, DialogContent, Typography, Box, Button } from "@mui/material";
 import { FiX } from "react-icons/fi";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -7,14 +7,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import UpdateRequest from "./UpdateRequest";
 
-const ShiftRequestsDetails = ({
-  isOpen,
-  toggle,
-  data,
-  onNavigate,
-  hasPrevious,
-  hasNext,
-}) => {
+const ShiftRequestsDetails = ({isOpen, toggle, data, onNavigate, hasPrevious, hasNext,}) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   if (!data) return null;
@@ -70,6 +63,16 @@ const ShiftRequestsDetails = ({
       "&:hover": {
         backgroundColor: "#c0392b",
       },
+    },
+    closeButton: {
+      background: "none",
+      border: "none",
+      padding: "0",
+      position: "absolute",
+      right: "16px",
+      top: "16px",
+      cursor: "pointer",
+      zIndex: 1,
     },
     navigationButton: {
       position: "absolute",
@@ -141,85 +144,90 @@ const ShiftRequestsDetails = ({
 
   return (
     <>
-    <Dialog open={isOpen} onClose={toggle} sx={styles.dialog}>
-      {hasPrevious && (
-        <button
-          style={{ ...styles.navigationButton, ...styles.prevButton }}
-          onClick={() => onNavigate("previous")}
-          aria-label="Previous"
-        >
-          <ChevronLeftIcon sx={{ fontSize: 20 }} />
+      <Dialog open={isOpen} onClose={toggle} sx={styles.dialog}>
+        <button onClick={toggle} style={styles.closeButton} aria-label="Close">
+          <FiX size={20} />
         </button>
-      )}
-
-      {hasNext && (
-        <button
-          style={{ ...styles.navigationButton, ...styles.nextButton }}
-          onClick={() => onNavigate("next")}
-          aria-label="Next"
-        >
-          <ChevronRightIcon sx={{ fontSize: 20 }} />
-        </button>
-      )}
-
-      <DialogContent sx={styles.content}>
-        <Typography sx={styles.title}>Shift Request Details</Typography>
-
-        <Box sx={styles.detailsSection}>
-          <Box sx={styles.detailItem}>
-            <Typography sx={styles.label}>Employee</Typography>
-            <Typography sx={styles.value}>
-              {`${data.employee.name} ${data.employee.code}`}
-            </Typography>
-          </Box>
-          <Box sx={styles.detailItem}>
-            <Typography sx={styles.label}>Requested Shift</Typography>
-            <Typography sx={styles.value}>{data.requestedShift}</Typography>
-          </Box>
-          <Box sx={styles.detailItem}>
-            <Typography sx={styles.label}>Previous Shift</Typography>
-            <Typography sx={styles.value}>{data.previousShift}</Typography>
-          </Box>
-          <Box sx={styles.detailItem}>
-            <Typography sx={styles.label}>Requested Date</Typography>
-            <Typography sx={styles.value}>{data.requestedDate}</Typography>
-          </Box>
-          <Box sx={styles.detailItem}>
-            <Typography sx={styles.label}>Requested Till</Typography>
-            <Typography sx={styles.value}>{data.requestedTill}</Typography>
-          </Box>
-          <Box sx={styles.detailItem}>
-            <Typography sx={styles.label}>Status</Typography>
-            <Typography sx={styles.value}>{data.status}</Typography>
-          </Box>
-          <Box sx={styles.detailItem} style={{ gridColumn: "1 / span 2" }}>
-            <Typography sx={styles.label}>Description</Typography>
-            <Typography sx={styles.value}>{data.description}</Typography>
-          </Box>
-        </Box>
-
-        <div style={styles.buttonGroup}>
+        {hasPrevious && (
           <button
-            style={{ ...styles.iconButton, ...styles.editButton }}
-            onClick={handleEditClick}
+            style={{ ...styles.navigationButton, ...styles.prevButton }}
+            onClick={() => onNavigate("previous")}
+            aria-label="Previous"
           >
-            <EditIcon />
+            <ChevronLeftIcon sx={{ fontSize: 20 }} />
           </button>
-          <button
-            style={{ ...styles.iconButton, ...styles.deleteButton }}
-            onClick={() => console.log("Delete clicked")}
-          >
-            <DeleteIcon />
-          </button>
-        </div>
-      </DialogContent>
-    </Dialog>
+        )}
 
-    <UpdateRequest 
-        isOpen={isEditModalOpen} 
-        toggle={handleCloseEditModal} 
-        data={data} 
-      />
+        {hasNext && (
+          <button
+            style={{ ...styles.navigationButton, ...styles.nextButton }}
+            onClick={() => onNavigate("next")}
+            aria-label="Next"
+          >
+            <ChevronRightIcon sx={{ fontSize: 20 }} />
+          </button>
+        )}
+
+        <DialogContent sx={styles.content}>
+          <Typography sx={styles.title}>Shift Request Details</Typography>
+
+          <Box sx={styles.detailsSection}>
+            <Box sx={styles.detailItem}>
+              <Typography sx={styles.label}>Employee</Typography>
+              <Typography sx={styles.value}>
+                {`${data.employee.name} ${data.employee.code}`}
+              </Typography>
+            </Box>
+            <Box sx={styles.detailItem}>
+              <Typography sx={styles.label}>Requested Shift</Typography>
+              <Typography sx={styles.value}>{data.requestedShift}</Typography>
+            </Box>
+            <Box sx={styles.detailItem}>
+              <Typography sx={styles.label}>Previous Shift</Typography>
+              <Typography sx={styles.value}>{data.previousShift}</Typography>
+            </Box>
+            <Box sx={styles.detailItem}>
+              <Typography sx={styles.label}>Requested Date</Typography>
+              <Typography sx={styles.value}>{data.requestedDate}</Typography>
+            </Box>
+            <Box sx={styles.detailItem}>
+              <Typography sx={styles.label}>Requested Till</Typography>
+              <Typography sx={styles.value}>{data.requestedTill}</Typography>
+            </Box>
+            <Box sx={styles.detailItem}>
+              <Typography sx={styles.label}>Status</Typography>
+              <Typography sx={styles.value}>{data.status}</Typography>
+            </Box>
+            <Box sx={styles.detailItem} style={{ gridColumn: "1 / span 2" }}>
+              <Typography sx={styles.label}>Description</Typography>
+              <Typography sx={styles.value}>{data.description}</Typography>
+            </Box>
+          </Box>
+
+          <div style={styles.buttonGroup}>
+            <button
+              style={{ ...styles.iconButton, ...styles.editButton }}
+              onClick={handleEditClick}
+            >
+              <EditIcon />
+            </button>
+            <button
+              style={{ ...styles.iconButton, ...styles.deleteButton }}
+              onClick={() => console.log("Delete clicked")}
+            >
+              <DeleteIcon />
+            </button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {isEditModalOpen && (
+        <UpdateRequest
+          isOpen={isEditModalOpen}
+          toggle={handleCloseEditModal}
+          data={data}
+        />
+      )}
     </>
   );
 };
