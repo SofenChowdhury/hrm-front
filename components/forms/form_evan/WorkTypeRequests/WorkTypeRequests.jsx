@@ -22,139 +22,141 @@ import { FiEdit2, FiCopy, FiTrash2, FiFileText } from "react-icons/fi";
 import { MdDone, MdDelete } from "react-icons/md";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
-import TopBarComponet from "../modalForms_evan/TopComponent/TopBarComponet";
+
+import TopBarComponet from '../modalForms_evan/TopComponent/TopBarComponet'
 import CreateShiftRequest from "../modalForms_evan/ShiftRequestsComponent/CreateShiftRequest";
 import ShiftRequestsDetails from "../modalForms_evan/ShiftRequestsComponent/ShiftRequestsDetails";
 import UpdateRequest from "../modalForms_evan/ShiftRequestsComponent/UpdateRequest";
 import ViewComments from "../modalForms_evan/ShiftRequestsComponent/ViewComments";
 
 const styles = {
-  pageWrapper: {
-    minWidth: "1024px",
-    maxWidth: "100%",
-    padding: "20px",
-    flex: 1,
-  },
-  mainContent: {
-    width: "100%",
-    minWidth: 0,
-  },
-  cardWrapper: {
-    width: "100%",
-    minWidth: 0,
-    overflow: "hidden",
-  },
-  tableWrapper: {
-    width: "100%",
-    overflowX: "auto",
-    marginRight: "0",
-    marginLeft: "0",
-    "::-webkit-scrollbar": {
-      height: "8px",
+    pageWrapper: {
+      minWidth: "1024px",
+      maxWidth: "100%",
+      padding: "20px",
+      flex: 1,
     },
-    "::-webkit-scrollbar-track": {
-      background: "#f1f1f1",
+    mainContent: {
+      width: "100%",
+      minWidth: 0,
     },
-    "::-webkit-scrollbar-thumb": {
-      background: "#888",
+    cardWrapper: {
+      width: "100%",
+      minWidth: 0,
+      overflow: "hidden",
+    },
+    tableWrapper: {
+      width: "100%",
+      overflowX: "auto",
+      marginRight: "0",
+      marginLeft: "0",
+      "::-webkit-scrollbar": {
+        height: "8px",
+      },
+      "::-webkit-scrollbar-track": {
+        background: "#f1f1f1",
+      },
+      "::-webkit-scrollbar-thumb": {
+        background: "#888",
+        borderRadius: "4px",
+      },
+    },
+    fixedTable: {
+      minWidth: "1500px",
+      width: "100%",
+      tableLayout: "fixed",
+    },
+    topButtons: {
+      display: "flex",
+      gap: "10px",
+    },
+    selectButton: {
+      border: "1px solid #4CAF50",
+      color: "#4CAF50",
+      background: "white",
+      padding: "6px 15px",
+      borderRadius: "4px",
+      fontWeight: "500",
+    },
+    unselectButton: {
+      border: "1px solid #666",
+      color: "#666",
+      background: "white",
+      padding: "6px 15px",
       borderRadius: "4px",
     },
-  },
-  fixedTable: {
-    minWidth: "1500px",
-    width: "100%",
-    tableLayout: "fixed",
-  },
-  topButtons: {
-    display: "flex",
-    gap: "10px",
-  },
-  selectButton: {
-    border: "1px solid #4CAF50",
-    color: "#4CAF50",
-    background: "white",
-    padding: "6px 15px",
-    borderRadius: "4px",
-    fontWeight: "500",
-  },
-  unselectButton: {
-    border: "1px solid #666",
-    color: "#666",
-    background: "white",
-    padding: "6px 15px",
-    borderRadius: "4px",
-  },
-  exportButton: {
-    border: "1px solid #2196F3",
-    color: "#2196F3",
-    background: "white",
-    padding: "6px 15px",
-    borderRadius: "4px",
-  },
-  selectedCount: {
-    border: "1px solid #F44336",
-    color: "#F44336",
-    background: "white",
-    padding: "6px 15px",
-    borderRadius: "4px",
-  },
-  tabs: {
-    display: "flex",
-    borderBottom: "1px solid #dee2e6",
-    marginBottom: "20px",
-  },
-  tab: {
-    padding: "10px 20px",
-    cursor: "pointer",
-    border: "none",
-    background: "none",
-    position: "relative",
-    color: "#666",
-    borderBottom: "2px solid transparent",
-  },
-  activeTab: {
-    color: "#d9534f",
-    borderBottom: "2px solid #d9534f",
-    fontWeight: "500",
-    "&:after": {
-      content: '""',
-      position: "absolute",
-      bottom: "-1px",
-      left: 0,
-      right: 0,
-      height: "2px",
-      background: "#f44336",
+    exportButton: {
+      border: "1px solid #2196F3",
+      color: "#2196F3",
+      background: "white",
+      padding: "6px 15px",
+      borderRadius: "4px",
     },
-  },
-  tableCell: {
-    padding: "12px 16px",
-    whiteSpace: "nowrap",
-    verticalAlign: "middle",
-  },
-  avatar: {
-    width: "32px",
-    height: "32px",
-    borderRadius: "50%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    marginRight: "10px",
-    fontSize: "14px",
-    color: "#333",
-  },
-  statusBadge: {
-    padding: "6px 12px",
-    borderRadius: "20px",
-    fontWeight: "500",
-  },
-  actionButtons: {
-    display: "flex",
-    gap: "8px",
-  },
-};
+    selectedCount: {
+      border: "1px solid #F44336",
+      color: "#F44336",
+      background: "white",
+      padding: "6px 15px",
+      borderRadius: "4px",
+    },
+    tabs: {
+      display: "flex",
+      borderBottom: "1px solid #dee2e6",
+      marginBottom: "20px",
+    },
+    tab: {
+      padding: "10px 20px",
+      cursor: "pointer",
+      border: "none",
+      background: "none",
+      position: "relative",
+      color: "#666",
+      borderBottom: "2px solid transparent",
+    },
+    activeTab: {
+      color: "#d9534f",
+      borderBottom: "2px solid #d9534f",
+      fontWeight: "500",
+      "&:after": {
+        content: '""',
+        position: "absolute",
+        bottom: "-1px",
+        left: 0,
+        right: 0,
+        height: "2px",
+        background: "#f44336",
+      },
+    },
+    tableCell: {
+      padding: "12px 16px",
+      whiteSpace: "nowrap",
+      verticalAlign: "middle",
+    },
+    avatar: {
+      width: "32px",
+      height: "32px",
+      borderRadius: "50%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      marginRight: "10px",
+      fontSize: "14px",
+      color: "#333",
+    },
+    statusBadge: {
+      padding: "6px 12px",
+      borderRadius: "20px",
+      fontWeight: "500",
+    },
+    actionButtons: {
+      display: "flex",
+      gap: "8px",
+    },
+  };
 
-const ShiftRequests = () => {
-  const [activeView, setActiveView] = useState("requests");
+const WorkTypeRequests = () => {
+
+    const [activeView, setActiveView] = useState("requests");
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
 
@@ -581,7 +583,7 @@ const ShiftRequests = () => {
   const TopButtons = () => (
     <div style={styles.topButtons}>
       <Button style={styles.selectButton} onClick={handleSelectAll}>
-        Select All Shifts
+        Select All Worktypes
       </Button>
       {selectedRows.length > 0 && (
         <>
@@ -589,9 +591,9 @@ const ShiftRequests = () => {
             style={styles.unselectButton}
             onClick={() => setSelectedRows([])}
           >
-            Unselect All Shifts
+            Unselect All Worktypes
           </Button>
-          <Button style={styles.exportButton}>Export Shifts</Button>
+          <Button style={styles.exportButton}>Export Worktypes</Button>
           <span style={styles.selectedCount}>
             {selectedRows.length} - Selected
           </span>
@@ -602,121 +604,118 @@ const ShiftRequests = () => {
 
   return (
     <Container fluid className="p-3" style={{ width: "1200px" }}>
-      <TopBarComponet
-        headerName="Shift Request"
-        onCreateClick={toggleCreateModal}
-      />
-      <CreateShiftRequest
-        isOpen={isCreateModalOpen}
-        toggle={toggleCreateModal}
-      />
-      <div>
-        <TopButtons />
-      </div>
+     <TopBarComponet headerName="Work Type Requests" onCreateClick={toggleCreateModal}/>
+    <CreateShiftRequest
+      isOpen={isCreateModalOpen}
+      toggle={toggleCreateModal}
+    />
+    <div>
+      <TopButtons />
+    </div>
 
-      <div className="d-flex justify-content-end mb-3">
-        <div className="d-flex gap-3">
-          <div className="d-flex align-items-center">
-            <div
-              style={{
-                width: 8,
-                height: 8,
-                borderRadius: "50%",
-                backgroundColor: "#4CAF50",
-                marginRight: 8,
-              }}
-            ></div>
-            <span>Approved</span>
-          </div>
-          <div className="d-flex align-items-center">
-            <div
-              style={{
-                width: 8,
-                height: 8,
-                borderRadius: "50%",
-                backgroundColor: "#F44336",
-                marginRight: 8,
-              }}
-            ></div>
-            <span>Rejected</span>
-          </div>
+    <div className="d-flex justify-content-end mb-3">
+      <div className="d-flex gap-3">
+        <div className="d-flex align-items-center">
+          <div
+            style={{
+              width: 8,
+              height: 8,
+              borderRadius: "50%",
+              backgroundColor: "#4CAF50",
+              marginRight: 8,
+            }}
+          ></div>
+          <span>Approved</span>
+        </div>
+        <div className="d-flex align-items-center">
+          <div
+            style={{
+              width: 8,
+              height: 8,
+              borderRadius: "50%",
+              backgroundColor: "#F44336",
+              marginRight: 8,
+            }}
+          ></div>
+          <span>Rejected</span>
         </div>
       </div>
+    </div>
 
-      <Card>
-        <CardBody>
-          <div style={styles.tabs}>
-            <button
-              style={{
-                ...styles.tab,
-                ...(activeView === "requests" && styles.activeTab),
-              }}
-              onClick={() => setActiveView("requests")}
-            >
-              Shift Requests
-            </button>
-            <button
-              style={{
-                ...styles.tab,
-                ...(activeView === "allocated" && styles.activeTab),
-              }}
-              onClick={() => setActiveView("allocated")}
-            >
-              Allocated Shift Requests
-            </button>
-          </div>
+    <Card>
+      <CardBody>
+        <div style={styles.tabs}>
+          <button
+            style={{
+              ...styles.tab,
+              ...(activeView === "requests" && styles.activeTab),
+            }}
+            onClick={() => setActiveView("requests")}
+          >
+            Shift Requests
+          </button>
+          <button
+            style={{
+              ...styles.tab,
+              ...(activeView === "allocated" && styles.activeTab),
+            }}
+            onClick={() => setActiveView("allocated")}
+          >
+            Allocated Shift Requests
+          </button>
+        </div>
 
-          {activeView === "requests" ? (
-            renderShiftRequestsTable()
-          ) : (
-            <div>Allocated Shift Requests Not found</div>
-          )}
+        {activeView === "requests" ? (
+          renderShiftRequestsTable()
+        ) : (
+          <div>Allocated Shift Requests Not found</div>
+        )}
 
-          {/* Pagination */}
-          <Row className="mt-3">
-            <Col className="d-flex justify-content-end">
-              <Stack spacing={2}>
-                <Pagination
-                  count={totalPages}
-                  page={currentPage}
-                  onChange={handlePageChange}
-                  variant="outlined"
-                  shape="rounded"
-                />
-              </Stack>
-            </Col>
-          </Row>
-        </CardBody>
-      </Card>
+        {/* Pagination */}
+        <Row className="mt-3">
+          <Col className="d-flex justify-content-end">
+            <Stack spacing={2}>
+              <Pagination
+                count={totalPages}
+                page={currentPage}
+                onChange={handlePageChange}
+                variant="outlined"
+                shape="rounded"
+              />
+            </Stack>
+          </Col>
+        </Row>
+      </CardBody>
+    </Card>
 
-      {/* Details Modal */}
-      {isDetailsModalOpen && (
-        <ShiftRequestsDetails
-          isOpen={isDetailsModalOpen}
-          toggle={toggleDetailsModal}
-          data={shiftData[selectedRowData]}
-          onNavigate={handleNavigateAsset}
-          hasPrevious={selectedRowData > 0}
-          hasNext={selectedRowData < shiftData.length - 1}
-        />
-      )}
-
-      {isUpdateModalOpen && (
-        <UpdateRequest
-          isOpen={isUpdateModalOpen}
-          toggle={toggleUpdateModal}
-          data={updateData}
-        />
-      )}
-
-      <ViewComments
-        isOpen={isCommentsOpen}
-        onClose={() => setCommentsOpen(false)}
-        rowIndex={selectedRowIndex}
-        data={shiftData}
+    {/* Details Modal */}
+    {isDetailsModalOpen && (
+      <ShiftRequestsDetails
+        isOpen={isDetailsModalOpen}
+        toggle={toggleDetailsModal}
+        data={shiftData[selectedRowData]}
+        onNavigate={handleNavigateAsset}
+        hasPrevious={selectedRowData > 0}
+        hasNext={selectedRowData < shiftData.length - 1}
       />
-    </Container>
-  );
-};
+    )}
 
-export default ShiftRequests;
+    {isUpdateModalOpen && (
+      <UpdateRequest
+        isOpen={isUpdateModalOpen}
+        toggle={toggleUpdateModal}
+        data={updateData}
+      />
+    )}
+
+    <ViewComments
+      isOpen={isCommentsOpen}
+      onClose={() => setCommentsOpen(false)}
+      rowIndex={selectedRowIndex}
+      data={shiftData}
+    />
+  </Container>
+  )
+}
+
+export default WorkTypeRequests
