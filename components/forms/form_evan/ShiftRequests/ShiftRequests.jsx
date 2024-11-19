@@ -23,10 +23,10 @@ import { MdDone, MdDelete } from "react-icons/md";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import TopBarComponet from "../modalForms_evan/TopComponent/TopBarComponet";
-import CreateShiftRequest from "../modalForms_evan/ShiftRequests/CreateShiftRequest";
-import ShiftRequestsDetails from "../modalForms_evan/ShiftRequests/ShiftRequestsDetails";
-import UpdateRequest from "../modalForms_evan/ShiftRequests/UpdateRequest";
-import ViewComments from "../modalForms_evan/ShiftRequests/ViewComments";
+import CreateShiftRequest from "../modalForms_evan/ShiftRequestsComponent/CreateShiftRequest";
+import ShiftRequestsDetails from "../modalForms_evan/ShiftRequestsComponent/ShiftRequestsDetails";
+import UpdateRequest from "../modalForms_evan/ShiftRequestsComponent/UpdateRequest";
+import ViewComments from "../modalForms_evan/ShiftRequestsComponent/ViewComments";
 
 const styles = {
   pageWrapper: {
