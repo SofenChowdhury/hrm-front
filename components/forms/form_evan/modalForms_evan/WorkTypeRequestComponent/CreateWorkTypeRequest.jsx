@@ -14,9 +14,8 @@ import {
 import { FiX } from "react-icons/fi";
 import Switch from "@mui/material/Switch";
 
-
-const CreateShiftRequest = ({ isOpen, toggle }) => {
-  const today = new Date().toISOString().split("T")[0];
+const CreateWorkTypeRequest = ({ isOpen, toggle }) => {
+    const today = new Date().toISOString().split("T")[0];
   const [formData, setFormData] = useState({
     employee: "Adam Luis",
     requestingWorkType: "",
@@ -86,7 +85,6 @@ const CreateShiftRequest = ({ isOpen, toggle }) => {
       padding: "0.375rem 0.75rem",
     },
   };
-
   return (
     <Modal isOpen={isOpen} toggle={toggle} size="lg">
     <div style={modalStyles.form}>
@@ -98,7 +96,7 @@ const CreateShiftRequest = ({ isOpen, toggle }) => {
         <FiX size={24} />
       </button>
 
-      <h5 style={modalStyles.title}>Create Shift Request</h5>
+      <h5 style={modalStyles.title}>Work Type Request</h5>
       <hr />
 
       <Form onSubmit={handleSubmit} className="mt-4">
@@ -172,7 +170,7 @@ const CreateShiftRequest = ({ isOpen, toggle }) => {
               />
             </FormGroup>
           </Col>
-          )}
+          )} 
         </Row>
 
         <FormGroup className="mt-3">
@@ -228,4 +226,4 @@ const CreateShiftRequest = ({ isOpen, toggle }) => {
   )
 }
 
-export default CreateShiftRequest
+export default CreateWorkTypeRequest

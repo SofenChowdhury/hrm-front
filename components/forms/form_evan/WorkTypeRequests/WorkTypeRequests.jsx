@@ -24,10 +24,11 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 
 import TopBarComponet from '../modalForms_evan/TopComponent/TopBarComponet'
-import CreateShiftRequest from "../modalForms_evan/ShiftRequestsComponent/CreateShiftRequest";
-import ShiftRequestsDetails from "../modalForms_evan/ShiftRequestsComponent/ShiftRequestsDetails";
-import UpdateRequest from "../modalForms_evan/ShiftRequestsComponent/UpdateRequest";
-import ViewComments from "../modalForms_evan/ShiftRequestsComponent/ViewComments";
+
+import CreateWorkTypeRequest from "../modalForms_evan/WorkTypeRequestComponent/CreateWorkTypeRequest";
+import WorkTypeDetails from "../modalForms_evan/WorkTypeRequestComponent/WorkTypeDetails";
+import UpdateWorkType from "../modalForms_evan/WorkTypeRequestComponent/UpdateWorkType";
+import ViewCommnetsWorkType from "../modalForms_evan/WorkTypeRequestComponent/ViewCommnetsWorkType";
 
 const styles = {
     pageWrapper: {
@@ -156,7 +157,6 @@ const styles = {
 
 const WorkTypeRequests = () => {
 
-    const [activeView, setActiveView] = useState("requests");
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
 
@@ -605,7 +605,7 @@ const WorkTypeRequests = () => {
   return (
     <Container fluid className="p-3" style={{ width: "1200px" }}>
      <TopBarComponet headerName="Work Type Requests" onCreateClick={toggleCreateModal}/>
-    <CreateShiftRequest
+    <CreateWorkTypeRequest
       isOpen={isCreateModalOpen}
       toggle={toggleCreateModal}
     />
@@ -644,32 +644,7 @@ const WorkTypeRequests = () => {
 
     <Card>
       <CardBody>
-        <div style={styles.tabs}>
-          <button
-            style={{
-              ...styles.tab,
-              ...(activeView === "requests" && styles.activeTab),
-            }}
-            onClick={() => setActiveView("requests")}
-          >
-            Shift Requests
-          </button>
-          <button
-            style={{
-              ...styles.tab,
-              ...(activeView === "allocated" && styles.activeTab),
-            }}
-            onClick={() => setActiveView("allocated")}
-          >
-            Allocated Shift Requests
-          </button>
-        </div>
-
-        {activeView === "requests" ? (
-          renderShiftRequestsTable()
-        ) : (
-          <div>Allocated Shift Requests Not found</div>
-        )}
+      {renderShiftRequestsTable()}
 
         {/* Pagination */}
         <Row className="mt-3">
@@ -690,7 +665,7 @@ const WorkTypeRequests = () => {
 
     {/* Details Modal */}
     {isDetailsModalOpen && (
-      <ShiftRequestsDetails
+      <WorkTypeDetails
         isOpen={isDetailsModalOpen}
         toggle={toggleDetailsModal}
         data={shiftData[selectedRowData]}
@@ -701,14 +676,14 @@ const WorkTypeRequests = () => {
     )}
 
     {isUpdateModalOpen && (
-      <UpdateRequest
+      <UpdateWorkType
         isOpen={isUpdateModalOpen}
         toggle={toggleUpdateModal}
         data={updateData}
       />
     )}
 
-    <ViewComments
+    <ViewCommnetsWorkType
       isOpen={isCommentsOpen}
       onClose={() => setCommentsOpen(false)}
       rowIndex={selectedRowIndex}
