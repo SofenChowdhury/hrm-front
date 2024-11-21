@@ -120,17 +120,11 @@ const ShiftRequestsDetails = ({isOpen, toggle, data, onNavigate, hasPrevious, ha
       backgroundColor: "#3498db",
       color: "#fff",
       border: "none",
-      "&:hover": {
-        backgroundColor: "#2980b9",
-      },
     },
     deleteButton: {
       backgroundColor: "#e74c3c",
       border: "none",
       color: "#fff",
-      "&:hover": {
-        backgroundColor: "#c0392b",
-      },
     },
   };
 
@@ -208,12 +202,25 @@ const ShiftRequestsDetails = ({isOpen, toggle, data, onNavigate, hasPrevious, ha
             <button
               style={{ ...styles.iconButton, ...styles.editButton }}
               onClick={handleEditClick}
+              onMouseOver={(e) =>
+                (e.currentTarget.style.backgroundColor = "#2980b9")
+              }
+              onMouseOut={(e) =>
+                (e.currentTarget.style.backgroundColor = "#3498db")
+              }
             >
               <EditIcon />
             </button>
             <button
               style={{ ...styles.iconButton, ...styles.deleteButton }}
               onClick={() => console.log("Delete clicked")}
+              onMouseOver={(e) =>
+                (e.currentTarget.style.backgroundColor = "#c0392b")
+              }
+              onMouseOut={(e) =>
+                (e.currentTarget.style.backgroundColor = "#e74c3c")
+              }
+              
             >
               <DeleteIcon />
             </button>

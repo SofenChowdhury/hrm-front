@@ -2043,7 +2043,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     />
                     <Item
                       title="Rotating Shift Assign"
-                      to="/permissions/permissionList"
+                      to="/employee/rotatingShiftAssign"
                       icon={<ReceiptIcon />}
                       selected={selected}
                       setSelected={setSelected}

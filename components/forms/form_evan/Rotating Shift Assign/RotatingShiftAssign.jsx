@@ -19,16 +19,15 @@ import {
 } from "react-icons/io5";
 import Pagination from "@mui/material/Pagination";
 import { FiEdit2, FiCopy, FiTrash2, FiFileText } from "react-icons/fi";
-import { MdDone, MdDelete } from "react-icons/md";
+import { IoArchive } from "react-icons/io5";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 
-import TopBarComponet from '../modalForms_evan/TopComponent/TopBarComponet'
-
-import CreateWorkTypeRequest from "../modalForms_evan/WorkTypeRequestComponent/CreateWorkTypeRequest";
-import WorkTypeDetails from "../modalForms_evan/WorkTypeRequestComponent/WorkTypeDetails";
-import UpdateWorkType from "../modalForms_evan/WorkTypeRequestComponent/UpdateWorkType";
-import ViewCommnetsWorkType from "../modalForms_evan/WorkTypeRequestComponent/ViewCommnetsWorkType";
+import TopBarAssignComponent from "../modalForms_evan/TopComponent/TopBarAssignComponent";
+import CreateRotatingShiftAssign from "../modalForms_evan/RotatingShiftAssignComponents/CreateRotatingShiftAssign";
+import RotatingShiftDetails from "../modalForms_evan/RotatingShiftAssignComponents/RotatingShiftDetails";
+import UpdateRotatingShift from "../modalForms_evan/RotatingShiftAssignComponents/UpdateRotatingShift";
+import DuplicateRotatingShift from "../modalForms_evan/RotatingShiftAssignComponents/DuplicateRotatingShift";
 
 const styles = {
     pageWrapper: {
@@ -70,6 +69,7 @@ const styles = {
     topButtons: {
       display: "flex",
       gap: "10px",
+      marginBottom: "10px"
     },
     selectButton: {
       border: "1px solid #4CAF50",
@@ -155,8 +155,8 @@ const styles = {
     },
   };
 
-const WorkTypeRequests = () => {
 
+const RotatingShiftAssign = () => {
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
 
@@ -165,6 +165,9 @@ const WorkTypeRequests = () => {
 
   const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
   const [updateData, setUpdateData] = useState(null);
+
+  const [isDuplicateModalOpen, setDuplicateModalOpen] = useState(false);
+  const [duplicateData, setduplicateData] = useState(null);
 
   // Generate color based on string
   const stringToColor = (string) => {
@@ -193,107 +196,46 @@ const WorkTypeRequests = () => {
     {
       id: 1,
       employee: {
-        name: "Sofia Howard",
-        code: "(#PEP75)",
+        name: "Jacob Walker",
+        code: "(#PEP18)",
       },
-      requestedShift: "Regular Shift",
-      previousShift: "Morning Shift",
-      requestedDate: "May. 1, 2024",
-      requestedTill: "May. 31, 2024",
-      status: "Approved",
-      description: "shift change",
+      title: "Morning to Night",
+      basedOn: "Weekend",
+      rotate: "Weekly every Monday",
+      startDate: "Aug. 5, 2024",
+      currentShift: "Regular Shift",
+      nextSwitch: "sep. 1, 2024",
+      nextShift: "Morning Shift",
     },
     {
-      id: 2,
-      employee: {
-        name: "Levi Sanders",
-        code: "(#PEP48)",
+        id: 2,
+        employee: {
+          name: "Sofia Howard",
+          code: "(#PEP75)",
+        },
+        title: "Morning to Night",
+        basedOn: "Weekend",
+        rotate: "Weekly every Monday",
+        startDate: "Aug. 5, 2024",
+        currentShift: "Regular Shift",
+        nextSwitch: "sep. 1, 2024",
+        nextShift: "Morning Shift",
       },
-      requestedShift: "Night Shift",
-      previousShift: "Regular Shift",
-      requestedDate: "Mar. 10, 2024",
-      requestedTill: "Mar. 22, 2024",
-      status: "Requested",
-      description: "shift change",
-    },
-    {
-      id: 3,
-      employee: {
-        name: "Sevi Eanders",
-        code: "(#PEP48)",
+      {
+        id: 3,
+        employee: {
+          name: "Rober Howard",
+          code: "(#PEP85)",
+        },
+        title: "Night to Morning",
+        basedOn: "Monthly",
+        rotate: "Weekly every Monday",
+        startDate: "Aug. 5, 2024",
+        currentShift: "Regular Shift",
+        nextSwitch: "sep. 1, 2024",
+        nextShift: "Morning Shift",
       },
-      requestedShift: "Regular Shift",
-      previousShift: "Night Shift",
-      requestedDate: "Mar. 12, 2024",
-      requestedTill: "Mar. 22, 2024",
-      status: "Rejected",
-      description: "shift change",
-    },
-    {
-      id: 4,
-      employee: {
-        name: "Stella Bell",
-        code: "(#PEP59)",
-      },
-      requestedShift: "Regular Shift",
-      previousShift: "Morning Shift",
-      requestedDate: "May. 1, 2024",
-      requestedTill: "May. 31, 2024",
-      status: "Approved",
-      description: "shift change",
-    },
-    {
-      id: 5,
-      employee: {
-        name: "Etella Saea",
-        code: "(#PEP59)",
-      },
-      requestedShift: "Regular Shift",
-      previousShift: "Night Shift",
-      requestedDate: "Mar. 12, 2024",
-      requestedTill: "Mar. 22, 2024",
-      status: "Rejected",
-      description: "shift change",
-    },
-    {
-      id: 6,
-      employee: {
-        name: "Alison Howard",
-        code: "(#PEP75)",
-      },
-      requestedShift: "Night Shift",
-      previousShift: "Regular Shift",
-      requestedDate: "Mar. 10, 2024",
-      requestedTill: "Mar. 22, 2024",
-      status: "Requested",
-      description: "shift change",
-    },
-    {
-      id: 7,
-      employee: {
-        name: "Robert Howard",
-        code: "(#PEP75)",
-      },
-      requestedShift: "Night Shift",
-      previousShift: "Regular Shift",
-      requestedDate: "Mar. 10, 2024",
-      requestedTill: "Mar. 22, 2024",
-      status: "Requested",
-      description: "shift change",
-    },
-    {
-      id: 8,
-      employee: {
-        name: "Alexa Robo",
-        code: "(#PEP75)",
-      },
-      requestedShift: "Night Shift",
-      previousShift: "Regular Shift",
-      requestedDate: "Mar. 10, 2024",
-      requestedTill: "Mar. 22, 2024",
-      status: "Requested",
-      description: "shift change",
-    },
+    
   ];
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -365,14 +307,24 @@ const WorkTypeRequests = () => {
     setUpdateModalOpen(!isUpdateModalOpen);
   };
 
-// View Comments
-  const [isCommentsOpen, setCommentsOpen] = useState(false);
-  const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
-
-  const handleViewComments = (index) => {
-    setSelectedRowIndex(index);
-    setCommentsOpen(true);
+// Duplicate Clcick
+const handleDuplicateClick = (data) => {
+    setduplicateData(data);
+    setDuplicateModalOpen(true);
   };
+
+  const toggleDuplicateModal = () => {
+    setDuplicateModalOpen(!isDuplicateModalOpen);
+  };
+
+
+//   const [isCommentsOpen, setCommentsOpen] = useState(false);
+//   const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
+
+//   const handleViewComments = (index) => {
+//     setSelectedRowIndex(index);
+//     setCommentsOpen(true);
+//   };
 
   const ActionButton = ({
     id,
@@ -436,15 +388,15 @@ const WorkTypeRequests = () => {
               />
             </th>
             <th style={styles.tableCell}>Employee</th>
-            <th style={styles.tableCell}>Requested Shift</th>
-            <th style={styles.tableCell}>Previous/Current Shift</th>
-            <th style={styles.tableCell}>Requested Date</th>
-            <th style={styles.tableCell}>Requested Till</th>
-            <th style={styles.tableCell}>Status</th>
-            <th style={styles.tableCell}>Description</th>
-            <th style={styles.tableCell}>Comment</th>
+            <th style={styles.tableCell}>Title</th>
+            <th style={styles.tableCell}>Based On</th>
+            <th style={styles.tableCell}>Rotate</th>
+            <th style={styles.tableCell}>Start Date</th>
+            <th style={styles.tableCell}>Current Shift</th>
+            <th style={styles.tableCell}>Next Switch</th>
+            <th style={styles.tableCell}>Next Shift</th>
             <th style={styles.tableCell}>Actions</th>
-            <th style={styles.tableCell}>Confirmation</th>
+            {/* <th style={styles.tableCell}>Confirmation</th> */}
             <th style={styles.tableCell}></th>
           </tr>
         </thead>
@@ -489,31 +441,13 @@ const WorkTypeRequests = () => {
                   </div>
                 </div>
               </td>
-              <td style={styles.tableCell}>{item.requestedShift}</td>
-              <td style={styles.tableCell}>{item.previousShift}</td>
-              <td style={styles.tableCell}>{item.requestedDate}</td>
-              <td style={styles.tableCell}>{item.requestedTill}</td>
-              <td style={styles.tableCell}>{item.status}</td>
-              <td style={styles.tableCell}>{item.description}</td>
-              <td style={styles.tableCell}>
-                <Button
-                  color="link"
-                  className="p-0"
-                  id={`viewComments-${item.id}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleViewComments(index);
-                  }}
-                >
-                  <FiFileText />
-                </Button>
-                <UncontrolledTooltip
-                  placement="top"
-                  target={`viewComments-${item.id}`}
-                >
-                  View Comments
-                </UncontrolledTooltip>
-              </td>
+              <td style={styles.tableCell}>{item.title}</td>
+              <td style={styles.tableCell}>{item.basedOn}</td>
+              <td style={styles.tableCell}>{item.rotate}</td>
+              <td style={styles.tableCell}>{item.startDate}</td>
+              <td style={styles.tableCell}>{item.currentShift}</td>
+              <td style={styles.tableCell}>{item.nextSwitch}</td>
+              <td style={styles.tableCell}>{item.nextShift}</td>
 
               <td>
                 <div
@@ -535,6 +469,16 @@ const WorkTypeRequests = () => {
                     bgColor="#e8f5e9"
                     icon={FiCopy}
                     tooltip="Duplicate"
+                    onClick={(e) => {
+                        handleDuplicateClick(item);
+                      }}
+                  />
+                  <ActionButton
+                    id={`archive-${item.id}`}
+                    color="#dc3545"
+                    bgColor="#FFE6F2"
+                    icon={IoArchive}
+                    tooltip="Archive"
                   />
                   <ActionButton
                     id={`deleteBtn-${item.id}`}
@@ -543,34 +487,6 @@ const WorkTypeRequests = () => {
                     icon={FiTrash2}
                     tooltip="Remove"
                   />
-                </div>
-              </td>
-
-              <td style={styles.tableCell}>
-                <div style={styles.actionButtons}>
-                  <Button
-                    id={`approveBtn-${item.id}`}
-                    color="success"
-                    size="sm"
-                  >
-                    <MdDone size={16} />
-                  </Button>
-                  <UncontrolledTooltip
-                    placement="top"
-                    target={`approveBtn-${item.id}`}
-                  >
-                    Approve
-                  </UncontrolledTooltip>
-
-                  <Button id={`rejectBtn-${item.id}`} color="danger" size="sm">
-                    <IoCloseOutline />
-                  </Button>
-                  <UncontrolledTooltip
-                    placement="top"
-                    target={`rejectBtn-${item.id}`}
-                  >
-                    Reject
-                  </UncontrolledTooltip>
                 </div>
               </td>
             </tr>
@@ -583,7 +499,7 @@ const WorkTypeRequests = () => {
   const TopButtons = () => (
     <div style={styles.topButtons}>
       <Button style={styles.selectButton} onClick={handleSelectAll}>
-        Select All Worktypes
+        Select All Shifts
       </Button>
       {selectedRows.length > 0 && (
         <>
@@ -591,9 +507,9 @@ const WorkTypeRequests = () => {
             style={styles.unselectButton}
             onClick={() => setSelectedRows([])}
           >
-            Unselect All Worktypes
+            Unselect All Shifts
           </Button>
-          <Button style={styles.exportButton}>Export Worktypes</Button>
+          <Button style={styles.exportButton}>Export Shifts</Button>
           <span style={styles.selectedCount}>
             {selectedRows.length} - Selected
           </span>
@@ -604,8 +520,8 @@ const WorkTypeRequests = () => {
 
   return (
     <Container fluid className="p-3" style={{ width: "1200px" }}>
-     <TopBarComponet headerName="Work Type Requests" onCreateClick={toggleCreateModal}/>
-    <CreateWorkTypeRequest
+     <TopBarAssignComponent headerName="Rotating Shift Assign" onCreateClick={toggleCreateModal}/>
+    <CreateRotatingShiftAssign
       isOpen={isCreateModalOpen}
       toggle={toggleCreateModal}
     />
@@ -613,34 +529,6 @@ const WorkTypeRequests = () => {
       <TopButtons />
     </div>
 
-    <div className="d-flex justify-content-end mb-3">
-      <div className="d-flex gap-3">
-        <div className="d-flex align-items-center">
-          <div
-            style={{
-              width: 8,
-              height: 8,
-              borderRadius: "50%",
-              backgroundColor: "#4CAF50",
-              marginRight: 8,
-            }}
-          ></div>
-          <span>Approved</span>
-        </div>
-        <div className="d-flex align-items-center">
-          <div
-            style={{
-              width: 8,
-              height: 8,
-              borderRadius: "50%",
-              backgroundColor: "#F44336",
-              marginRight: 8,
-            }}
-          ></div>
-          <span>Rejected</span>
-        </div>
-      </div>
-    </div>
 
     <Card>
       <CardBody>
@@ -665,7 +553,7 @@ const WorkTypeRequests = () => {
 
     {/* Details Modal */}
     {isDetailsModalOpen && (
-      <WorkTypeDetails
+      <RotatingShiftDetails
         isOpen={isDetailsModalOpen}
         toggle={toggleDetailsModal}
         data={shiftData[selectedRowData]}
@@ -676,21 +564,21 @@ const WorkTypeRequests = () => {
     )}
 
     {isUpdateModalOpen && (
-      <UpdateWorkType
+      <UpdateRotatingShift
         isOpen={isUpdateModalOpen}
         toggle={toggleUpdateModal}
         data={updateData}
       />
     )}
 
-    <ViewCommnetsWorkType
-      isOpen={isCommentsOpen}
-      onClose={() => setCommentsOpen(false)}
-      rowIndex={selectedRowIndex}
-      data={shiftData}
+    <DuplicateRotatingShift
+      isOpen={isDuplicateModalOpen}
+      toggle={toggleDuplicateModal}
+    //   rowIndex={selectedRowIndex}
+      data={duplicateData}
     />
   </Container>
   )
 }
 
-export default WorkTypeRequests
+export default RotatingShiftAssign
