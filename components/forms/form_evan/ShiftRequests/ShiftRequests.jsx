@@ -27,6 +27,8 @@ import CreateShiftRequest from "../modalForms_evan/ShiftRequestsComponent/Create
 import ShiftRequestsDetails from "../modalForms_evan/ShiftRequestsComponent/ShiftRequestsDetails";
 import UpdateRequest from "../modalForms_evan/ShiftRequestsComponent/UpdateRequest";
 import ViewComments from "../modalForms_evan/ShiftRequestsComponent/ViewComments";
+import DuplicateShiftRequest from "../modalForms_evan/ShiftRequestsComponent/DuplicateShiftRequest";
+import WarningComponent from "../modalForms_evan/Warning Component/WarningComponent";
 
 const styles = {
   pageWrapper: {
@@ -163,6 +165,9 @@ const ShiftRequests = () => {
 
   const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
   const [updateData, setUpdateData] = useState(null);
+
+  const [isDuplicateModalOpen, setDuplicateModalOpen] = useState(false);
+  const [duplicateData, setDuplicateData] = useState(null);
 
   // Generate color based on string
   const stringToColor = (string) => {
@@ -363,7 +368,53 @@ const ShiftRequests = () => {
     setUpdateModalOpen(!isUpdateModalOpen);
   };
 
-// View Comments
+  // Duplicate click
+  const handleDuplicateClick = (data) => {
+    setDuplicateData(data);
+    setDuplicateModalOpen(true);
+  };
+
+  const toggleDuplicateModal = () => {
+    setDuplicateModalOpen(!isDuplicateModalOpen);
+  };
+
+  // Delete clcik
+  const [isWarningOpen, setIsWarningOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
+
+  const handleDeleteClick = (id) => {
+    setDeleteId(id);
+    setIsWarningOpen(true);
+  };
+
+  const handleCloseWarning = () => {
+    setIsWarningOpen(false);
+  };
+
+  const handleConfirmDelete = () => {
+    console.log("Deleted item with ID:", deleteId);
+    setIsWarningOpen(false);
+  };
+
+  // Reject clcik
+  const [isWarningOpened, setIsWarningOpened] = useState(false);
+  const [rejectId, setrejectId] = useState(null);
+
+  const handleRejectClick = (id) => {
+    setrejectId(id);
+    setIsWarningOpened(true);
+  };
+
+  const handleRjectCloseWarning = () => {
+    setIsWarningOpened(false);
+  };
+
+  const handleRejectConfirm = () => {
+    console.log("Deleted item with ID:", rejectId);
+    setIsWarningOpened(false);
+  };
+
+  // View Comments
   const [isCommentsOpen, setCommentsOpen] = useState(false);
   const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
 
@@ -423,7 +474,12 @@ const ShiftRequests = () => {
 
   const renderShiftRequestsTable = () => (
     <div style={styles.pageWrapper}>
-      <Table hover responsive className="mb-0" style={{ minWidth: "1500px", textAlign: "center" }}>
+      <Table
+        hover
+        responsive
+        className="mb-0"
+        style={{ minWidth: "1500px", textAlign: "center" }}
+      >
         <thead>
           <tr>
             <th style={styles.tableCell}>
@@ -515,7 +571,12 @@ const ShiftRequests = () => {
 
               <td>
                 <div
-                  style={{ display: "flex", gap: "10px", alignItems: "center", marginLeft: "20px" }}
+                  style={{
+                    display: "flex",
+                    gap: "10px",
+                    alignItems: "center",
+                    marginLeft: "20px",
+                  }}
                 >
                   <ActionButton
                     id={`editBtn-${item.id}`}
@@ -533,6 +594,9 @@ const ShiftRequests = () => {
                     bgColor="#e8f5e9"
                     icon={FiCopy}
                     tooltip="Duplicate"
+                    onClick={(e) => {
+                      handleDuplicateClick(item);
+                    }}
                   />
                   <ActionButton
                     id={`deleteBtn-${item.id}`}
@@ -540,6 +604,7 @@ const ShiftRequests = () => {
                     bgColor="#ffebee"
                     icon={FiTrash2}
                     tooltip="Remove"
+                    onClick={() => handleDeleteClick(item.id)}
                   />
                 </div>
               </td>
@@ -560,7 +625,15 @@ const ShiftRequests = () => {
                     Approve
                   </UncontrolledTooltip>
 
-                  <Button id={`rejectBtn-${item.id}`} color="danger" size="sm">
+                  <Button
+                    id={`rejectBtn-${item.id}`}
+                    color="danger"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleRejectClick(item.id);
+                    }}
+                  >
                     <IoCloseOutline />
                   </Button>
                   <UncontrolledTooltip
@@ -700,7 +773,7 @@ const ShiftRequests = () => {
           hasNext={selectedRowData < shiftData.length - 1}
         />
       )}
-
+      {/* Update form */}
       {isUpdateModalOpen && (
         <UpdateRequest
           isOpen={isUpdateModalOpen}
@@ -708,7 +781,36 @@ const ShiftRequests = () => {
           data={updateData}
         />
       )}
+      {/* Duplicate form */}
+      {isDuplicateModalOpen && (
+        <DuplicateShiftRequest
+          isOpen={isDuplicateModalOpen}
+          toggle={toggleDuplicateModal}
+          data={duplicateData}
+        />
+      )}
 
+      {/* For remove */}
+      <WarningComponent
+        open={isWarningOpen}
+        onClose={handleCloseWarning}
+        onConfirm={handleConfirmDelete}
+        message="Are you sure you want to remove this shift request?"
+        confirmText="Confirm"
+        cancelText="Cancel"
+      />
+
+      {/* For reject */}
+      <WarningComponent
+        open={isWarningOpened}
+        onClose={handleRjectCloseWarning}
+        onConfirm={handleRejectConfirm}
+        message="Are you sure you want to reject this request?"
+        confirmText="Confirm"
+        cancelText="Cancel"
+      />
+
+      {/* View comments */}
       <ViewComments
         isOpen={isCommentsOpen}
         onClose={() => setCommentsOpen(false)}

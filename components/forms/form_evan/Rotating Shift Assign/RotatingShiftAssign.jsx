@@ -28,133 +28,133 @@ import CreateRotatingShiftAssign from "../modalForms_evan/RotatingShiftAssignCom
 import RotatingShiftDetails from "../modalForms_evan/RotatingShiftAssignComponents/RotatingShiftDetails";
 import UpdateRotatingShift from "../modalForms_evan/RotatingShiftAssignComponents/UpdateRotatingShift";
 import DuplicateRotatingShift from "../modalForms_evan/RotatingShiftAssignComponents/DuplicateRotatingShift";
+import WarningComponent from "../modalForms_evan/Warning Component/WarningComponent";
 
 const styles = {
-    pageWrapper: {
-      minWidth: "1024px",
-      maxWidth: "100%",
-      padding: "20px",
-      flex: 1,
+  pageWrapper: {
+    minWidth: "1024px",
+    maxWidth: "100%",
+    padding: "20px",
+    flex: 1,
+  },
+  mainContent: {
+    width: "100%",
+    minWidth: 0,
+  },
+  cardWrapper: {
+    width: "100%",
+    minWidth: 0,
+    overflow: "hidden",
+  },
+  tableWrapper: {
+    width: "100%",
+    overflowX: "auto",
+    marginRight: "0",
+    marginLeft: "0",
+    "::-webkit-scrollbar": {
+      height: "8px",
     },
-    mainContent: {
-      width: "100%",
-      minWidth: 0,
+    "::-webkit-scrollbar-track": {
+      background: "#f1f1f1",
     },
-    cardWrapper: {
-      width: "100%",
-      minWidth: 0,
-      overflow: "hidden",
-    },
-    tableWrapper: {
-      width: "100%",
-      overflowX: "auto",
-      marginRight: "0",
-      marginLeft: "0",
-      "::-webkit-scrollbar": {
-        height: "8px",
-      },
-      "::-webkit-scrollbar-track": {
-        background: "#f1f1f1",
-      },
-      "::-webkit-scrollbar-thumb": {
-        background: "#888",
-        borderRadius: "4px",
-      },
-    },
-    fixedTable: {
-      minWidth: "1500px",
-      width: "100%",
-      tableLayout: "fixed",
-    },
-    topButtons: {
-      display: "flex",
-      gap: "10px",
-      marginBottom: "10px"
-    },
-    selectButton: {
-      border: "1px solid #4CAF50",
-      color: "#4CAF50",
-      background: "white",
-      padding: "6px 15px",
-      borderRadius: "4px",
-      fontWeight: "500",
-    },
-    unselectButton: {
-      border: "1px solid #666",
-      color: "#666",
-      background: "white",
-      padding: "6px 15px",
+    "::-webkit-scrollbar-thumb": {
+      background: "#888",
       borderRadius: "4px",
     },
-    exportButton: {
-      border: "1px solid #2196F3",
-      color: "#2196F3",
-      background: "white",
-      padding: "6px 15px",
-      borderRadius: "4px",
+  },
+  fixedTable: {
+    minWidth: "1500px",
+    width: "100%",
+    tableLayout: "fixed",
+  },
+  topButtons: {
+    display: "flex",
+    gap: "10px",
+    marginBottom: "10px",
+  },
+  selectButton: {
+    border: "1px solid #4CAF50",
+    color: "#4CAF50",
+    background: "white",
+    padding: "6px 15px",
+    borderRadius: "4px",
+    fontWeight: "500",
+  },
+  unselectButton: {
+    border: "1px solid #666",
+    color: "#666",
+    background: "white",
+    padding: "6px 15px",
+    borderRadius: "4px",
+  },
+  exportButton: {
+    border: "1px solid #2196F3",
+    color: "#2196F3",
+    background: "white",
+    padding: "6px 15px",
+    borderRadius: "4px",
+  },
+  selectedCount: {
+    border: "1px solid #F44336",
+    color: "#F44336",
+    background: "white",
+    padding: "6px 15px",
+    borderRadius: "4px",
+  },
+  tabs: {
+    display: "flex",
+    borderBottom: "1px solid #dee2e6",
+    marginBottom: "20px",
+  },
+  tab: {
+    padding: "10px 20px",
+    cursor: "pointer",
+    border: "none",
+    background: "none",
+    position: "relative",
+    color: "#666",
+    borderBottom: "2px solid transparent",
+  },
+  activeTab: {
+    color: "#d9534f",
+    borderBottom: "2px solid #d9534f",
+    fontWeight: "500",
+    "&:after": {
+      content: '""',
+      position: "absolute",
+      bottom: "-1px",
+      left: 0,
+      right: 0,
+      height: "2px",
+      background: "#f44336",
     },
-    selectedCount: {
-      border: "1px solid #F44336",
-      color: "#F44336",
-      background: "white",
-      padding: "6px 15px",
-      borderRadius: "4px",
-    },
-    tabs: {
-      display: "flex",
-      borderBottom: "1px solid #dee2e6",
-      marginBottom: "20px",
-    },
-    tab: {
-      padding: "10px 20px",
-      cursor: "pointer",
-      border: "none",
-      background: "none",
-      position: "relative",
-      color: "#666",
-      borderBottom: "2px solid transparent",
-    },
-    activeTab: {
-      color: "#d9534f",
-      borderBottom: "2px solid #d9534f",
-      fontWeight: "500",
-      "&:after": {
-        content: '""',
-        position: "absolute",
-        bottom: "-1px",
-        left: 0,
-        right: 0,
-        height: "2px",
-        background: "#f44336",
-      },
-    },
-    tableCell: {
-      padding: "12px 16px",
-      whiteSpace: "nowrap",
-      verticalAlign: "middle",
-    },
-    avatar: {
-      width: "32px",
-      height: "32px",
-      borderRadius: "50%",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      marginRight: "10px",
-      fontSize: "14px",
-      color: "#333",
-    },
-    statusBadge: {
-      padding: "6px 12px",
-      borderRadius: "20px",
-      fontWeight: "500",
-    },
-    actionButtons: {
-      display: "flex",
-      gap: "8px",
-    },
-  };
-
+  },
+  tableCell: {
+    padding: "12px 16px",
+    whiteSpace: "nowrap",
+    verticalAlign: "middle",
+  },
+  avatar: {
+    width: "32px",
+    height: "32px",
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: "10px",
+    fontSize: "14px",
+    color: "#333",
+  },
+  statusBadge: {
+    padding: "6px 12px",
+    borderRadius: "20px",
+    fontWeight: "500",
+  },
+  actionButtons: {
+    display: "flex",
+    gap: "8px",
+  },
+};
 
 const RotatingShiftAssign = () => {
   const [selectedRows, setSelectedRows] = useState([]);
@@ -208,34 +208,33 @@ const RotatingShiftAssign = () => {
       nextShift: "Morning Shift",
     },
     {
-        id: 2,
-        employee: {
-          name: "Sofia Howard",
-          code: "(#PEP75)",
-        },
-        title: "Morning to Night",
-        basedOn: "Weekend",
-        rotate: "Weekly every Monday",
-        startDate: "Aug. 5, 2024",
-        currentShift: "Regular Shift",
-        nextSwitch: "sep. 1, 2024",
-        nextShift: "Morning Shift",
+      id: 2,
+      employee: {
+        name: "Sofia Howard",
+        code: "(#PEP75)",
       },
-      {
-        id: 3,
-        employee: {
-          name: "Rober Howard",
-          code: "(#PEP85)",
-        },
-        title: "Night to Morning",
-        basedOn: "Monthly",
-        rotate: "Weekly every Monday",
-        startDate: "Aug. 5, 2024",
-        currentShift: "Regular Shift",
-        nextSwitch: "sep. 1, 2024",
-        nextShift: "Morning Shift",
+      title: "Morning to Night",
+      basedOn: "Weekend",
+      rotate: "Weekly every Monday",
+      startDate: "Aug. 5, 2024",
+      currentShift: "Regular Shift",
+      nextSwitch: "sep. 1, 2024",
+      nextShift: "Morning Shift",
+    },
+    {
+      id: 3,
+      employee: {
+        name: "Rober Howard",
+        code: "(#PEP85)",
       },
-    
+      title: "Night to Morning",
+      basedOn: "Monthly",
+      rotate: "Weekly every Monday",
+      startDate: "Aug. 5, 2024",
+      currentShift: "Regular Shift",
+      nextSwitch: "sep. 1, 2024",
+      nextShift: "Morning Shift",
+    },
   ];
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -307,8 +306,8 @@ const RotatingShiftAssign = () => {
     setUpdateModalOpen(!isUpdateModalOpen);
   };
 
-// Duplicate Clcick
-const handleDuplicateClick = (data) => {
+  // Duplicate Clcick
+  const handleDuplicateClick = (data) => {
     setduplicateData(data);
     setDuplicateModalOpen(true);
   };
@@ -317,14 +316,49 @@ const handleDuplicateClick = (data) => {
     setDuplicateModalOpen(!isDuplicateModalOpen);
   };
 
+  // Delete clcik
+  const [isWarningOpen, setIsWarningOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
 
-//   const [isCommentsOpen, setCommentsOpen] = useState(false);
-//   const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
+  const handleDeleteClick = (id) => {
+    setDeleteId(id);
+    setIsWarningOpen(true);
+  };
 
-//   const handleViewComments = (index) => {
-//     setSelectedRowIndex(index);
-//     setCommentsOpen(true);
-//   };
+  const handleCloseWarning = () => {
+    setIsWarningOpen(false);
+  };
+
+  const handleConfirmDelete = () => {
+    console.log("Deleted item with ID:", deleteId);
+    setIsWarningOpen(false);
+  };
+
+  // Archive clcik
+  const [isWarningOpened, setIsWarningOpened] = useState(false);
+  const [archiveId, setarchiveId] = useState(null);
+
+  const handleArchiveClick = (id) => {
+    setarchiveId(id);
+    setIsWarningOpened(true);
+  };
+
+  const handleArchiveCloseWarning = () => {
+    setIsWarningOpened(false);
+  };
+
+  const handleArchiveConfirm = () => {
+    console.log("Archive item with ID:", archiveId);
+    setIsWarningOpened(false);
+  };
+
+  //   const [isCommentsOpen, setCommentsOpen] = useState(false);
+  //   const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
+
+  //   const handleViewComments = (index) => {
+  //     setSelectedRowIndex(index);
+  //     setCommentsOpen(true);
+  //   };
 
   const ActionButton = ({
     id,
@@ -377,7 +411,12 @@ const handleDuplicateClick = (data) => {
 
   const renderShiftRequestsTable = () => (
     <div style={styles.pageWrapper}>
-      <Table hover responsive className="mb-0" style={{ minWidth: "1500px", textAlign: "center" }}>
+      <Table
+        hover
+        responsive
+        className="mb-0"
+        style={{ minWidth: "1500px", textAlign: "center" }}
+      >
         <thead>
           <tr>
             <th style={styles.tableCell}>
@@ -451,7 +490,12 @@ const handleDuplicateClick = (data) => {
 
               <td>
                 <div
-                  style={{ display: "flex", gap: "10px", alignItems: "center", marginLeft: "20px" }}
+                  style={{
+                    display: "flex",
+                    gap: "10px",
+                    alignItems: "center",
+                    marginLeft: "20px",
+                  }}
                 >
                   <ActionButton
                     id={`editBtn-${item.id}`}
@@ -470,8 +514,8 @@ const handleDuplicateClick = (data) => {
                     icon={FiCopy}
                     tooltip="Duplicate"
                     onClick={(e) => {
-                        handleDuplicateClick(item);
-                      }}
+                      handleDuplicateClick(item);
+                    }}
                   />
                   <ActionButton
                     id={`archive-${item.id}`}
@@ -479,6 +523,7 @@ const handleDuplicateClick = (data) => {
                     bgColor="#FFE6F2"
                     icon={IoArchive}
                     tooltip="Archive"
+                    onClick={() => handleArchiveClick(item.id)}
                   />
                   <ActionButton
                     id={`deleteBtn-${item.id}`}
@@ -486,6 +531,7 @@ const handleDuplicateClick = (data) => {
                     bgColor="#ffebee"
                     icon={FiTrash2}
                     tooltip="Remove"
+                    onClick={() => handleDeleteClick(item.id)}
                   />
                 </div>
               </td>
@@ -520,65 +566,89 @@ const handleDuplicateClick = (data) => {
 
   return (
     <Container fluid className="p-3" style={{ width: "1200px" }}>
-     <TopBarAssignComponent headerName="Rotating Shift Assign" onCreateClick={toggleCreateModal}/>
-    <CreateRotatingShiftAssign
-      isOpen={isCreateModalOpen}
-      toggle={toggleCreateModal}
-    />
-    <div>
-      <TopButtons />
-    </div>
-
-
-    <Card>
-      <CardBody>
-      {renderShiftRequestsTable()}
-
-        {/* Pagination */}
-        <Row className="mt-3">
-          <Col className="d-flex justify-content-end">
-            <Stack spacing={2}>
-              <Pagination
-                count={totalPages}
-                page={currentPage}
-                onChange={handlePageChange}
-                variant="outlined"
-                shape="rounded"
-              />
-            </Stack>
-          </Col>
-        </Row>
-      </CardBody>
-    </Card>
-
-    {/* Details Modal */}
-    {isDetailsModalOpen && (
-      <RotatingShiftDetails
-        isOpen={isDetailsModalOpen}
-        toggle={toggleDetailsModal}
-        data={shiftData[selectedRowData]}
-        onNavigate={handleNavigateAsset}
-        hasPrevious={selectedRowData > 0}
-        hasNext={selectedRowData < shiftData.length - 1}
+      <TopBarAssignComponent
+        headerName="Rotating Shift Assign"
+        onCreateClick={toggleCreateModal}
       />
-    )}
-
-    {isUpdateModalOpen && (
-      <UpdateRotatingShift
-        isOpen={isUpdateModalOpen}
-        toggle={toggleUpdateModal}
-        data={updateData}
+      <CreateRotatingShiftAssign
+        isOpen={isCreateModalOpen}
+        toggle={toggleCreateModal}
       />
-    )}
+      <div>
+        <TopButtons />
+      </div>
 
-    <DuplicateRotatingShift
-      isOpen={isDuplicateModalOpen}
-      toggle={toggleDuplicateModal}
-    //   rowIndex={selectedRowIndex}
-      data={duplicateData}
-    />
-  </Container>
-  )
-}
+      <Card>
+        <CardBody>
+          {renderShiftRequestsTable()}
 
-export default RotatingShiftAssign
+          {/* Pagination */}
+          <Row className="mt-3">
+            <Col className="d-flex justify-content-end">
+              <Stack spacing={2}>
+                <Pagination
+                  count={totalPages}
+                  page={currentPage}
+                  onChange={handlePageChange}
+                  variant="outlined"
+                  shape="rounded"
+                />
+              </Stack>
+            </Col>
+          </Row>
+        </CardBody>
+      </Card>
+
+      {/* Details Modal */}
+      {isDetailsModalOpen && (
+        <RotatingShiftDetails
+          isOpen={isDetailsModalOpen}
+          toggle={toggleDetailsModal}
+          data={shiftData[selectedRowData]}
+          onNavigate={handleNavigateAsset}
+          hasPrevious={selectedRowData > 0}
+          hasNext={selectedRowData < shiftData.length - 1}
+        />
+      )}
+
+      {/* Update Rotating */}
+      {isUpdateModalOpen && (
+        <UpdateRotatingShift
+          isOpen={isUpdateModalOpen}
+          toggle={toggleUpdateModal}
+          data={updateData}
+        />
+      )}
+
+      {/* Duplicate rotating */}
+      <DuplicateRotatingShift
+        isOpen={isDuplicateModalOpen}
+        toggle={toggleDuplicateModal}
+        //   rowIndex={selectedRowIndex}
+        data={duplicateData}
+      />
+
+      {/* For remove */}
+      <WarningComponent
+        open={isWarningOpen}
+        onClose={handleCloseWarning}
+        onConfirm={handleConfirmDelete}
+        message="Are you sure you want to remove this shift rotating?"
+        confirmText="Confirm"
+        cancelText="Cancel"
+      />
+
+      {/* For archive */}
+      <WarningComponent
+        open={isWarningOpened}
+        onClose={handleArchiveCloseWarning}
+        onConfirm={handleArchiveConfirm}
+        message="Are you sure you want to archive this request?"
+        confirmText="Confirm"
+        cancelText="Cancel"
+      />
+    </Container>
+  );
+};
+
+export default RotatingShiftAssign;

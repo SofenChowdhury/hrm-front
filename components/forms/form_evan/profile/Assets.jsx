@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Container, Table, Button } from "reactstrap";
 import AssetsRequest from "../modalForms_evan/Assets/AssetsRequest";
 import AssetsInformation from "../modalForms_evan/Assets/AssetsInformation";
-import { Dialog, DialogContent, Typography, Box } from "@mui/material";
-import { FaRegQuestionCircle  } from "react-icons/fa";
+// import { Dialog, DialogContent, Typography, Box } from "@mui/material";
+// import { FaRegQuestionCircle  } from "react-icons/fa";
+import WarningComponent from "../modalForms_evan/Warning Component/WarningComponent";
 
 const Assets = () => {
   const [modalType, setModalType] = useState(null);
@@ -220,7 +221,14 @@ const Assets = () => {
 
 
        {/* When Row Return Click this Dialog box open */}
-       <Dialog
+       <WarningComponent
+        open={showConfirmDialog}
+        onClose={() => setShowConfirmDialog(false)}
+        onConfirm={handleConfirmReturn}
+        message="Are you sure you want to return this asset?"
+      />
+
+       {/* <Dialog
         open={showConfirmDialog}
         onClose={() => setShowConfirmDialog(false)}
         sx={styles.confirmDialog}
@@ -258,7 +266,7 @@ const Assets = () => {
             </button>
           </Box>
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
 
 
 
