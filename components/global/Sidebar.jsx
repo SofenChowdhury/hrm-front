@@ -2061,7 +2061,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     />
                     <Item
                       title="Disciplinary Actions"
-                      to="/permissions/permissionList"
+                      to="/employee/disciplinaryActions"
                       icon={<ReceiptIcon />}
                       selected={selected}
                       setSelected={setSelected}
