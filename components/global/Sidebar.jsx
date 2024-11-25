@@ -191,6 +191,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
       name: "employee",
       isOpen: false,
     },
+    {
+      name: "attendance",
+      isOpen: false,
+    },
   ]);
 
   // SET WINDOW SIZE
@@ -2086,6 +2090,30 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       change={change}
                       width={width}
                     />
+                  </SubMenu>
+
+                   {/* Attendance */}
+                   <SubMenu
+                    title="Attendance"
+                    icon={<KeyIcon />}
+                    style={{
+                      color: colors.grey[100],
+                    }}
+                    onOpenChange={() => {
+                      handleChange("attendance");
+                    }}
+                    open={opened[23].isOpen}
+                  >
+                    <Item
+                      title="Attendances"
+                      to="/attendance/attendances"
+                      icon={<ReceiptIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+
                   </SubMenu>
                 </>
               )}

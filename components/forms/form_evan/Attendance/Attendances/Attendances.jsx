@@ -22,13 +22,12 @@ import { FiEdit2, FiCopy, FiTrash2, FiFileText } from "react-icons/fi";
 import { MdDone, MdDelete } from "react-icons/md";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
-import TopBarComponet from "../modalForms_evan/TopComponent/TopBarComponet";
-import CreateShiftRequest from "../modalForms_evan/ShiftRequestsComponent/CreateShiftRequest";
-import ShiftRequestsDetails from "../modalForms_evan/ShiftRequestsComponent/ShiftRequestsDetails";
-import UpdateRequest from "../modalForms_evan/ShiftRequestsComponent/UpdateRequest";
-import ViewComments from "../modalForms_evan/ShiftRequestsComponent/ViewComments";
-import DuplicateShiftRequest from "../modalForms_evan/ShiftRequestsComponent/DuplicateShiftRequest";
-import WarningComponent from "../modalForms_evan/Warning Component/WarningComponent";
+
+import TopBarComponet from "../../modalForms_evan/TopComponent/TopBarComponet";
+import AddAttendaceComponent from "../../modalForms_evan/AttendaceField/AddAttendaceComponent";
+import OTAttendances from "./OTAttendances";
+import ValidateAttendances from "./ValidateAttendances";
+import DetailsAttendaces from "../../modalForms_evan/AttendaceField/DetailsAttendaces";
 
 const styles = {
   pageWrapper: {
@@ -155,7 +154,7 @@ const styles = {
   },
 };
 
-const ShiftRequests = () => {
+const Attendances = () => {
   const [activeView, setActiveView] = useState("requests");
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
@@ -196,16 +195,21 @@ const ShiftRequests = () => {
     {
       id: 1,
       employee: {
-        name: "Levi Sanders",
+        name: "Adam luis",
         code: "(#PEP48)",
       },
-      
-      requestedShift: "Regular Shift",
-      previousShift: "Morning Shift",
-      requestedDate: "May. 1, 2024",
-      requestedTill: "May. 31, 2024",
-      status: "Approved",
-      description: "shift change",
+      date: "Aug. 21, 2024",
+      day: "Wednesday",
+      checkIn: "03:48 PM",
+      InDate: "Aug. 21, 2024",
+      checkOut: "03:10 PM",
+      OutDate: "Aug. 26, 2024",
+      Shift: "Regular Shift",
+      workType: "None",
+      minHour: "08:15",
+      atWork: "120:22",
+      pendingHour: "00:00",
+      overTime: "04:00",
     },
     {
       id: 2,
@@ -213,90 +217,38 @@ const ShiftRequests = () => {
         name: "Sofia Howard",
         code: "(#PEP75)",
       },
-      requestedShift: "Night Shift",
-      previousShift: "Regular Shift",
-      requestedDate: "Mar. 10, 2024",
-      requestedTill: "Mar. 22, 2024",
-      status: "Requested",
-      description: "shift change",
+      date: "Aug. 21, 2024",
+      day: "Wednesday",
+      checkIn: "03:48 PM",
+      InDate: "Aug. 21, 2024",
+      checkOut: "03:10 PM",
+      OutDate: "Aug. 26, 2024",
+      Shift: "Regular Shift",
+      workType: "None",
+      minHour: "08:15",
+      atWork: "120:22",
+      pendingHour: "00:00",
+      overTime: "04:00",
     },
+
     {
       id: 3,
       employee: {
         name: "Stella Bell",
         code: "(#PEP59)",
       },
-      requestedShift: "Regular Shift",
-      previousShift: "Night Shift",
-      requestedDate: "Mar. 12, 2024",
-      requestedTill: "Mar. 22, 2024",
-      status: "Rejected",
-      description: "shift change",
-    },
-    {
-      id: 4,
-      employee: {
-        name: "Sevi Eanders",
-        code: "(#PEP48)",
-      },
-      requestedShift: "Regular Shift",
-      previousShift: "Morning Shift",
-      requestedDate: "May. 1, 2024",
-      requestedTill: "May. 31, 2024",
-      status: "Approved",
-      description: "shift change",
-    },
-    {
-      id: 5,
-      employee: {
-        name: "Etella Saea",
-        code: "(#PEP59)",
-      },
-      requestedShift: "Regular Shift",
-      previousShift: "Night Shift",
-      requestedDate: "Mar. 12, 2024",
-      requestedTill: "Mar. 22, 2024",
-      status: "Rejected",
-      description: "shift change",
-    },
-    {
-      id: 6,
-      employee: {
-        name: "Alison Howard",
-        code: "(#PEP75)",
-      },
-      requestedShift: "Night Shift",
-      previousShift: "Regular Shift",
-      requestedDate: "Mar. 10, 2024",
-      requestedTill: "Mar. 22, 2024",
-      status: "Requested",
-      description: "shift change",
-    },
-    {
-      id: 7,
-      employee: {
-        name: "Robert Howard",
-        code: "(#PEP75)",
-      },
-      requestedShift: "Night Shift",
-      previousShift: "Regular Shift",
-      requestedDate: "Mar. 10, 2024",
-      requestedTill: "Mar. 22, 2024",
-      status: "Requested",
-      description: "shift change",
-    },
-    {
-      id: 8,
-      employee: {
-        name: "Alexa Robo",
-        code: "(#PEP75)",
-      },
-      requestedShift: "Night Shift",
-      previousShift: "Regular Shift",
-      requestedDate: "Mar. 10, 2024",
-      requestedTill: "Mar. 22, 2024",
-      status: "Requested",
-      description: "shift change",
+      date: "Aug. 21, 2024",
+      day: "Wednesday",
+      checkIn: "03:48 PM",
+      InDate: "Aug. 21, 2024",
+      checkOut: "03:10 PM",
+      OutDate: "Aug. 26, 2024",
+      Shift: "Regular Shift",
+      workType: "None",
+      minHour: "08:15",
+      atWork: "120:22",
+      pendingHour: "00:00",
+      overTime: "04:00",
     },
   ];
 
@@ -357,71 +309,6 @@ const ShiftRequests = () => {
 
   const toggleCreateModal = () => {
     setCreateModalOpen(!isCreateModalOpen);
-  };
-
-  // Edit click
-  const handleEditClick = (data) => {
-    setUpdateData(data);
-    setUpdateModalOpen(true);
-  };
-
-  const toggleUpdateModal = () => {
-    setUpdateModalOpen(!isUpdateModalOpen);
-  };
-
-  // Duplicate click
-  const handleDuplicateClick = (data) => {
-    setDuplicateData(data);
-    setDuplicateModalOpen(true);
-  };
-
-  const toggleDuplicateModal = () => {
-    setDuplicateModalOpen(!isDuplicateModalOpen);
-  };
-
-  // Delete clcik
-  const [isWarningOpen, setIsWarningOpen] = useState(false);
-  const [deleteId, setDeleteId] = useState(null);
-
-  const handleDeleteClick = (id) => {
-    setDeleteId(id);
-    setIsWarningOpen(true);
-  };
-
-  const handleCloseWarning = () => {
-    setIsWarningOpen(false);
-  };
-
-  const handleConfirmDelete = () => {
-    console.log("Deleted item with ID:", deleteId);
-    setIsWarningOpen(false);
-  };
-
-  // Reject clcik
-  const [isWarningOpened, setIsWarningOpened] = useState(false);
-  const [rejectId, setrejectId] = useState(null);
-
-  const handleRejectClick = (id) => {
-    setrejectId(id);
-    setIsWarningOpened(true);
-  };
-
-  const handleRjectCloseWarning = () => {
-    setIsWarningOpened(false);
-  };
-
-  const handleRejectConfirm = () => {
-    console.log("Deleted item with ID:", rejectId);
-    setIsWarningOpened(false);
-  };
-
-  // View Comments
-  const [isCommentsOpen, setCommentsOpen] = useState(false);
-  const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
-
-  const handleViewComments = (index) => {
-    setSelectedRowIndex(index);
-    setCommentsOpen(true);
   };
 
   const ActionButton = ({
@@ -491,13 +378,18 @@ const ShiftRequests = () => {
               />
             </th>
             <th style={styles.tableCell}>Employee</th>
-            <th style={styles.tableCell}>Requested Shift</th>
-            <th style={styles.tableCell}>Previous/Current Shift</th>
-            <th style={styles.tableCell}>Requested Date</th>
-            <th style={styles.tableCell}>Requested Till</th>
-            <th style={styles.tableCell}>Status</th>
-            <th style={styles.tableCell}>Description</th>
-            <th style={styles.tableCell}>Comment</th>
+            <th style={styles.tableCell}>Date</th>
+            <th style={styles.tableCell}>Day</th>
+            <th style={styles.tableCell}>Check-In</th>
+            <th style={styles.tableCell}>In Date</th>
+            <th style={styles.tableCell}>Check-Out</th>
+            <th style={styles.tableCell}>Out Date</th>
+            <th style={styles.tableCell}>Shift</th>
+            <th style={styles.tableCell}>Work Type</th>
+            <th style={styles.tableCell}>Min Hour</th>
+            <th style={styles.tableCell}>At Work</th>
+            <th style={styles.tableCell}>Pending Hour</th>
+            <th style={styles.tableCell}>Overtime</th>
             <th style={styles.tableCell}>Actions</th>
             <th style={styles.tableCell}>Confirmation</th>
             <th style={styles.tableCell}></th>
@@ -544,32 +436,18 @@ const ShiftRequests = () => {
                   </div>
                 </div>
               </td>
-              <td style={styles.tableCell}>{item.requestedShift}</td>
-              <td style={styles.tableCell}>{item.previousShift}</td>
-              <td style={styles.tableCell}>{item.requestedDate}</td>
-              <td style={styles.tableCell}>{item.requestedTill}</td>
-              <td style={styles.tableCell}>{item.status}</td>
-              <td style={styles.tableCell}>{item.description}</td>
-              <td style={styles.tableCell}>
-                <Button
-                  color="link"
-                  className="p-0"
-                  id={`viewComments-${item.id}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleViewComments(index);
-                  }}
-                >
-                  <FiFileText />
-                </Button>
-                <UncontrolledTooltip
-                  placement="top"
-                  target={`viewComments-${item.id}`}
-                >
-                  View Comments
-                </UncontrolledTooltip>
-              </td>
-
+              <td style={styles.tableCell}>{item.date}</td>
+              <td style={styles.tableCell}>{item.day}</td>
+              <td style={styles.tableCell}>{item.checkIn}</td>
+              <td style={styles.tableCell}>{item.InDate}</td>
+              <td style={styles.tableCell}>{item.checkOut}</td>
+              <td style={styles.tableCell}>{item.OutDate}</td>
+              <td style={styles.tableCell}>{item.Shift}</td>
+              <td style={styles.tableCell}>{item.workType}</td>
+              <td style={styles.tableCell}>{item.minHour}</td>
+              <td style={styles.tableCell}>{item.atWork}</td>
+              <td style={styles.tableCell}>{item.pendingHour}</td>
+              <td style={styles.tableCell}>{item.overTime}</td>
               <td>
                 <div
                   style={{
@@ -590,16 +468,6 @@ const ShiftRequests = () => {
                     }}
                   />
                   <ActionButton
-                    id={`copyBtn-${item.id}`}
-                    color="#198754"
-                    bgColor="#e8f5e9"
-                    icon={FiCopy}
-                    tooltip="Duplicate"
-                    onClick={(e) => {
-                      handleDuplicateClick(item);
-                    }}
-                  />
-                  <ActionButton
                     id={`deleteBtn-${item.id}`}
                     color="#dc3545"
                     bgColor="#ffebee"
@@ -611,38 +479,32 @@ const ShiftRequests = () => {
               </td>
 
               <td style={styles.tableCell}>
-                <div style={styles.actionButtons}>
+                <div>
                   <Button
-                    id={`approveBtn-${item.id}`}
-                    color="success"
-                    size="sm"
-                  >
-                    <MdDone size={16} />
-                  </Button>
-                  <UncontrolledTooltip
-                    placement="top"
-                    target={`approveBtn-${item.id}`}
-                  >
-                    Approve
-                  </UncontrolledTooltip>
-
-                  <Button
-                    id={`rejectBtn-${item.id}`}
-                    color="danger"
-                    size="sm"
+                    style={{
+                      backgroundColor: "#3498db",
+                      color: "#fff",
+                      border: "none",
+                      borderRadius: "4px",
+                      padding: "8px 16px",
+                      fontSize: "14px",
+                      fontWeight: "500",
+                      cursor: "pointer",
+                      transition: "all 0.3s ease",
+                    }}
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleRejectClick(item.id);
+                      if (onClick) onClick(e);
+                    }}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.backgroundColor = "#2b79a9";
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.backgroundColor = "#3498db";
                     }}
                   >
-                    <IoCloseOutline />
+                    Validate
                   </Button>
-                  <UncontrolledTooltip
-                    placement="top"
-                    target={`rejectBtn-${item.id}`}
-                  >
-                    Reject
-                  </UncontrolledTooltip>
                 </div>
               </td>
             </tr>
@@ -652,70 +514,30 @@ const ShiftRequests = () => {
     </div>
   );
 
-  const TopButtons = () => (
-    <div style={styles.topButtons}>
-      <Button style={styles.selectButton} onClick={handleSelectAll}>
-        Select All Shifts
-      </Button>
-      {selectedRows.length > 0 && (
-        <>
-          <Button
-            style={styles.unselectButton}
-            onClick={() => setSelectedRows([])}
-          >
-            Unselect All Shifts
-          </Button>
-          <Button style={styles.exportButton}>Export Shifts</Button>
-          <span style={styles.selectedCount}>
-            {selectedRows.length} - Selected
-          </span>
-        </>
-      )}
-    </div>
-  );
+  const renderContent = () => {
+    switch (activeView) {
+      case 'requests':
+        return renderShiftRequestsTable();
+      case 'allocated':
+        return <OTAttendances />;
+      case 'validated':
+        return <ValidateAttendances />;
+      default:
+        return <div>No content available</div>;
+    }
+  };
+
 
   return (
     <Container fluid className="p-3" style={{ width: "1200px" }}>
       <TopBarComponet
-        headerName="Shift Request"
+        headerName="Attendance"
         onCreateClick={toggleCreateModal}
       />
-      <CreateShiftRequest
+      <AddAttendaceComponent
         isOpen={isCreateModalOpen}
         toggle={toggleCreateModal}
       />
-      <div>
-        <TopButtons />
-      </div>
-
-      <div className="d-flex justify-content-end mb-3">
-        <div className="d-flex gap-3">
-          <div className="d-flex align-items-center">
-            <div
-              style={{
-                width: 8,
-                height: 8,
-                borderRadius: "50%",
-                backgroundColor: "#4CAF50",
-                marginRight: 8,
-              }}
-            ></div>
-            <span>Approved</span>
-          </div>
-          <div className="d-flex align-items-center">
-            <div
-              style={{
-                width: 8,
-                height: 8,
-                borderRadius: "50%",
-                backgroundColor: "#F44336",
-                marginRight: 8,
-              }}
-            ></div>
-            <span>Rejected</span>
-          </div>
-        </div>
-      </div>
 
       <Card>
         <CardBody>
@@ -727,7 +549,7 @@ const ShiftRequests = () => {
               }}
               onClick={() => setActiveView("requests")}
             >
-              Shift Requests
+              Attendance to validate
             </button>
             <button
               style={{
@@ -736,18 +558,24 @@ const ShiftRequests = () => {
               }}
               onClick={() => setActiveView("allocated")}
             >
-              Allocated Shift Requests
+              OT Attendances
+            </button>
+            <button
+              style={{
+                ...styles.tab,
+                ...(activeView === "validated" && styles.activeTab),
+              }}
+              onClick={() => setActiveView("validated")}
+            >
+              Validate Attendances
             </button>
           </div>
 
-          {activeView === "requests" ? (
-            renderShiftRequestsTable()
-          ) : (
-            <div>Allocated Shift Requests Not found</div>
-          )}
+          {renderContent()}
 
           {/* Pagination */}
           <Row className="mt-3">
+          {activeView !== "allocated" && activeView !== "validated" && (
             <Col className="d-flex justify-content-end">
               <Stack spacing={2}>
                 <Pagination
@@ -759,13 +587,14 @@ const ShiftRequests = () => {
                 />
               </Stack>
             </Col>
+            )}
           </Row>
         </CardBody>
       </Card>
 
       {/* Details Modal */}
       {isDetailsModalOpen && (
-        <ShiftRequestsDetails
+        <DetailsAttendaces
           isOpen={isDetailsModalOpen}
           toggle={toggleDetailsModal}
           data={shiftData[selectedRowData]}
@@ -774,52 +603,9 @@ const ShiftRequests = () => {
           hasNext={selectedRowData < shiftData.length - 1}
         />
       )}
-      {/* Update form */}
-      {isUpdateModalOpen && (
-        <UpdateRequest
-          isOpen={isUpdateModalOpen}
-          toggle={toggleUpdateModal}
-          data={updateData}
-        />
-      )}
-      {/* Duplicate form */}
-      {isDuplicateModalOpen && (
-        <DuplicateShiftRequest
-          isOpen={isDuplicateModalOpen}
-          toggle={toggleDuplicateModal}
-          data={duplicateData}
-        />
-      )}
 
-      {/* For remove */}
-      <WarningComponent
-        open={isWarningOpen}
-        onClose={handleCloseWarning}
-        onConfirm={handleConfirmDelete}
-        message="Are you sure you want to remove this shift request?"
-        confirmText="Confirm"
-        cancelText="Cancel"
-      />
-
-      {/* For reject */}
-      <WarningComponent
-        open={isWarningOpened}
-        onClose={handleRjectCloseWarning}
-        onConfirm={handleRejectConfirm}
-        message="Are you sure you want to reject this request?"
-        confirmText="Confirm"
-        cancelText="Cancel"
-      />
-
-      {/* View comments */}
-      <ViewComments
-        isOpen={isCommentsOpen}
-        onClose={() => setCommentsOpen(false)}
-        rowIndex={selectedRowIndex}
-        data={shiftData}
-      />
     </Container>
   );
 };
 
-export default ShiftRequests;
+export default Attendances;

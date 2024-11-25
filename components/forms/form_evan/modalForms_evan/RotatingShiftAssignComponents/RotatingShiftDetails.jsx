@@ -32,6 +32,11 @@ const RotatingShiftDetails = ({
         overflow: "visible",
       },
     },
+    header: {
+      display: "flex",
+      alignItems: "center",
+      marginBottom: "24px",
+    },
     content: {
       padding: "20px 24px",
       position: "relative",
@@ -41,6 +46,30 @@ const RotatingShiftDetails = ({
       fontWeight: "bold",
       color: "#333",
       marginBottom: "20px",
+    },
+    avatar: {
+      width: "50px",
+      height: "50px",
+      borderRadius: "50%",
+      backgroundColor: "#4CAF50",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      color: "white",
+      fontSize: "20px",
+      marginRight: "16px",
+    },
+    employeeInfo: {
+      flex: 1,
+    },
+    employeeName: {
+      fontSize: "18px",
+      fontWeight: "600",
+      color: "#333",
+    },
+    department: {
+      fontSize: "14px",
+      color: "#666",
     },
     detailsSection: {
       display: "grid",
@@ -223,14 +252,19 @@ const RotatingShiftDetails = ({
           <Typography sx={styles.title}>
             Rotating Shift Assign Details
           </Typography>
+          <Box sx={styles.header}>
+            <div style={styles.avatar}>
+              {data?.employee?.name?.substring(0, 2)?.toUpperCase()}
+            </div>
+            <div style={styles.employeeInfo}>
+              <Typography style={styles.employeeName}>
+                {data?.employee?.name}
+              </Typography>
+              <Typography style={styles.department}>S/W Dept / None</Typography>
+            </div>
+          </Box>
 
           <Box sx={styles.detailsSection}>
-            <Box sx={styles.detailItem}>
-              <Typography sx={styles.label}>Employee</Typography>
-              <Typography sx={styles.value}>
-                {`${data.employee.name} ${data.employee.code}`}
-              </Typography>
-            </Box>
             <Box sx={styles.detailItem}>
               <Typography sx={styles.label}>Ttile</Typography>
               <Typography sx={styles.value}>{data.title}</Typography>
