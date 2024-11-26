@@ -24,10 +24,12 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 
 import TopBarComponet from "../../modalForms_evan/TopComponent/TopBarComponet";
-import AddAttendaceComponent from "../../modalForms_evan/AttendaceField/AddAttendaceComponent";
 import OTAttendances from "./OTAttendances";
 import ValidateAttendances from "./ValidateAttendances";
-import DetailsAttendaces from "../../modalForms_evan/AttendaceField/DetailsAttendaces";
+import DetailsAttendances from "../../modalForms_evan/AttendaceField/DetailsAttendances";
+import AddAttendanceComponent from "../../modalForms_evan/AttendaceField/AddAttendanceComponent";
+import EditAttendances from "../../modalForms_evan/AttendaceField/EditAttendances";
+import WarningComponent from "../../modalForms_evan/Warning Component/WarningComponent";
 
 const styles = {
   pageWrapper: {
@@ -165,8 +167,6 @@ const Attendances = () => {
   const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
   const [updateData, setUpdateData] = useState(null);
 
-  const [isDuplicateModalOpen, setDuplicateModalOpen] = useState(false);
-  const [duplicateData, setDuplicateData] = useState(null);
 
   // Generate color based on string
   const stringToColor = (string) => {
@@ -310,6 +310,35 @@ const Attendances = () => {
   const toggleCreateModal = () => {
     setCreateModalOpen(!isCreateModalOpen);
   };
+
+  // Edit click
+  const handleEditClick = (data) => {
+    setUpdateData(data);
+    setUpdateModalOpen(true);
+  };
+
+  const toggleUpdateModal = () => {
+    setUpdateModalOpen(!isUpdateModalOpen);
+  };
+
+
+   // Delete clcik
+   const [isWarningOpen, setIsWarningOpen] = useState(false);
+   const [deleteId, setDeleteId] = useState(null);
+ 
+   const handleDeleteClick = (id) => {
+     setDeleteId(id);
+     setIsWarningOpen(true);
+   };
+ 
+   const handleCloseWarning = () => {
+     setIsWarningOpen(false);
+   };
+ 
+   const handleConfirmDelete = () => {
+     console.log("Deleted item with ID:", deleteId);
+     setIsWarningOpen(false);
+   };
 
   const ActionButton = ({
     id,
@@ -494,7 +523,7 @@ const Attendances = () => {
                     }}
                     onClick={(e) => {
                       e.stopPropagation();
-                      if (onClick) onClick(e);
+                      // if (onClick) onClick(e);
                     }}
                     onMouseOver={(e) => {
                       e.currentTarget.style.backgroundColor = "#2b79a9";
@@ -531,10 +560,10 @@ const Attendances = () => {
   return (
     <Container fluid className="p-3" style={{ width: "1200px" }}>
       <TopBarComponet
-        headerName="Attendance"
+        headerName="Attendances"
         onCreateClick={toggleCreateModal}
       />
-      <AddAttendaceComponent
+      <AddAttendanceComponent
         isOpen={isCreateModalOpen}
         toggle={toggleCreateModal}
       />
@@ -594,7 +623,7 @@ const Attendances = () => {
 
       {/* Details Modal */}
       {isDetailsModalOpen && (
-        <DetailsAttendaces
+        <DetailsAttendances
           isOpen={isDetailsModalOpen}
           toggle={toggleDetailsModal}
           data={shiftData[selectedRowData]}
@@ -603,6 +632,26 @@ const Attendances = () => {
           hasNext={selectedRowData < shiftData.length - 1}
         />
       )}
+
+      {/* Update form */}
+      {isUpdateModalOpen && (
+        <EditAttendances
+          isOpen={isUpdateModalOpen}
+          toggle={toggleUpdateModal}
+          data={updateData}
+        />
+      )}
+
+
+      {/* For remove */}
+      <WarningComponent
+        open={isWarningOpen}
+        onClose={handleCloseWarning}
+        onConfirm={handleConfirmDelete}
+        message="Are you sure you want to remove this Attendance?"
+        confirmText="Confirm"
+        cancelText="Cancel"
+      />
 
     </Container>
   );

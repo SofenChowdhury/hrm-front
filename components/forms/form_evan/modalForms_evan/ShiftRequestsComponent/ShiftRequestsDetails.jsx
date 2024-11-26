@@ -6,6 +6,9 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import UpdateRequest from "./UpdateRequest";
+import Avatar from "@mui/material/Avatar";
+import WarningComponent from "../Warning Component/WarningComponent";
+
 
 const ShiftRequestsDetails = ({isOpen, toggle, data, onNavigate, hasPrevious, hasNext,}) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -38,18 +41,18 @@ const ShiftRequestsDetails = ({isOpen, toggle, data, onNavigate, hasPrevious, ha
       alignItems: "center",
       marginBottom: "24px",
     },
-    avatar: {
-      width: "50px",
-      height: "50px",
-      borderRadius: "50%",
-      backgroundColor: "#4CAF50",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      color: "white",
-      fontSize: "20px",
-      marginRight: "16px",
-    },
+    // avatar: {
+    //   width: "50px",
+    //   height: "50px",
+    //   borderRadius: "50%",
+    //   backgroundColor: "#4CAF50",
+    //   display: "flex",
+    //   alignItems: "center",
+    //   justifyContent: "center",
+    //   color: "white",
+    //   fontSize: "20px",
+    //   marginRight: "16px",
+    // },
     employeeInfo: {
       flex: 1,
     },
@@ -156,7 +159,28 @@ const ShiftRequestsDetails = ({isOpen, toggle, data, onNavigate, hasPrevious, ha
       color: "#fff",
     },
   };
+// Generate color based on string
+const stringToColor = (string) => {
+  let hash = 0;
+  for (let i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  let color = "#";
+  for (let i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += `00${value.toString(16)}`.slice(-2);
+  }
+  return color;
+};
 
+const getInitials = (name) => {
+  return name
+  .split(" ")
+  .map((word) => word[0])
+  .join("")
+  .toUpperCase();
+};
+  // Edit click
   const handleEditClick = () => {
     setIsEditModalOpen(true);
   };
@@ -164,6 +188,25 @@ const ShiftRequestsDetails = ({isOpen, toggle, data, onNavigate, hasPrevious, ha
   const handleCloseEditModal = () => {
     setIsEditModalOpen(false);
   };
+
+  // Delete click
+  const [isWarningOpen, setIsWarningOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
+
+  const handleDeleteClick = (id) => {
+    setDeleteId(id);
+    setIsWarningOpen(true);
+  };
+
+  const handleCloseWarning = () => {
+    setIsWarningOpen(false);
+  };
+
+  const handleConfirmDelete = () => {
+    console.log("Deleted item with ID:", deleteId);
+    setIsWarningOpen(false);
+  };
+
 
   return (
     <>
@@ -195,9 +238,19 @@ const ShiftRequestsDetails = ({isOpen, toggle, data, onNavigate, hasPrevious, ha
           <Typography sx={styles.title}>Shift Request Details</Typography>
 
           <Box sx={styles.header}>
-            <div style={styles.avatar}>
+            <Avatar
+              sx={{
+                bgcolor: stringToColor(data.employee.name),
+                width: 50,
+                height: 50,
+                marginRight: "10px",
+              }}
+            >
+              {getInitials(data.employee.name)}
+            </Avatar>
+            {/* <div style={styles.avatar}>
               {data?.employee?.name?.substring(0, 2)?.toUpperCase()}
-            </div>
+            </div> */}
             <div style={styles.employeeInfo}>
               <Typography style={styles.employeeName}>
                 {data?.employee?.name}
@@ -254,7 +307,7 @@ const ShiftRequestsDetails = ({isOpen, toggle, data, onNavigate, hasPrevious, ha
             </button>
             <button
               style={{ ...styles.iconButton, ...styles.deleteButton }}
-              onClick={() => console.log("Delete clicked")}
+              onClick={handleDeleteClick}
               onMouseOver={(e) =>
                 (e.currentTarget.style.backgroundColor = "#c0392b")
               }
@@ -276,6 +329,16 @@ const ShiftRequestsDetails = ({isOpen, toggle, data, onNavigate, hasPrevious, ha
           data={data}
         />
       )}
+
+      {/* For remove */}
+      <WarningComponent
+        open={isWarningOpen}
+        onClose={handleCloseWarning}
+        onConfirm={handleConfirmDelete}
+        message="Are you sure you want to remove this?"
+        confirmText="Confirm"
+        cancelText="Cancel"
+      />
     </>
   );
 };

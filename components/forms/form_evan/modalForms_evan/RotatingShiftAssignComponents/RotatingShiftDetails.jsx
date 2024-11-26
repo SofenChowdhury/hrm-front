@@ -8,6 +8,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { IoArchive } from "react-icons/io5";
 import UpdateRotatingShift from "./UpdateRotatingShift";
 import WarningComponent from "../Warning Component/WarningComponent";
+import Avatar from "@mui/material/Avatar";
 
 const RotatingShiftDetails = ({
   isOpen,
@@ -47,18 +48,18 @@ const RotatingShiftDetails = ({
       color: "#333",
       marginBottom: "20px",
     },
-    avatar: {
-      width: "50px",
-      height: "50px",
-      borderRadius: "50%",
-      backgroundColor: "#4CAF50",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      color: "white",
-      fontSize: "20px",
-      marginRight: "16px",
-    },
+    // avatar: {
+    //   width: "50px",
+    //   height: "50px",
+    //   borderRadius: "50%",
+    //   backgroundColor: "#4CAF50",
+    //   display: "flex",
+    //   alignItems: "center",
+    //   justifyContent: "center",
+    //   color: "white",
+    //   fontSize: "20px",
+    //   marginRight: "16px",
+    // },
     employeeInfo: {
       flex: 1,
     },
@@ -178,6 +179,29 @@ const RotatingShiftDetails = ({
     },
   };
 
+   // Generate color based on string
+   const stringToColor = (string) => {
+    let hash = 0;
+    for (let i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    let color = "#";
+    for (let i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.slice(-2);
+    }
+    return color;
+  };
+  
+  const getInitials = (name) => {
+    return name
+    .split(" ")
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase();
+  };
+
+// Edit Click
   const handleEditClick = () => {
     setIsEditModalOpen(true);
   };
@@ -253,9 +277,19 @@ const RotatingShiftDetails = ({
             Rotating Shift Assign Details
           </Typography>
           <Box sx={styles.header}>
-            <div style={styles.avatar}>
+            <Avatar
+              sx={{
+                bgcolor: stringToColor(data.employee.name),
+                width: 50,
+                height: 50,
+                marginRight: "10px",
+              }}
+            >
+              {getInitials(data.employee.name)}
+            </Avatar>
+            {/* <div style={styles.avatar}>
               {data?.employee?.name?.substring(0, 2)?.toUpperCase()}
-            </div>
+            </div> */}
             <div style={styles.employeeInfo}>
               <Typography style={styles.employeeName}>
                 {data?.employee?.name}

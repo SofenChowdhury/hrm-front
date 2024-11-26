@@ -5,12 +5,12 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import UpdateWorkType from "./UpdateWorkType";
+import CheckIcon from "@mui/icons-material/Check";
+import EditAttendances from "./EditAttendances";
 import Avatar from "@mui/material/Avatar";
 import WarningComponent from "../Warning Component/WarningComponent";
 
-
-const WorkTypeDetails = ({
+const DetailsAttendances = ({
   isOpen,
   toggle,
   data,
@@ -93,16 +93,6 @@ const WorkTypeDetails = ({
       fontWeight: "500",
       color: "#333",
     },
-    actionButton: {
-      width: "100%",
-      marginTop: "24px",
-      backgroundColor: "#e74c3c",
-      color: "white",
-      fontWeight: "bold",
-      "&:hover": {
-        backgroundColor: "#c0392b",
-      },
-    },
     closeButton: {
       background: "none",
       border: "none",
@@ -142,7 +132,8 @@ const WorkTypeDetails = ({
     },
     buttonGroup: {
       display: "flex",
-      gap: "16px",
+      gap: "5px",
+      marginTop: "24px",
     },
     iconButton: {
       flex: "1",
@@ -154,20 +145,13 @@ const WorkTypeDetails = ({
       cursor: "pointer",
       transition: "all 0.3s ease",
       fontSize: "20px",
-    },
-    editButton: {
-      backgroundColor: "#3498db",
-      color: "#fff",
-      border: "none",
-    },
-    deleteButton: {
-      backgroundColor: "#e74c3c",
       border: "none",
       color: "#fff",
     },
   };
 
- // Generate color based on string
+  
+  // Generate color based on string
   const stringToColor = (string) => {
     let hash = 0;
     for (let i = 0; i < string.length; i += 1) {
@@ -188,7 +172,7 @@ const WorkTypeDetails = ({
     .join("")
     .toUpperCase();
   };
-
+  
   // Edit click
   const handleEditClick = () => {
     setIsEditModalOpen(true);
@@ -198,24 +182,23 @@ const WorkTypeDetails = ({
     setIsEditModalOpen(false);
   };
 
-   // Delete click
-   const [isWarningOpen, setIsWarningOpen] = useState(false);
-   const [deleteId, setDeleteId] = useState(null);
- 
-   const handleDeleteClick = (id) => {
-     setDeleteId(id);
-     setIsWarningOpen(true);
-   };
- 
-   const handleCloseWarning = () => {
-     setIsWarningOpen(false);
-   };
- 
-   const handleConfirmDelete = () => {
-     console.log("Deleted item with ID:", deleteId);
-     setIsWarningOpen(false);
-   };
-
+    // Delete click
+    const [isWarningOpen, setIsWarningOpen] = useState(false);
+    const [deleteId, setDeleteId] = useState(null);
+  
+    const handleDeleteClick = (id) => {
+      setDeleteId(id);
+      setIsWarningOpen(true);
+    };
+  
+    const handleCloseWarning = () => {
+      setIsWarningOpen(false);
+    };
+  
+    const handleConfirmDelete = () => {
+      console.log("Deleted item with ID:", deleteId);
+      setIsWarningOpen(false);
+    };
 
 
   return (
@@ -245,7 +228,7 @@ const WorkTypeDetails = ({
         )}
 
         <DialogContent sx={styles.content}>
-          <Typography sx={styles.title}>Work Type Details</Typography>
+          <Typography sx={styles.title}>Attendance Details</Typography>
 
           <Box sx={styles.header}>
             <Avatar
@@ -271,40 +254,66 @@ const WorkTypeDetails = ({
 
           <Box sx={styles.detailsSection}>
             <Box sx={styles.detailItem}>
-              <Typography sx={styles.label}>Employee</Typography>
-              <Typography sx={styles.value}>
-                {`${data.employee.name} ${data.employee.code}`}
-              </Typography>
+              <Typography sx={styles.label}>Date</Typography>
+              <Typography sx={styles.value}>{data?.date}</Typography>
             </Box>
             <Box sx={styles.detailItem}>
-              <Typography sx={styles.label}>Requested Shift</Typography>
-              <Typography sx={styles.value}>{data.requestedShift}</Typography>
+              <Typography sx={styles.label}>Day</Typography>
+              <Typography sx={styles.value}>{data?.day}</Typography>
+            </Box>
+
+            <Box sx={styles.detailItem}>
+              <Typography sx={styles.label}>Check In</Typography>
+              <Typography sx={styles.value}>{data?.checkIn}</Typography>
             </Box>
             <Box sx={styles.detailItem}>
-              <Typography sx={styles.label}>Previous Shift</Typography>
-              <Typography sx={styles.value}>{data.previousShift}</Typography>
+              <Typography sx={styles.label}>Check In Date</Typography>
+              <Typography sx={styles.value}>{data?.InDate}</Typography>
+            </Box>
+
+            <Box sx={styles.detailItem}>
+              <Typography sx={styles.label}>Check Out</Typography>
+              <Typography sx={styles.value}>{data?.checkOut}</Typography>
             </Box>
             <Box sx={styles.detailItem}>
-              <Typography sx={styles.label}>Requested Date</Typography>
-              <Typography sx={styles.value}>{data.requestedDate}</Typography>
+              <Typography sx={styles.label}>Check Out Date</Typography>
+              <Typography sx={styles.value}>{data?.OutDate}</Typography>
+            </Box>
+
+            <Box sx={styles.detailItem}>
+              <Typography sx={styles.label}>Shift</Typography>
+              <Typography sx={styles.value}>{data?.Shift}</Typography>
             </Box>
             <Box sx={styles.detailItem}>
-              <Typography sx={styles.label}>Requested Till</Typography>
-              <Typography sx={styles.value}>{data.requestedTill}</Typography>
+              <Typography sx={styles.label}>Work Type</Typography>
+              <Typography sx={styles.value}>{data?.workType}</Typography>
+            </Box>
+
+            <Box sx={styles.detailItem}>
+              <Typography sx={styles.label}>Min Hour</Typography>
+              <Typography sx={styles.value}>{data?.minHour}</Typography>
             </Box>
             <Box sx={styles.detailItem}>
-              <Typography sx={styles.label}>Status</Typography>
-              <Typography sx={styles.value}>{data.status}</Typography>
+              <Typography sx={styles.label}>At Work</Typography>
+              <Typography sx={styles.value}>{data?.atWork}</Typography>
             </Box>
-            <Box sx={styles.detailItem} style={{ gridColumn: "1 / span 2" }}>
-              <Typography sx={styles.label}>Description</Typography>
-              <Typography sx={styles.value}>{data.description}</Typography>
+
+            <Box sx={styles.detailItem}>
+              <Typography sx={styles.label}>Overtime</Typography>
+              <Typography sx={styles.value}>{data?.overTime}</Typography>
+            </Box>
+            <Box sx={styles.detailItem}>
+              <Typography sx={styles.label}>Activities</Typography>
+              <Typography sx={styles.value}>2 Activity</Typography>
             </Box>
           </Box>
 
           <div style={styles.buttonGroup}>
             <button
-              style={{ ...styles.iconButton, ...styles.editButton }}
+              style={{
+                ...styles.iconButton,
+                backgroundColor: "#3498db",
+              }}
               onClick={handleEditClick}
               onMouseOver={(e) =>
                 (e.currentTarget.style.backgroundColor = "#2980b9")
@@ -316,7 +325,25 @@ const WorkTypeDetails = ({
               <EditIcon />
             </button>
             <button
-              style={{ ...styles.iconButton, ...styles.deleteButton }}
+              style={{
+                ...styles.iconButton,
+                backgroundColor: "#2ecc71",
+              }}
+              onMouseOver={(e) =>
+                (e.currentTarget.style.backgroundColor = "#27ae60")
+              }
+              onMouseOut={(e) =>
+                (e.currentTarget.style.backgroundColor = "#2ecc71")
+              }
+            >
+              <CheckIcon />
+            </button>
+
+            <button
+              style={{
+                ...styles.iconButton,
+                backgroundColor: "#e74c3c",
+              }}
               onClick={handleDeleteClick}
               onMouseOver={(e) =>
                 (e.currentTarget.style.backgroundColor = "#c0392b")
@@ -330,9 +357,8 @@ const WorkTypeDetails = ({
           </div>
         </DialogContent>
       </Dialog>
-
       {isEditModalOpen && (
-        <UpdateWorkType
+        <EditAttendances
           isOpen={isEditModalOpen}
           toggle={handleCloseEditModal}
           data={data}
@@ -344,13 +370,12 @@ const WorkTypeDetails = ({
         open={isWarningOpen}
         onClose={handleCloseWarning}
         onConfirm={handleConfirmDelete}
-        message="Are you sure you want to remove this?"
+        message="Are you sure you want to remove this Attendance?"
         confirmText="Confirm"
         cancelText="Cancel"
       />
-
     </>
   );
 };
 
-export default WorkTypeDetails;
+export default DetailsAttendances;

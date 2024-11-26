@@ -16,6 +16,9 @@ import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
+import ValidateAttendanceDetails from "../../modalForms_evan/AttendaceField/ValidateAttendanceDetails";
+import ValidateAttendaceEdit from "../../modalForms_evan/AttendaceField/ValidateAttendaceEdit";
+import WarningComponent from "../../modalForms_evan/Warning Component/WarningComponent";
 
 const styles = {
   tableCell: {
@@ -35,6 +38,13 @@ const styles = {
 const ValidateAttendances = () => {
     const [selectedRows, setSelectedRows] = useState([]);
     const [selectAll, setSelectAll] = useState(false);
+
+    const [selectedRowData, setSelectedRowData] = useState(null);
+    const [isDetailsModalOpen, setDetailsModalOpen] = useState(false);
+
+    const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
+    const [updateData, setUpdateData] = useState(null);
+  
     const [currentPage, setCurrentPage] = useState(1);
     const employeesPerPage = 5;
   
@@ -98,7 +108,7 @@ const ValidateAttendances = () => {
         atWork: "120:22",
         pendingHour: "00:00",
         overTime: "04:00",
-      }
+      },
     ];
   
     const handlePageChange = (event, value) => {
@@ -126,7 +136,55 @@ const ValidateAttendances = () => {
         setSelectedRows([...selectedRows, id]);
       }
     };
+
+    // Open the selected row's data
+    const handleRowClick = (data, index) => {
+      setSelectedRowData(index);
+      setDetailsModalOpen(true);
+    };
   
+    // Close the modal
+    const toggleDetailsModal = () => {
+      setDetailsModalOpen(!isDetailsModalOpen);
+    };
+  
+    const handleNavigateAsset = (direction) => {
+      if (direction === "previous" && selectedRowData > 0) {
+        setSelectedRowData(selectedRowData - 1);
+      } else if (direction === "next" && selectedRowData < otData.length - 1) {
+        setSelectedRowData(selectedRowData + 1);
+      }
+    };
+
+
+  // Edit click
+  const handleEditClick = (data) => {
+    setUpdateData(data);
+    setUpdateModalOpen(true);
+  };
+
+  const toggleUpdateModal = () => {
+    setUpdateModalOpen(!isUpdateModalOpen);
+  };
+
+     // Delete clcik
+     const [isWarningOpen, setIsWarningOpen] = useState(false);
+     const [deleteId, setDeleteId] = useState(null);
+   
+     const handleDeleteClick = (id) => {
+       setDeleteId(id);
+       setIsWarningOpen(true);
+     };
+   
+     const handleCloseWarning = () => {
+       setIsWarningOpen(false);
+     };
+   
+     const handleConfirmDelete = () => {
+       console.log("Deleted item with ID:", deleteId);
+       setIsWarningOpen(false);
+     };
+
     const ActionButton = ({ id, color, bgColor, icon: Icon, tooltip, onClick }) => {
       return (
         <>
@@ -204,10 +262,12 @@ const ValidateAttendances = () => {
             </tr>
           </thead>
           <tbody>
-            {currentEmployees.map((item) => (
+            {currentEmployees.map((item, index) => (
               <tr
                 key={item.id}
+                onClick={() => handleRowClick(item, index)}
                 style={{
+                  cursor: "pointer",
                   backgroundColor: selectedRows.includes(item.id)
                     ? "#FFF3E0"
                     : "white",
@@ -265,6 +325,9 @@ const ValidateAttendances = () => {
                       bgColor="#eef2ff"
                       icon={FiEdit2}
                       tooltip="Edit"
+                      onClick={(e) => {
+                        handleEditClick(item);
+                      }}
                     />
                     <ActionButton
                       id={`deleteBtn-${item.id}`}
@@ -272,6 +335,8 @@ const ValidateAttendances = () => {
                       bgColor="#ffebee"
                       icon={FiTrash2}
                       tooltip="Remove"
+                      onClick={() => handleDeleteClick(item.id)}
+
                     />
                   </div>
                 </td>
@@ -317,6 +382,38 @@ const ValidateAttendances = () => {
           />
         </Stack>
       </div>
+
+      {/* Details Modal */}
+      {isDetailsModalOpen && (
+        <ValidateAttendanceDetails
+          isOpen={isDetailsModalOpen}
+          toggle={toggleDetailsModal}
+          data={otData[selectedRowData]}
+          onNavigate={handleNavigateAsset}
+          hasPrevious={selectedRowData > 0}
+          hasNext={selectedRowData < otData.length - 1}
+        />
+      )}
+
+      {/* Update form */}
+      {isUpdateModalOpen && (
+        <ValidateAttendaceEdit
+          isOpen={isUpdateModalOpen}
+          toggle={toggleUpdateModal}
+          data={updateData}
+        />
+      )}
+
+      {/* For remove */}
+      <WarningComponent
+        open={isWarningOpen}
+        onClose={handleCloseWarning}
+        onConfirm={handleConfirmDelete}
+        message="Are you sure you want to remove this Validate Attendance?"
+        confirmText="Confirm"
+        cancelText="Cancel"
+      />
+
       </div>
   );
 };
