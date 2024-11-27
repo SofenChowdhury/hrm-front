@@ -513,7 +513,7 @@ const AttendanceActivities = () => {
   return (
     <Container fluid className="p-3" style={{ width: "1200px" }}>
         <TopBarAttendancefield
-        headerName="Attendance Requests"
+        headerName="Attendance Activities"
       />
        <div>
         <TopButtons />
