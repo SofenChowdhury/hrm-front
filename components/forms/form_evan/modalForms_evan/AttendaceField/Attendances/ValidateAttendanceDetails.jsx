@@ -6,11 +6,11 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from "@mui/icons-material/Check";
-import EditAttendances from "./EditAttendances";
+import ValidateAttendaceEdit from "./ValidateAttendaceEdit";
 import Avatar from "@mui/material/Avatar";
-import WarningComponent from "../Warning Component/WarningComponent";
+import WarningComponent from "../../Warning Component/WarningComponent";
 
-const DetailsAttendances = ({
+const ValidateAttendanceDetails = ({
   isOpen,
   toggle,
   data,
@@ -150,7 +150,6 @@ const DetailsAttendances = ({
     },
   };
 
-  
   // Generate color based on string
   const stringToColor = (string) => {
     let hash = 0;
@@ -164,16 +163,16 @@ const DetailsAttendances = ({
     }
     return color;
   };
-  
+
   const getInitials = (name) => {
     return name
-    .split(" ")
-    .map((word) => word[0])
-    .join("")
-    .toUpperCase();
+      .split(" ")
+      .map((word) => word[0])
+      .join("")
+      .toUpperCase();
   };
-  
-  // Edit click
+
+  //   Edit click
   const handleEditClick = () => {
     setIsEditModalOpen(true);
   };
@@ -182,24 +181,23 @@ const DetailsAttendances = ({
     setIsEditModalOpen(false);
   };
 
-    // Delete click
-    const [isWarningOpen, setIsWarningOpen] = useState(false);
-    const [deleteId, setDeleteId] = useState(null);
-  
-    const handleDeleteClick = (id) => {
-      setDeleteId(id);
-      setIsWarningOpen(true);
-    };
-  
-    const handleCloseWarning = () => {
-      setIsWarningOpen(false);
-    };
-  
-    const handleConfirmDelete = () => {
-      console.log("Deleted item with ID:", deleteId);
-      setIsWarningOpen(false);
-    };
+  // Delete click
+  const [isWarningOpen, setIsWarningOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
 
+  const handleDeleteClick = (id) => {
+    setDeleteId(id);
+    setIsWarningOpen(true);
+  };
+
+  const handleCloseWarning = () => {
+    setIsWarningOpen(false);
+  };
+
+  const handleConfirmDelete = () => {
+    console.log("Deleted item with ID:", deleteId);
+    setIsWarningOpen(false);
+  };
 
   return (
     <>
@@ -228,7 +226,7 @@ const DetailsAttendances = ({
         )}
 
         <DialogContent sx={styles.content}>
-          <Typography sx={styles.title}>Attendance Details</Typography>
+          <Typography sx={styles.title}>Validate Attendance Details</Typography>
 
           <Box sx={styles.header}>
             <Avatar
@@ -324,20 +322,20 @@ const DetailsAttendances = ({
             >
               <EditIcon />
             </button>
-            <button
+            {/* <button
               style={{
                 ...styles.iconButton,
-                backgroundColor: "#2ecc71",
+                backgroundColor: "#efc312",
               }}
               onMouseOver={(e) =>
-                (e.currentTarget.style.backgroundColor = "#27ae60")
+                (e.currentTarget.style.backgroundColor = "#bc9d1f")
               }
               onMouseOut={(e) =>
-                (e.currentTarget.style.backgroundColor = "#2ecc71")
+                (e.currentTarget.style.backgroundColor = "#efc312")
               }
             >
               <CheckIcon />
-            </button>
+            </button> */}
 
             <button
               style={{
@@ -358,7 +356,7 @@ const DetailsAttendances = ({
         </DialogContent>
       </Dialog>
       {isEditModalOpen && (
-        <EditAttendances
+        <ValidateAttendaceEdit
           isOpen={isEditModalOpen}
           toggle={handleCloseEditModal}
           data={data}
@@ -370,7 +368,7 @@ const DetailsAttendances = ({
         open={isWarningOpen}
         onClose={handleCloseWarning}
         onConfirm={handleConfirmDelete}
-        message="Are you sure you want to remove this Attendance?"
+        message="Are you sure you want to remove this Validate Attendance?"
         confirmText="Confirm"
         cancelText="Cancel"
       />
@@ -378,4 +376,4 @@ const DetailsAttendances = ({
   );
 };
 
-export default DetailsAttendances;
+export default ValidateAttendanceDetails;

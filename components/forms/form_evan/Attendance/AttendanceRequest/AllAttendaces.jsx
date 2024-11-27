@@ -17,27 +17,26 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
 import { MdDone } from "react-icons/md";
-import OTAttendanceDetails from "../../modalForms_evan/AttendaceField/Attendances/OTAttendanceDetails";
-import OTAttendancesEdit from "../../modalForms_evan/AttendaceField/Attendances/OTAttendancesEdit";
-import WarningComponent from "../../modalForms_evan/Warning Component/WarningComponent";
+import AllAttendancesDetails from "../../modalForms_evan/AttendaceField/Attendance Requests/AllAttendancesDetails";
+import EditAllAttendances from "../../modalForms_evan/AttendaceField/Attendance Requests/EditAllAttendances";
 
 const styles = {
-  tableCell: {
-    padding: "12px 16px",
-    whiteSpace: "nowrap",
-    verticalAlign: "middle",
-    textAlign: "center",
-  },
-  pageWrapper: {
-    minWidth: "1024px",
-    maxWidth: "100%",
-    padding: "20px",
-    flex: 1,
-  },
-};
+    tableCell: {
+      padding: "12px 16px",
+      whiteSpace: "nowrap",
+      verticalAlign: "middle",
+      textAlign: "center"
+    },
+    pageWrapper: {
+      minWidth: "1024px",
+      maxWidth: "100%",
+      padding: "20px",
+      flex: 1,
+    }
+  };
 
-const OTAttendances = () => {
-  const [selectedRows, setSelectedRows] = useState([]);
+const AllAttendaces = () => {
+const [selectedRows, setSelectedRows] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
 
   const [selectedRowData, setSelectedRowData] = useState(null);
@@ -85,14 +84,32 @@ const OTAttendances = () => {
       checkOut: "03:10 PM",
       OutDate: "Aug. 26, 2024",
       Shift: "Regular Shift",
-      workType: "Overtime",
+      workType: "None",
       minHour: "08:15",
       atWork: "120:22",
-      pendingHour: "00:00",
       overTime: "04:00",
     },
     {
-      id: 2,
+        id: 2,
+        employee: {
+          name: "Alice Foster",
+          code: "(#PEP49)",
+        },
+        date: "Aug. 21, 2024",
+        day: "Wednesday",
+        checkIn: "03:48 PM",
+        InDate: "Aug. 21, 2024",
+        checkOut: "03:10 PM",
+        OutDate: "Aug. 26, 2024",
+        Shift: "Regular Shift",
+        workType: "Overtime",
+        minHour: "08:15",
+        atWork: "120:22",
+        overTime: "04:00",
+      },
+
+    {
+      id: 3,
       employee: {
         name: "Adam Luis",
         code: "(#PEP48)",
@@ -104,12 +121,29 @@ const OTAttendances = () => {
       checkOut: "03:10 PM",
       OutDate: "Aug. 26, 2024",
       Shift: "Regular Shift",
-      workType: "Overtime",
+      workType: "Work Form Home",
       minHour: "08:15",
       atWork: "120:22",
-      pendingHour: "00:00",
       overTime: "04:00",
     },
+    {
+        id: 4,
+        employee: {
+          name: "Benjamin Parker",
+          code: "(#PEP40)",
+        },
+        date: "Aug. 21, 2024",
+        day: "Wednesday",
+        checkIn: "03:48 PM",
+        InDate: "Aug. 21, 2024",
+        checkOut: "03:10 PM",
+        OutDate: "Aug. 26, 2024",
+        Shift: "Regular Shift",
+        workType: "Work Form Office",
+        minHour: "08:15",
+        atWork: "120:22",
+        overTime: "04:00",
+      },
   ];
 
   const handlePageChange = (event, value) => {
@@ -119,10 +153,7 @@ const OTAttendances = () => {
   const totalPages = Math.ceil(otData.length / employeesPerPage);
   const indexOfLastEmployee = currentPage * employeesPerPage;
   const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
-  const currentEmployees = otData.slice(
-    indexOfFirstEmployee,
-    indexOfLastEmployee
-  );
+  const currentEmployees = otData.slice(indexOfFirstEmployee, indexOfLastEmployee);
 
   const handleSelectAll = () => {
     if (selectAll) {
@@ -141,24 +172,25 @@ const OTAttendances = () => {
     }
   };
 
-  // Open the selected row's data
-  const handleRowClick = (data, index) => {
-    setSelectedRowData(index);
-    setDetailsModalOpen(true);
-  };
+    // Open the selected row's data
+    const handleRowClick = (data, index) => {
+      setSelectedRowData(index);
+      setDetailsModalOpen(true);
+    };
+  
+    // Close the modal
+    const toggleDetailsModal = () => {
+      setDetailsModalOpen(!isDetailsModalOpen);
+    };
+  
+    const handleNavigateAsset = (direction) => {
+      if (direction === "previous" && selectedRowData > 0) {
+        setSelectedRowData(selectedRowData - 1);
+      } else if (direction === "next" && selectedRowData < otData.length - 1) {
+        setSelectedRowData(selectedRowData + 1);
+      }
+    };
 
-  // Close the modal
-  const toggleDetailsModal = () => {
-    setDetailsModalOpen(!isDetailsModalOpen);
-  };
-
-  const handleNavigateAsset = (direction) => {
-    if (direction === "previous" && selectedRowData > 0) {
-      setSelectedRowData(selectedRowData - 1);
-    } else if (direction === "next" && selectedRowData < otData.length - 1) {
-      setSelectedRowData(selectedRowData + 1);
-    }
-  };
 
   // Edit click
   const handleEditClick = (data) => {
@@ -170,32 +202,27 @@ const OTAttendances = () => {
     setUpdateModalOpen(!isUpdateModalOpen);
   };
 
-  // Delete clcik
-  const [isWarningOpen, setIsWarningOpen] = useState(false);
-  const [deleteId, setDeleteId] = useState(null);
+     // Delete clcik
+     const [isWarningOpen, setIsWarningOpen] = useState(false);
+     const [deleteId, setDeleteId] = useState(null);
+   
+     const handleDeleteClick = (id) => {
+       setDeleteId(id);
+       setIsWarningOpen(true);
+     };
+   
+     const handleCloseWarning = () => {
+       setIsWarningOpen(false);
+     };
+   
+     const handleConfirmDelete = () => {
+       console.log("Deleted item with ID:", deleteId);
+       setIsWarningOpen(false);
+     };
 
-  const handleDeleteClick = (id) => {
-    setDeleteId(id);
-    setIsWarningOpen(true);
-  };
 
-  const handleCloseWarning = () => {
-    setIsWarningOpen(false);
-  };
 
-  const handleConfirmDelete = () => {
-    console.log("Deleted item with ID:", deleteId);
-    setIsWarningOpen(false);
-  };
-
-  const ActionButton = ({
-    id,
-    color,
-    bgColor,
-    icon: Icon,
-    tooltip,
-    onClick,
-  }) => {
+  const ActionButton = ({ id, color, bgColor, icon: Icon, tooltip, onClick }) => {
     return (
       <>
         <button
@@ -265,10 +292,8 @@ const OTAttendances = () => {
             <th style={styles.tableCell}>Work Type</th>
             <th style={styles.tableCell}>Min Hour</th>
             <th style={styles.tableCell}>At Work</th>
-            <th style={styles.tableCell}>Pending Hour</th>
             <th style={styles.tableCell}>Overtime</th>
             <th style={styles.tableCell}>Actions</th>
-            <th style={styles.tableCell}>Confirmation</th>
           </tr>
         </thead>
         <tbody>
@@ -303,12 +328,8 @@ const OTAttendances = () => {
                     {getInitials(item.employee.name)}
                   </Avatar>
                   <div>
-                    <div style={{ fontWeight: "500" }}>
-                      {item.employee.name}
-                    </div>
-                    <small style={{ color: "#666" }}>
-                      {item.employee.code}
-                    </small>
+                    <div style={{ fontWeight: "500" }}>{item.employee.name}</div>
+                    <small style={{ color: "#666" }}>{item.employee.code}</small>
                   </div>
                 </div>
               </td>
@@ -322,7 +343,6 @@ const OTAttendances = () => {
               <td style={styles.tableCell}>{item.workType}</td>
               <td style={styles.tableCell}>{item.minHour}</td>
               <td style={styles.tableCell}>{item.atWork}</td>
-              <td style={styles.tableCell}>{item.pendingHour}</td>
               <td style={styles.tableCell}>{item.overTime}</td>
               <td>
                 <div
@@ -343,17 +363,17 @@ const OTAttendances = () => {
                       handleEditClick(item);
                     }}
                   />
-                  <ActionButton
+                  {/* <ActionButton
                     id={`deleteBtn-${item.id}`}
                     color="#dc3545"
                     bgColor="#ffebee"
                     icon={FiTrash2}
                     tooltip="Remove"
                     onClick={() => handleDeleteClick(item.id)}
-                  />
+                  /> */}
                 </div>
               </td>
-              <td style={styles.tableCell}>
+              {/* <td style={styles.tableCell}>
                 <div>
                   <Button
                     style={{
@@ -374,10 +394,10 @@ const OTAttendances = () => {
                       e.currentTarget.style.backgroundColor = "#43c655";
                     }}
                   >
-                    <MdDone size={16} />
+                    <MdDone size={16}/>
                   </Button>
                 </div>
-              </td>
+              </td> */}
             </tr>
           ))}
         </tbody>
@@ -398,7 +418,7 @@ const OTAttendances = () => {
 
       {/* Details Modal */}
       {isDetailsModalOpen && (
-        <OTAttendanceDetails
+        <AllAttendancesDetails
           isOpen={isDetailsModalOpen}
           toggle={toggleDetailsModal}
           data={otData[selectedRowData]}
@@ -410,24 +430,15 @@ const OTAttendances = () => {
 
       {/* Update form */}
       {isUpdateModalOpen && (
-        <OTAttendancesEdit
+        <EditAllAttendances
           isOpen={isUpdateModalOpen}
           toggle={toggleUpdateModal}
           data={updateData}
         />
       )}
 
-      {/* For remove */}
-      <WarningComponent
-        open={isWarningOpen}
-        onClose={handleCloseWarning}
-        onConfirm={handleConfirmDelete}
-        message="Are you sure you want to remove this OT Attendance?"
-        confirmText="Confirm"
-        cancelText="Cancel"
-      />
     </div>
-  );
-};
+  )
+}
 
-export default OTAttendances;
+export default AllAttendaces

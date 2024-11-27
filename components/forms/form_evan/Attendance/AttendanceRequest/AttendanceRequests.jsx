@@ -22,13 +22,12 @@ import { FiEdit2, FiCopy, FiTrash2, FiFileText } from "react-icons/fi";
 import { MdDone, MdDelete } from "react-icons/md";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
-
 import TopBarComponet from "../../modalForms_evan/TopComponent/TopBarComponet";
-import OTAttendances from "./OTAttendances";
-import ValidateAttendances from "./ValidateAttendances";
-import DetailsAttendances from "../../modalForms_evan/AttendaceField/Attendances/DetailsAttendances";
-import AddAttendanceComponent from "../../modalForms_evan/AttendaceField/Attendances/AddAttendanceComponent";
-import EditAttendances from "../../modalForms_evan/AttendaceField/Attendances/EditAttendances";
+import CreateNewAttendanceRequest from "../../modalForms_evan/AttendaceField/Attendance Requests/CreateNewAttendanceRequest";
+import AllAttendaces from "./AllAttendaces";
+import RequestedAttendaceDetails from "../../modalForms_evan/AttendaceField/Attendance Requests/RequestedAttendaceDetails";
+import RequestAttendanceComment from "../../modalForms_evan/AttendaceField/Attendance Requests/RequestAttendanceComment";
+import EditValidateAttendanceRequest from "../../modalForms_evan/AttendaceField/Attendance Requests/EditValidateAttendanceRequest";
 import WarningComponent from "../../modalForms_evan/Warning Component/WarningComponent";
 
 const styles = {
@@ -71,6 +70,7 @@ const styles = {
   topButtons: {
     display: "flex",
     gap: "10px",
+    marginBottom: "10px",
   },
   selectButton: {
     border: "1px solid #4CAF50",
@@ -156,7 +156,7 @@ const styles = {
   },
 };
 
-const Attendances = () => {
+const AttendanceRequests = () => {
   const [activeView, setActiveView] = useState("requests");
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
@@ -194,10 +194,10 @@ const Attendances = () => {
     {
       id: 1,
       employee: {
-        name: "Adam luis",
-        code: "(#PEP48)",
+        name: "Ruby Cook",
+        code: "(#PEP63)",
       },
-      date: "Aug. 21, 2024",
+      date: "May. 14, 2024",
       day: "Wednesday",
       checkIn: "03:48 PM",
       InDate: "Aug. 21, 2024",
@@ -207,46 +207,42 @@ const Attendances = () => {
       workType: "None",
       minHour: "08:15",
       atWork: "120:22",
-      pendingHour: "00:00",
       overTime: "04:00",
     },
     {
       id: 2,
       employee: {
-        name: "Sofia Howard",
-        code: "(#PEP75)",
+        name: "Lily Campbell",
+        code: "(#PEP23)",
       },
-      date: "Aug. 21, 2024",
-      day: "Wednesday",
+      date: "May. 7, 2024",
+      day: "Tuesday",
       checkIn: "03:48 PM",
       InDate: "Aug. 21, 2024",
       checkOut: "03:10 PM",
       OutDate: "Aug. 26, 2024",
-      Shift: "Regular Shift",
-      workType: "None",
+      Shift: "Night Shift",
+      workType: "Work Form Office",
       minHour: "08:15",
       atWork: "120:22",
-      pendingHour: "00:00",
       overTime: "04:00",
     },
-
     {
       id: 3,
       employee: {
-        name: "Stella Bell",
-        code: "(#PEP59)",
+        name: "Isaac Torres",
+        code: "(#PEP52)",
       },
-      date: "Aug. 21, 2024",
-      day: "Wednesday",
+      date: "May. 3, 2024",
+      day: "Friday",
       checkIn: "03:48 PM",
       InDate: "Aug. 21, 2024",
       checkOut: "03:10 PM",
       OutDate: "Aug. 26, 2024",
-      Shift: "Regular Shift",
-      workType: "None",
+      Shift: "Morning Shift",
+      workType: "Work Form Home",
       minHour: "08:15",
       atWork: "120:22",
-      pendingHour: "00:00",
       overTime: "04:00",
     },
   ];
@@ -308,6 +304,15 @@ const Attendances = () => {
 
   const toggleCreateModal = () => {
     setCreateModalOpen(!isCreateModalOpen);
+  };
+
+  // View Comments
+  const [isCommentsOpen, setCommentsOpen] = useState(false);
+  const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
+
+  const handleViewComments = (index) => {
+    setSelectedRowIndex(index);
+    setCommentsOpen(true);
   };
 
   // Edit click
@@ -415,10 +420,9 @@ const Attendances = () => {
             <th style={styles.tableCell}>Work Type</th>
             <th style={styles.tableCell}>Min Hour</th>
             <th style={styles.tableCell}>At Work</th>
-            <th style={styles.tableCell}>Pending Hour</th>
             <th style={styles.tableCell}>Overtime</th>
+            <th style={styles.tableCell}>Comment</th>
             <th style={styles.tableCell}>Actions</th>
-            <th style={styles.tableCell}>Confirmation</th>
             <th style={styles.tableCell}></th>
           </tr>
         </thead>
@@ -473,8 +477,26 @@ const Attendances = () => {
               <td style={styles.tableCell}>{item.workType}</td>
               <td style={styles.tableCell}>{item.minHour}</td>
               <td style={styles.tableCell}>{item.atWork}</td>
-              <td style={styles.tableCell}>{item.pendingHour}</td>
               <td style={styles.tableCell}>{item.overTime}</td>
+              <td style={styles.tableCell}>
+                <Button
+                  color="link"
+                  className="p-0"
+                  id={`viewComments-${item.id}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleViewComments(index);
+                  }}
+                >
+                  <FiFileText />
+                </Button>
+                <UncontrolledTooltip
+                  placement="top"
+                  target={`viewComments-${item.id}`}
+                >
+                  View Comments
+                </UncontrolledTooltip>
+              </td>
               <td>
                 <div
                   style={{
@@ -504,36 +526,6 @@ const Attendances = () => {
                   />
                 </div>
               </td>
-
-              <td style={styles.tableCell}>
-                <div>
-                  <Button
-                    style={{
-                      backgroundColor: "#3498db",
-                      color: "#fff",
-                      border: "none",
-                      borderRadius: "4px",
-                      padding: "8px 16px",
-                      fontSize: "14px",
-                      fontWeight: "500",
-                      cursor: "pointer",
-                      transition: "all 0.3s ease",
-                    }}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      // if (onClick) onClick(e);
-                    }}
-                    onMouseOver={(e) => {
-                      e.currentTarget.style.backgroundColor = "#2b79a9";
-                    }}
-                    onMouseOut={(e) => {
-                      e.currentTarget.style.backgroundColor = "#3498db";
-                    }}
-                  >
-                    Validate
-                  </Button>
-                </div>
-              </td>
             </tr>
           ))}
         </tbody>
@@ -546,24 +538,52 @@ const Attendances = () => {
       case "requests":
         return renderShiftRequestsTable();
       case "allocated":
-        return <OTAttendances />;
-      case "validated":
-        return <ValidateAttendances />;
+        return <AllAttendaces />;
+      //   case 'validated':
+      //     return <ValidateAttendances />;
       default:
         return <div>No content available</div>;
     }
   };
 
+  const TopButtons = () => (
+    <div style={styles.topButtons}>
+      <Button style={styles.selectButton} onClick={handleSelectAll}>
+        Select All Records
+      </Button>
+      {selectedRows.length > 0 && (
+        <>
+          <Button
+            style={styles.unselectButton}
+            onClick={() => setSelectedRows([])}
+          >
+            Unselect All Records
+          </Button>
+          {/* <Button style={styles.exportButton}>Export Shifts</Button> */}
+          <span style={styles.selectedCount}>
+            {selectedRows.length} - Selected
+          </span>
+        </>
+      )}
+    </div>
+  );
+
   return (
     <Container fluid className="p-3" style={{ width: "1200px" }}>
       <TopBarComponet
-        headerName="Attendances"
+        headerName="Attendance Requests"
         onCreateClick={toggleCreateModal}
       />
-      <AddAttendanceComponent
+      <CreateNewAttendanceRequest
         isOpen={isCreateModalOpen}
         toggle={toggleCreateModal}
       />
+
+      <div>
+      {activeView !== "allocated" && (
+        <TopButtons />
+      )}
+      </div>
 
       <Card>
         <CardBody>
@@ -575,7 +595,7 @@ const Attendances = () => {
               }}
               onClick={() => setActiveView("requests")}
             >
-              Attendance to validate
+              Requested Attendance
             </button>
             <button
               style={{
@@ -584,16 +604,7 @@ const Attendances = () => {
               }}
               onClick={() => setActiveView("allocated")}
             >
-              OT Attendances
-            </button>
-            <button
-              style={{
-                ...styles.tab,
-                ...(activeView === "validated" && styles.activeTab),
-              }}
-              onClick={() => setActiveView("validated")}
-            >
-              Validate Attendances
+              All Attendances
             </button>
           </div>
 
@@ -601,7 +612,7 @@ const Attendances = () => {
 
           {/* Pagination */}
           <Row className="mt-3">
-            {activeView !== "allocated" && activeView !== "validated" && (
+            {activeView !== "allocated" && (
               <Col className="d-flex justify-content-end">
                 <Stack spacing={2}>
                   <Pagination
@@ -620,7 +631,7 @@ const Attendances = () => {
 
       {/* Details Modal */}
       {isDetailsModalOpen && (
-        <DetailsAttendances
+        <RequestedAttendaceDetails
           isOpen={isDetailsModalOpen}
           toggle={toggleDetailsModal}
           data={shiftData[selectedRowData]}
@@ -630,9 +641,17 @@ const Attendances = () => {
         />
       )}
 
+      {/* View comments */}
+      <RequestAttendanceComment
+        isOpen={isCommentsOpen}
+        onClose={() => setCommentsOpen(false)}
+        rowIndex={selectedRowIndex}
+        data={shiftData}
+      />
+
       {/* Update form */}
       {isUpdateModalOpen && (
-        <EditAttendances
+        <EditValidateAttendanceRequest
           isOpen={isUpdateModalOpen}
           toggle={toggleUpdateModal}
           data={updateData}
@@ -648,8 +667,9 @@ const Attendances = () => {
         confirmText="Confirm"
         cancelText="Cancel"
       />
+
     </Container>
   );
 };
 
-export default Attendances;
+export default AttendanceRequests;

@@ -6,11 +6,11 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from "@mui/icons-material/Check";
-import ValidateAttendaceEdit from "./ValidateAttendaceEdit";
+import OTAttendancesEdit from "./OTAttendancesEdit";
 import Avatar from "@mui/material/Avatar";
-import WarningComponent from "../Warning Component/WarningComponent";
+import WarningComponent from "../../Warning Component/WarningComponent";
 
-const ValidateAttendanceDetails = ({
+const OTAttendanceDetails = ({
   isOpen,
   toggle,
   data,
@@ -172,7 +172,7 @@ const ValidateAttendanceDetails = ({
       .toUpperCase();
   };
 
-//   Edit click
+  //   Edit Click
   const handleEditClick = () => {
     setIsEditModalOpen(true);
   };
@@ -181,23 +181,23 @@ const ValidateAttendanceDetails = ({
     setIsEditModalOpen(false);
   };
 
-      // Delete click
-      const [isWarningOpen, setIsWarningOpen] = useState(false);
-      const [deleteId, setDeleteId] = useState(null);
-    
-      const handleDeleteClick = (id) => {
-        setDeleteId(id);
-        setIsWarningOpen(true);
-      };
-    
-      const handleCloseWarning = () => {
-        setIsWarningOpen(false);
-      };
-    
-      const handleConfirmDelete = () => {
-        console.log("Deleted item with ID:", deleteId);
-        setIsWarningOpen(false);
-      };
+  // Delete click
+  const [isWarningOpen, setIsWarningOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
+
+  const handleDeleteClick = (id) => {
+    setDeleteId(id);
+    setIsWarningOpen(true);
+  };
+
+  const handleCloseWarning = () => {
+    setIsWarningOpen(false);
+  };
+
+  const handleConfirmDelete = () => {
+    console.log("Deleted item with ID:", deleteId);
+    setIsWarningOpen(false);
+  };
 
   return (
     <>
@@ -226,7 +226,7 @@ const ValidateAttendanceDetails = ({
         )}
 
         <DialogContent sx={styles.content}>
-          <Typography sx={styles.title}>Validate Attendance Details</Typography>
+          <Typography sx={styles.title}>OT Attendance Details</Typography>
 
           <Box sx={styles.header}>
             <Avatar
@@ -322,7 +322,7 @@ const ValidateAttendanceDetails = ({
             >
               <EditIcon />
             </button>
-            {/* <button
+            <button
               style={{
                 ...styles.iconButton,
                 backgroundColor: "#efc312",
@@ -335,7 +335,7 @@ const ValidateAttendanceDetails = ({
               }
             >
               <CheckIcon />
-            </button> */}
+            </button>
 
             <button
               style={{
@@ -356,25 +356,23 @@ const ValidateAttendanceDetails = ({
         </DialogContent>
       </Dialog>
       {isEditModalOpen && (
-        <ValidateAttendaceEdit
+        <OTAttendancesEdit
           isOpen={isEditModalOpen}
           toggle={handleCloseEditModal}
           data={data}
         />
       )}
 
-      {/* For remove */}
       <WarningComponent
         open={isWarningOpen}
         onClose={handleCloseWarning}
         onConfirm={handleConfirmDelete}
-        message="Are you sure you want to remove this Validate Attendance?"
+        message="Are you sure you want to remove this OT Attendance?"
         confirmText="Confirm"
         cancelText="Cancel"
       />
-
     </>
   );
 };
 
-export default ValidateAttendanceDetails;
+export default OTAttendanceDetails;

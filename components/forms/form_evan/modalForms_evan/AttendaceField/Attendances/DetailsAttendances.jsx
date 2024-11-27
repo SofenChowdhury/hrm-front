@@ -6,11 +6,11 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from "@mui/icons-material/Check";
-import OTAttendancesEdit from "./OTAttendancesEdit";
+import EditAttendances from "./EditAttendances";
 import Avatar from "@mui/material/Avatar";
-import WarningComponent from "../Warning Component/WarningComponent";
+import WarningComponent from "../../Warning Component/WarningComponent";
 
-const OTAttendanceDetails = ({
+const DetailsAttendances = ({
   isOpen,
   toggle,
   data,
@@ -172,7 +172,7 @@ const OTAttendanceDetails = ({
       .toUpperCase();
   };
 
-  //   Edit Click
+  // Edit click
   const handleEditClick = () => {
     setIsEditModalOpen(true);
   };
@@ -226,7 +226,7 @@ const OTAttendanceDetails = ({
         )}
 
         <DialogContent sx={styles.content}>
-          <Typography sx={styles.title}>OT Attendance Details</Typography>
+          <Typography sx={styles.title}>Attendance Details</Typography>
 
           <Box sx={styles.header}>
             <Avatar
@@ -325,13 +325,13 @@ const OTAttendanceDetails = ({
             <button
               style={{
                 ...styles.iconButton,
-                backgroundColor: "#efc312",
+                backgroundColor: "#2ecc71",
               }}
               onMouseOver={(e) =>
-                (e.currentTarget.style.backgroundColor = "#bc9d1f")
+                (e.currentTarget.style.backgroundColor = "#27ae60")
               }
               onMouseOut={(e) =>
-                (e.currentTarget.style.backgroundColor = "#efc312")
+                (e.currentTarget.style.backgroundColor = "#2ecc71")
               }
             >
               <CheckIcon />
@@ -356,18 +356,19 @@ const OTAttendanceDetails = ({
         </DialogContent>
       </Dialog>
       {isEditModalOpen && (
-        <OTAttendancesEdit
+        <EditAttendances
           isOpen={isEditModalOpen}
           toggle={handleCloseEditModal}
           data={data}
         />
       )}
 
+      {/* For remove */}
       <WarningComponent
         open={isWarningOpen}
         onClose={handleCloseWarning}
         onConfirm={handleConfirmDelete}
-        message="Are you sure you want to remove this OT Attendance?"
+        message="Are you sure you want to remove this Attendance?"
         confirmText="Confirm"
         cancelText="Cancel"
       />
@@ -375,4 +376,4 @@ const OTAttendanceDetails = ({
   );
 };
 
-export default OTAttendanceDetails;
+export default DetailsAttendances;
