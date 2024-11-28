@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { Dialog, DialogContent, Typography, Box, Button } from "@mui/material";
-import { FiX } from "react-icons/fi";
+import { FiX, FiAlertCircle } from "react-icons/fi";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from "@mui/icons-material/Check";
 import Avatar from "@mui/material/Avatar";
-import EditValidateAttendanceRequest from "./EditValidateAttendanceRequest";
+import CreatePenalties from "./CreatePenalties";
+import WarningComponent from "../../Warning Component/WarningComponent";
 
-const RequestedAttendaceDetails = ({
+const ViewDetails = ({
     isOpen,
     toggle,
     data,
@@ -250,15 +251,14 @@ const RequestedAttendaceDetails = ({
             </Box>
   
             <Box sx={styles.detailsSection}>
+            <Box sx={styles.detailItem}>
+                <Typography sx={styles.label}>Type</Typography>
+                <Typography sx={styles.value}>{data?.type}</Typography>
+              </Box>
               <Box sx={styles.detailItem}>
                 <Typography sx={styles.label}>Date</Typography>
                 <Typography sx={styles.value}>{data?.date}</Typography>
               </Box>
-              <Box sx={styles.detailItem}>
-                <Typography sx={styles.label}>Day</Typography>
-                <Typography sx={styles.value}>{data?.day}</Typography>
-              </Box>
-  
               <Box sx={styles.detailItem}>
                 <Typography sx={styles.label}>Check In</Typography>
                 <Typography sx={styles.value}>{data?.checkIn}</Typography>
@@ -296,12 +296,12 @@ const RequestedAttendaceDetails = ({
               </Box>
   
               <Box sx={styles.detailItem}>
-                <Typography sx={styles.label}>Overtime</Typography>
-                <Typography sx={styles.value}>{data?.overTime}</Typography>
+                <Typography sx={styles.label}>Attendance Validate</Typography>
+                <Typography sx={styles.value}>Yes</Typography>
               </Box>
               <Box sx={styles.detailItem}>
-                <Typography sx={styles.label}>Activities</Typography>
-                <Typography sx={styles.value}>2 Activity</Typography>
+                <Typography sx={styles.label}>Penalties</Typography>
+                <Typography sx={styles.value}>No Penalties found</Typography>
               </Box>
             </Box>
   
@@ -309,32 +309,18 @@ const RequestedAttendaceDetails = ({
               <button
                 style={{
                   ...styles.iconButton,
-                  backgroundColor: "#3498db",
+                  backgroundColor: "#f4cb25",
                 }}
                 onClick={handleEditClick}
                 onMouseOver={(e) =>
-                  (e.currentTarget.style.backgroundColor = "#2980b9")
+                  (e.currentTarget.style.backgroundColor = "#cdad29")
                 }
                 onMouseOut={(e) =>
-                  (e.currentTarget.style.backgroundColor = "#3498db")
+                  (e.currentTarget.style.backgroundColor = "#f4cb25")
                 }
               >
-                <EditIcon />
+                <FiAlertCircle />
               </button>
-              <button
-              style={{
-                ...styles.iconButton,
-                backgroundColor: "#2ecc71",
-              }}
-              onMouseOver={(e) =>
-                (e.currentTarget.style.backgroundColor = "#27ae60")
-              }
-              onMouseOut={(e) =>
-                (e.currentTarget.style.backgroundColor = "#2ecc71")
-              }
-            >
-              <CheckIcon />
-            </button>
 
             <button
               style={{
@@ -357,23 +343,23 @@ const RequestedAttendaceDetails = ({
         </Dialog>
 
         {isEditModalOpen && (
-          <EditValidateAttendanceRequest
+          <CreatePenalties
             isOpen={isEditModalOpen}
             toggle={handleCloseEditModal}
             data={data}
           />
         )}
   
-        {/* <WarningComponent
+        <WarningComponent
           open={isWarningOpen}
           onClose={handleCloseWarning}
           onConfirm={handleConfirmDelete}
-          message="Are you sure you want to remove this OT Attendance?"
+          message="Are you sure you want to delete this?"
           confirmText="Confirm"
           cancelText="Cancel"
-        /> */}
+        />
       </>
   )
 }
 
-export default RequestedAttendaceDetails
+export default ViewDetails

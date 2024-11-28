@@ -2133,6 +2133,16 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       width={width}
                     />
 
+                    <Item
+                      title="Late Come Early Out"
+                      to="/attendance/lateComeEarlyOut"
+                      icon={<ReceiptIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+
                   </SubMenu>
                 </>
               )}
