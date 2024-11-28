@@ -2143,6 +2143,16 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       width={width}
                     />
 
+                    <Item
+                      title="My Attendances"
+                      to="/attendance/myAttendances"
+                      icon={<ReceiptIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+
                   </SubMenu>
                 </>
               )}

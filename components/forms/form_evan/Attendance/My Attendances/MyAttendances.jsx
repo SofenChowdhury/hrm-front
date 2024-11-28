@@ -12,148 +12,147 @@ import {
   Tooltip,
   UncontrolledTooltip,
 } from "reactstrap";
-import {
-  IoCheckmarkOutline,
-  IoCloseOutline,
-  IoEllipsisVertical,
-} from "react-icons/io5";
+import { IoFilterSharp } from "react-icons/io5";
 import Pagination from "@mui/material/Pagination";
-import { FiEdit2, FiCopy, FiTrash2, FiFileText, FiAlertCircle } from "react-icons/fi";
+import {
+  FiEdit2,
+  FiCopy,
+  FiTrash2,
+  FiFileText,
+  FiAlertCircle,
+} from "react-icons/fi";
 import { MdDone, MdDelete } from "react-icons/md";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
-import TopBarAttendancefield from "../../modalForms_evan/TopComponent/TopBarAttendancefield";
-import CreatePenalties from "../../modalForms_evan/AttendaceField/LateComeEarlyOut/CreatePenalties";
-import ViewDetails from "../../modalForms_evan/AttendaceField/LateComeEarlyOut/ViewDetails";
-import WarningComponent from "../../modalForms_evan/Warning Component/WarningComponent";
+import MyAttendancesDetails from "./MyAttendancesDetails";
 
 const styles = {
-    pageWrapper: {
-      minWidth: "1024px",
-      maxWidth: "100%",
-      padding: "20px",
-      flex: 1,
+  pageWrapper: {
+    minWidth: "1024px",
+    maxWidth: "100%",
+    padding: "20px",
+    flex: 1,
+  },
+  mainContent: {
+    width: "100%",
+    minWidth: 0,
+  },
+  cardWrapper: {
+    width: "100%",
+    minWidth: 0,
+    overflow: "hidden",
+  },
+  tableWrapper: {
+    width: "100%",
+    overflowX: "auto",
+    marginRight: "0",
+    marginLeft: "0",
+    "::-webkit-scrollbar": {
+      height: "8px",
     },
-    mainContent: {
-      width: "100%",
-      minWidth: 0,
+    "::-webkit-scrollbar-track": {
+      background: "#f1f1f1",
     },
-    cardWrapper: {
-      width: "100%",
-      minWidth: 0,
-      overflow: "hidden",
-    },
-    tableWrapper: {
-      width: "100%",
-      overflowX: "auto",
-      marginRight: "0",
-      marginLeft: "0",
-      "::-webkit-scrollbar": {
-        height: "8px",
-      },
-      "::-webkit-scrollbar-track": {
-        background: "#f1f1f1",
-      },
-      "::-webkit-scrollbar-thumb": {
-        background: "#888",
-        borderRadius: "4px",
-      },
-    },
-    fixedTable: {
-      minWidth: "1500px",
-      width: "100%",
-      tableLayout: "fixed",
-    },
-    topButtons: {
-      display: "flex",
-      gap: "10px",
-      marginBottom: "10px",
-    },
-    selectButton: {
-      border: "1px solid #4CAF50",
-      color: "#4CAF50",
-      background: "white",
-      padding: "6px 15px",
-      borderRadius: "4px",
-      fontWeight: "500",
-    },
-    unselectButton: {
-      border: "1px solid #666",
-      color: "#666",
-      background: "white",
-      padding: "6px 15px",
+    "::-webkit-scrollbar-thumb": {
+      background: "#888",
       borderRadius: "4px",
     },
-    exportButton: {
-      border: "1px solid #2196F3",
-      color: "#2196F3",
-      background: "white",
-      padding: "6px 15px",
-      borderRadius: "4px",
+  },
+  fixedTable: {
+    minWidth: "1500px",
+    width: "100%",
+    tableLayout: "fixed",
+  },
+  topButtons: {
+    display: "flex",
+    gap: "10px",
+    marginBottom: "10px",
+  },
+  selectButton: {
+    border: "1px solid #4CAF50",
+    color: "#4CAF50",
+    background: "white",
+    padding: "6px 15px",
+    borderRadius: "4px",
+    fontWeight: "500",
+  },
+  unselectButton: {
+    border: "1px solid #666",
+    color: "#666",
+    background: "white",
+    padding: "6px 15px",
+    borderRadius: "4px",
+  },
+  exportButton: {
+    border: "1px solid #2196F3",
+    color: "#2196F3",
+    background: "white",
+    padding: "6px 15px",
+    borderRadius: "4px",
+  },
+  selectedCount: {
+    border: "1px solid #F44336",
+    color: "#F44336",
+    background: "white",
+    padding: "6px 15px",
+    borderRadius: "4px",
+  },
+  tabs: {
+    display: "flex",
+    borderBottom: "1px solid #dee2e6",
+    marginBottom: "20px",
+  },
+  tab: {
+    padding: "10px 20px",
+    cursor: "pointer",
+    border: "none",
+    background: "none",
+    position: "relative",
+    color: "#666",
+    borderBottom: "2px solid transparent",
+  },
+  activeTab: {
+    color: "#d9534f",
+    borderBottom: "2px solid #d9534f",
+    fontWeight: "500",
+    "&:after": {
+      content: '""',
+      position: "absolute",
+      bottom: "-1px",
+      left: 0,
+      right: 0,
+      height: "2px",
+      background: "#f44336",
     },
-    selectedCount: {
-      border: "1px solid #F44336",
-      color: "#F44336",
-      background: "white",
-      padding: "6px 15px",
-      borderRadius: "4px",
-    },
-    tabs: {
-      display: "flex",
-      borderBottom: "1px solid #dee2e6",
-      marginBottom: "20px",
-    },
-    tab: {
-      padding: "10px 20px",
-      cursor: "pointer",
-      border: "none",
-      background: "none",
-      position: "relative",
-      color: "#666",
-      borderBottom: "2px solid transparent",
-    },
-    activeTab: {
-      color: "#d9534f",
-      borderBottom: "2px solid #d9534f",
-      fontWeight: "500",
-      "&:after": {
-        content: '""',
-        position: "absolute",
-        bottom: "-1px",
-        left: 0,
-        right: 0,
-        height: "2px",
-        background: "#f44336",
-      },
-    },
-    tableCell: {
-      padding: "12px 16px",
-      whiteSpace: "nowrap",
-      verticalAlign: "middle",
-    },
-    avatar: {
-      width: "32px",
-      height: "32px",
-      borderRadius: "50%",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      marginRight: "10px",
-      fontSize: "14px",
-      color: "#333",
-    },
-    statusBadge: {
-      padding: "6px 12px",
-      borderRadius: "20px",
-      fontWeight: "500",
-    },
-    actionButtons: {
-      display: "flex",
-      gap: "8px",
-    },
-  };
+  },
+  tableCell: {
+    padding: "12px 16px",
+    whiteSpace: "nowrap",
+    verticalAlign: "middle",
+  },
+  avatar: {
+    width: "32px",
+    height: "32px",
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: "10px",
+    fontSize: "14px",
+    color: "#333",
+  },
+  statusBadge: {
+    padding: "6px 12px",
+    borderRadius: "20px",
+    fontWeight: "500",
+  },
+  actionButtons: {
+    display: "flex",
+    gap: "8px",
+  },
+};
 
-const LateComeEarlyOut = () => {
+const MyAttendances = () => {
   const [activeView, setActiveView] = useState("requests");
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
@@ -194,7 +193,6 @@ const LateComeEarlyOut = () => {
         name: "Adam Luis",
         code: "(#PEP63)",
       },
-      type:"Late Come",
       date: "May. 14, 2024",
       day: "Wednesday",
       checkIn: "03:48 PM",
@@ -205,48 +203,46 @@ const LateComeEarlyOut = () => {
       workType: "None",
       minHour: "09:35",
       atWork: "70:22",
+      pendingHour: "8:15",
       overTime: "05:00",
-      penalties: [],
     },
     {
       id: 2,
       employee: {
-        name: "Lily Campbell",
-        code: "(#PEP23)",
+        name: "Adam Luis",
+        code: "(#PEP64)",
       },
-      type:"Early Out",
-      date: "May. 7, 2024",
-      day: "Tuesday",
+      date: "May. 14, 2024",
+      day: "Wednesday",
       checkIn: "03:48 PM",
       InDate: "May. 21, 2024",
       checkOut: "03:10 PM",
       OutDate: "May. 26, 2024",
-      Shift: "Night Shift",
-      workType: "Work Form Office",
+      Shift: "Regular Shift",
+      workType: "None",
       minHour: "08:15",
-      atWork: "120:22",
+      atWork: "717:42",
+      pendingHour: "00:00",
       overTime: "04:00",
-      penalties: [],
     },
     {
       id: 3,
       employee: {
         name: "Adam Luis",
-        code: "(#PEP52)",
+        code: "(#PEP65)",
       },
-      type:"Late Come",
-      date: "May. 3, 2024",
-      day: "Friday",
+      date: "May. 14, 2024",
+      day: "Wednesday",
       checkIn: "03:48 PM",
-      InDate: "Nov. 21, 2024",
+      InDate: "May. 21, 2024",
       checkOut: "03:10 PM",
-      OutDate: "Nov. 26, 2024",
-      Shift: "Morning Shift",
-      workType: "Work Form Home",
-      minHour: "07:15",
-      atWork: "75:22",
-      overTime: "03:45",
-      penalties: [],
+      OutDate: "May. 26, 2024",
+      Shift: "Regular Shift",
+      workType: "None",
+      minHour: "08:15",
+      atWork: "119:22",
+      pendingHour: "8:15",
+      overTime: "00:00",
     },
   ];
 
@@ -308,7 +304,6 @@ const LateComeEarlyOut = () => {
   const toggleCreateModal = () => {
     setCreateModalOpen(!isCreateModalOpen);
   };
-
 
   // Edit click
   const handleEditClick = (data) => {
@@ -405,16 +400,19 @@ const LateComeEarlyOut = () => {
               />
             </th>
             <th style={styles.tableCell}>Employee</th>
-            <th style={styles.tableCell}>Type</th>
-            <th style={styles.tableCell}>Attendance Date</th>
+            {/* <th style={styles.tableCell}>Type</th> */}
+            <th style={styles.tableCell}>Date</th>
+            <th style={styles.tableCell}>Day</th>
             <th style={styles.tableCell}>Check-In</th>
             <th style={styles.tableCell}>In Date</th>
             <th style={styles.tableCell}>Check-Out</th>
             <th style={styles.tableCell}>Out Date</th>
+            <th style={styles.tableCell}>Shift</th>
+            <th style={styles.tableCell}>Work Type</th>
             <th style={styles.tableCell}>Min Hour</th>
             <th style={styles.tableCell}>At Work</th>
-            <th style={styles.tableCell}>Penalties</th>
-            <th style={styles.tableCell}>Actions</th>
+            <th style={styles.tableCell}>Pending Hour</th>
+            <th style={styles.tableCell}>Overtime</th>
             <th style={styles.tableCell}></th>
           </tr>
         </thead>
@@ -459,44 +457,19 @@ const LateComeEarlyOut = () => {
                   </div>
                 </div>
               </td>
-              <td style={styles.tableCell}>{item.type}</td>
               <td style={styles.tableCell}>{item.date}</td>
+              <td style={styles.tableCell}>{item.day}</td>
               <td style={styles.tableCell}>{item.checkIn}</td>
               <td style={styles.tableCell}>{item.InDate}</td>
               <td style={styles.tableCell}>{item.checkOut}</td>
               <td style={styles.tableCell}>{item.OutDate}</td>
+              <td style={styles.tableCell}>{item.Shift}</td>
+              <td style={styles.tableCell}>{item.workType}</td>
               <td style={styles.tableCell}>{item.minHour}</td>
               <td style={styles.tableCell}>{item.atWork}</td>
+              <td style={styles.tableCell}>{item.pendingHour}</td>
+              <td style={styles.tableCell}>{item.overTime}</td>
               <td style={styles.tableCell}></td>
-              <td>
-                <div
-                  style={{
-                    display: "flex",
-                    gap: "10px",
-                    alignItems: "center",
-                    marginLeft: "20px",
-                  }}
-                >
-                  <ActionButton
-                    id={`editBtn-${item.id}`}
-                    color="#435ebe"
-                    bgColor="#eef2ff"
-                    icon={FiAlertCircle}
-                    tooltip="penalty"
-                    onClick={(e) => {
-                      handleEditClick(item);
-                    }}
-                  />
-                  <ActionButton
-                    id={`deleteBtn-${item.id}`}
-                    color="#dc3545"
-                    bgColor="#ffebee"
-                    icon={FiTrash2}
-                    tooltip="Remove"
-                    onClick={() => handleDeleteClick(item.id)}
-                  />
-                </div>
-              </td>
             </tr>
           ))}
         </tbody>
@@ -504,36 +477,74 @@ const LateComeEarlyOut = () => {
     </div>
   );
 
-
- const TopButtons = () => (
-    <div style={styles.topButtons}>
-      <Button style={styles.selectButton} onClick={handleSelectAll}>
-        Select All Attendance
-      </Button>
-      {selectedRows.length > 0 && (
-        <>
-          <Button
-            style={styles.unselectButton}
-            onClick={() => setSelectedRows([])}
-          >
-            Unselect All Attendance
-          </Button>
-          <Button style={styles.exportButton}>Export Attendance</Button>
-          <span style={styles.selectedCount}>
-            {selectedRows.length} - Selected
-          </span>
-        </>
-      )}
-    </div>
-  );
-  
   return (
     <Container fluid className="p-3" style={{ width: "1200px" }}>
-        <TopBarAttendancefield
-        headerName="Late Come/Early Out"
-      />
-       <div>
-        <TopButtons />
+      <Row className="mb-3 align-items-center">
+        <Col>
+          <h3>My Attendances</h3>
+        </Col>
+        <Col md="8" className="d-flex justify-content-end">
+          <Button
+            outline
+            color="secondary"
+            style={{ marginRight: "5px", width: "180px" }}
+          >
+            <IoFilterSharp /> Filter
+          </Button>
+        </Col>
+      </Row>
+
+      <div className="d-flex justify-content-end mb-3">
+        <div className="d-flex gap-3">
+          <div className="d-flex align-items-center">
+            <div
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: "50%",
+                backgroundColor: "#4CAF50",
+                marginRight: 8,
+              }}
+            ></div>
+            <span>Validate</span>
+          </div>
+          <div className="d-flex align-items-center">
+            <div
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: "50%",
+                backgroundColor: "#F44336",
+                marginRight: 8,
+              }}
+            ></div>
+            <span>Not validate</span>
+          </div>
+          <div className="d-flex align-items-center">
+            <div
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: "50%",
+                backgroundColor: "#f2b718",
+                marginRight: 8,
+              }}
+            ></div>
+            <span>Requested</span>
+          </div>
+          <div className="d-flex align-items-center">
+            <div
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: "50%",
+                backgroundColor: "#3719f7",
+                marginRight: 8,
+              }}
+            ></div>
+            <span>Approved request</span>
+          </div>
+        </div>
       </div>
 
       <Card>
@@ -559,7 +570,7 @@ const LateComeEarlyOut = () => {
 
       {/* Details Modal */}
       {isDetailsModalOpen && (
-        <ViewDetails
+        <MyAttendancesDetails
           isOpen={isDetailsModalOpen}
           toggle={toggleDetailsModal}
           data={shiftData[selectedRowData]}
@@ -570,26 +581,25 @@ const LateComeEarlyOut = () => {
       )}
 
       {/* Update form */}
-      {isUpdateModalOpen && (
+      {/* {isUpdateModalOpen && (
         <CreatePenalties
           isOpen={isUpdateModalOpen}
           toggle={toggleUpdateModal}
           data={updateData}
         />
-      )}
+      )} */}
 
       {/* For remove */}
-      <WarningComponent
+      {/* <WarningComponent
         open={isWarningOpen}
         onClose={handleCloseWarning}
         onConfirm={handleConfirmDelete}
         message="Are you sure you want to delete this?"
         confirmText="Confirm"
         cancelText="Cancel"
-      />
-
+      /> */}
     </Container>
-  )
-}
+  );
+};
 
-export default LateComeEarlyOut
+export default MyAttendances;
