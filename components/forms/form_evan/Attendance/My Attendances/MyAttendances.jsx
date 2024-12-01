@@ -14,14 +14,6 @@ import {
 } from "reactstrap";
 import { IoFilterSharp } from "react-icons/io5";
 import Pagination from "@mui/material/Pagination";
-import {
-  FiEdit2,
-  FiCopy,
-  FiTrash2,
-  FiFileText,
-  FiAlertCircle,
-} from "react-icons/fi";
-import { MdDone, MdDelete } from "react-icons/md";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import MyAttendancesDetails from "./MyAttendancesDetails";
@@ -153,15 +145,11 @@ const styles = {
 };
 
 const MyAttendances = () => {
-  const [activeView, setActiveView] = useState("requests");
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
 
   const [selectedRowData, setSelectedRowData] = useState(null);
   const [isDetailsModalOpen, setDetailsModalOpen] = useState(false);
-
-  const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
-  const [updateData, setUpdateData] = useState(null);
 
   // Generate color based on string
   const stringToColor = (string) => {
@@ -296,90 +284,6 @@ const MyAttendances = () => {
     } else if (direction === "next" && selectedRowData < shiftData.length - 1) {
       setSelectedRowData(selectedRowData + 1);
     }
-  };
-
-  // Function to toggle modal visibility
-  const [isCreateModalOpen, setCreateModalOpen] = useState(false);
-
-  const toggleCreateModal = () => {
-    setCreateModalOpen(!isCreateModalOpen);
-  };
-
-  // Edit click
-  const handleEditClick = (data) => {
-    setUpdateData(data);
-    setUpdateModalOpen(true);
-  };
-
-  const toggleUpdateModal = () => {
-    setUpdateModalOpen(!isUpdateModalOpen);
-  };
-
-  // Delete clcik
-  const [isWarningOpen, setIsWarningOpen] = useState(false);
-  const [deleteId, setDeleteId] = useState(null);
-
-  const handleDeleteClick = (id) => {
-    setDeleteId(id);
-    setIsWarningOpen(true);
-  };
-
-  const handleCloseWarning = () => {
-    setIsWarningOpen(false);
-  };
-
-  const handleConfirmDelete = () => {
-    console.log("Deleted item with ID:", deleteId);
-    setIsWarningOpen(false);
-  };
-
-  const ActionButton = ({
-    id,
-    color,
-    bgColor,
-    icon: Icon,
-    tooltip,
-    onClick,
-  }) => {
-    return (
-      <>
-        <button
-          id={id}
-          className="btn"
-          style={{
-            color: color,
-            backgroundColor: bgColor,
-            borderRadius: "4px",
-            width: "32px",
-            height: "32px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            border: "none",
-            padding: "0",
-            transition: "all 0.2s ease-in-out",
-            marginTop: "10px",
-          }}
-          onClick={(e) => {
-            e.stopPropagation();
-            if (onClick) onClick(e);
-          }}
-          onMouseOver={(e) => {
-            e.currentTarget.style.opacity = "0.8";
-            e.currentTarget.style.transform = "scale(1.05)";
-          }}
-          onMouseOut={(e) => {
-            e.currentTarget.style.opacity = "1";
-            e.currentTarget.style.transform = "scale(1)";
-          }}
-        >
-          <Icon size={16} />
-        </button>
-        <UncontrolledTooltip placement="top" target={id}>
-          {tooltip}
-        </UncontrolledTooltip>
-      </>
-    );
   };
 
   const renderShiftRequestsTable = () => (
@@ -579,25 +483,6 @@ const MyAttendances = () => {
           hasNext={selectedRowData < shiftData.length - 1}
         />
       )}
-
-      {/* Update form */}
-      {/* {isUpdateModalOpen && (
-        <CreatePenalties
-          isOpen={isUpdateModalOpen}
-          toggle={toggleUpdateModal}
-          data={updateData}
-        />
-      )} */}
-
-      {/* For remove */}
-      {/* <WarningComponent
-        open={isWarningOpen}
-        onClose={handleCloseWarning}
-        onConfirm={handleConfirmDelete}
-        message="Are you sure you want to delete this?"
-        confirmText="Confirm"
-        cancelText="Cancel"
-      /> */}
     </Container>
   );
 };
