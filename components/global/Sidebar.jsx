@@ -195,6 +195,10 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
       name: "attendance",
       isOpen: false,
     },
+    {
+      name: "leave",
+      isOpen: false,
+    },
   ]);
 
   // SET WINDOW SIZE
@@ -2146,6 +2150,69 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     <Item
                       title="My Attendances"
                       to="/attendance/myAttendances"
+                      icon={<ReceiptIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+
+                  </SubMenu>
+
+                  {/* Leave */}
+                  <SubMenu
+                    title="Leave"
+                    icon={<KeyIcon />}
+                    style={{
+                      color: colors.grey[100],
+                    }}
+                    onOpenChange={() => {
+                      handleChange("leave");
+                    }}
+                    open={opened[24].isOpen}
+                  >
+                    <Item
+                      title="My Leave Requests"
+                      to="/leave/myLeaveRequests"
+                      icon={<ReceiptIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+                    <Item
+                      title="Leave Requests"
+                      to="/leave/attendanceRequests"
+                      icon={<ReceiptIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+
+                    <Item
+                      title="Leave Types"
+                      to="/leave/attendanceActivities"
+                      icon={<ReceiptIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+
+                    <Item
+                      title="Assigned Leave"
+                      to="/leave/lateComeEarlyOut"
+                      icon={<ReceiptIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+
+                    <Item
+                      title="Leave Allocation Request"
+                      to="/leave/myAttendances"
                       icon={<ReceiptIcon />}
                       selected={selected}
                       setSelected={setSelected}
