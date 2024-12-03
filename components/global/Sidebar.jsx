@@ -2182,7 +2182,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     />
                     <Item
                       title="Leave Requests"
-                      to="/leave/attendanceRequests"
+                      to="/leave/leaverequest"
                       icon={<ReceiptIcon />}
                       selected={selected}
                       setSelected={setSelected}
