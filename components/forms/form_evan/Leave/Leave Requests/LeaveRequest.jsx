@@ -29,6 +29,8 @@ import LeaveClash from "../../modalForms_evan/LeaveField/LeaveRequest/LeaveClash
 import LeaveRequstformcreate from "../../modalForms_evan/LeaveField/LeaveRequest/LeaveRequstformcreate";
 import LeaveRequestDetailsView from "../../modalForms_evan/LeaveField/LeaveRequest/LeaveRequestDetailsView";
 import EditLeaveRequest from "../../modalForms_evan/LeaveField/LeaveRequest/EditLeaveRequest";
+import LeaveRequestComment from "../../modalForms_evan/LeaveField/LeaveRequest/LeaveRequestComment";
+import WarningComponent from "../../modalForms_evan/Warning Component/WarningComponent";
 
 const styles = {
     pageWrapper: {
@@ -295,11 +297,19 @@ const LeaveRequest = () => {
     const toggleCreateModal = () => {
       setCreateModalOpen(!isCreateModalOpen);
     };
-  
+
+     // View Comments
+  const [isCommentsOpen, setCommentsOpen] = useState(false);
+  const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
+
+  const handleViewComments = (index) => {
+    setSelectedRowIndex(index);
+    setCommentsOpen(true);
+  };
   
     // Edit click
-    const handleEditClick = (data, leaveType) => {
-      setSelectedLeaveType(leaveType);
+    const handleEditClick = (data) => {
+      setSelectedLeaveType(data.type);
       setUpdateData(data);
       setUpdateModalOpen(true);
     };
@@ -655,16 +665,24 @@ const LeaveRequest = () => {
             data={updateData}
           />
         )}
+
+        {/* View comments */}
+      <LeaveRequestComment
+        isOpen={isCommentsOpen}
+        onClose={() => setCommentsOpen(false)}
+        rowIndex={selectedRowIndex}
+        data={shiftData}
+      />
   
         {/* For remove */}
-        {/* <WarningComponent
+        <WarningComponent
           open={isWarningOpen}
           onClose={handleCloseWarning}
           onConfirm={handleConfirmDelete}
           message="Are you sure you want to delete this?"
           confirmText="Confirm"
           cancelText="Cancel"
-        /> */}
+        />
   
       </Container>
   )
