@@ -390,7 +390,12 @@ const LeaveRequest = () => {
       };
 
     const renderLeaveClashCell = () => (
-        <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }} onClick={handleClashClick}>
+        <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }} 
+        onClick={(e) => {
+          e.stopPropagation();
+          handleClashClick();
+        }}>
+          
           <MdGroups size={35} />
           <div
             style={{
