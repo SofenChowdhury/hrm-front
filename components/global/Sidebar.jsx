@@ -2212,7 +2212,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
 
                     <Item
                       title="Leave Allocation Request"
-                      to="/leave/myAttendances"
+                      to="/leave/leaveAllocationRequest"
                       icon={<ReceiptIcon />}
                       selected={selected}
                       setSelected={setSelected}
