@@ -2202,7 +2202,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
 
                     <Item
                       title="Assigned Leave"
-                      to="/leave/lateComeEarlyOut"
+                      to="/leave/assignedLeave"
                       icon={<ReceiptIcon />}
                       selected={selected}
                       setSelected={setSelected}
