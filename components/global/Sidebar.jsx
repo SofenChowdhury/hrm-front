@@ -2249,8 +2249,8 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       width={width}
                     />
                     <Item
-                      title="Leave Requests"
-                      to="/payroll/leaverequest"
+                      title="Allowances"
+                      to="/payroll/allowances"
                       icon={<ReceiptIcon />}
                       selected={selected}
                       setSelected={setSelected}
