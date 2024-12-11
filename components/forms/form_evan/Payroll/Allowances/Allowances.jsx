@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Container, Card, Typography, Avatar } from "@mui/material";
 import TopBarAllowanceComponent from "../../modalForms_evan/TopComponent/TopBarAllowanceComponent";
+import AllowancesDetailsView from "../../modalForms_evan/AllowancesField/AllowancesDetailsView";
+import CreateAllowance from "../../modalForms_evan/AllowancesField/CreateAllowance";
 
 const styles = {
   cardContainer: {
@@ -66,6 +68,9 @@ const Allowances = () => {
       amount: 200.0,
       taxable: "Yes",
       oneTimeAllowance: "No",
+      conditionBased:"No",
+      hasMaxlimt:"No",
+      allowanceEligibility:"If Basic Pay Greater Than (>) 0.0",
       employee: { name: "Sofia Howard", code: "(#PEP75)" },
     },
     {
@@ -75,6 +80,9 @@ const Allowances = () => {
       amount: 1000.0,
       taxable: "Yes",
       oneTimeAllowance: "No",
+      conditionBased:"No",
+      hasMaxlimt:"No",
+      allowanceEligibility:"If Basic Pay Greater Than (>) 0.0",
       employee: { name: "Levi Sanders", code: "(#PEP48)" },
     },
   ];
@@ -105,14 +113,41 @@ const Allowances = () => {
         return firstInitial + lastInitial;
     };
 
+  
+  // Function to toggle modal visibility
+  const [isCreateModalOpen, setCreateModalOpen] = useState(false);
+
+  const toggleCreateModal = () => {
+    setCreateModalOpen(!isCreateModalOpen);
+  };
+
+
   const handleCardClick = (index) => {
     setSelectedLeaveIndex(index);
     setIsDetailsModalOpen(true);
   };
 
+  const toggleDetailsModal = () => {
+    setIsDetailsModalOpen(!isDetailsModalOpen);
+  };
+
+  const handleNavigateAsset = (direction) => {
+    if (direction === "previous" && selectedLeaveIndex > 0) {
+      setSelectedLeaveIndex(selectedLeaveIndex - 1);
+    } else if (direction === "next" && selectedLeaveIndex < leaveData.length - 1) {
+      setSelectedLeaveIndex(selectedLeaveIndex + 1);
+    }
+  };
+
   return (
     <Container fluid className="p-3" style={{ width: "1200px" }}>
-      <TopBarAllowanceComponent headerName="Allowances" />
+      <TopBarAllowanceComponent headerName="Allowances" 
+        onCreateClick={toggleCreateModal}
+        />
+        <CreateAllowance
+        isOpen={isCreateModalOpen}
+        toggle={toggleCreateModal}
+      />
 
       <div style={styles.cardContainer}>
         {leaveData.map((item, index) => (
@@ -148,6 +183,16 @@ const Allowances = () => {
           </Card>
         ))}
       </div>
+
+      <AllowancesDetailsView
+        isOpen={isDetailsModalOpen}
+        toggle={toggleDetailsModal}
+        data={leaveData[selectedLeaveIndex]}
+        onNavigate={handleNavigateAsset}
+        hasPrevious={selectedLeaveIndex > 0}
+        hasNext={selectedLeaveIndex < leaveData.length - 1}
+      />
+
     </Container>
   );
 };
