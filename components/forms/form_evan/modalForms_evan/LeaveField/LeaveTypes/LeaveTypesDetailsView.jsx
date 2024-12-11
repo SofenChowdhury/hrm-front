@@ -12,7 +12,7 @@ import WarningComponent from "../../Warning Component/WarningComponent";
 const LeaveTypesDetailsView = ({ isOpen, toggle, data, onNavigate,hasPrevious,hasNext, }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  const [isWarningOpen, setIsWarningOpen] = useState(false); // Ensure this is at the top level
+  const [isWarningOpen, setIsWarningOpen] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
   if (!data) return null;
 
