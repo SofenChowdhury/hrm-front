@@ -52,6 +52,7 @@
     "react-multi-select-component": "^4.3.4",
     "react-pro-sidebar": "^0.7.1",
     "react-redux": "^8.0.5",
+    "react-select": "^5.8.3",
     "react-to-print": "^2.14.11",
     "reactstrap": "^9.2.3",
     "redux-persist": "^6.0.0",

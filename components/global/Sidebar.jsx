@@ -199,6 +199,11 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
       name: "leave",
       isOpen: false,
     },
+
+    {
+      name: "payroll",
+      isOpen: false,
+    }
   ]);
 
   // SET WINDOW SIZE
@@ -2182,7 +2187,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     />
                     <Item
                       title="Leave Requests"
-                      to="/leave/attendanceRequests"
+                      to="/leave/leaverequest"
                       icon={<ReceiptIcon />}
                       selected={selected}
                       setSelected={setSelected}
@@ -2192,7 +2197,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
 
                     <Item
                       title="Leave Types"
-                      to="/leave/attendanceActivities"
+                      to="/leave/leaveType"
                       icon={<ReceiptIcon />}
                       selected={selected}
                       setSelected={setSelected}
@@ -2202,7 +2207,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
 
                     <Item
                       title="Assigned Leave"
-                      to="/leave/lateComeEarlyOut"
+                      to="/leave/assignedLeave"
                       icon={<ReceiptIcon />}
                       selected={selected}
                       setSelected={setSelected}
@@ -2212,7 +2217,7 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
 
                     <Item
                       title="Leave Allocation Request"
-                      to="/leave/myAttendances"
+                      to="/leave/leaveAllocationRequest"
                       icon={<ReceiptIcon />}
                       selected={selected}
                       setSelected={setSelected}
@@ -2221,6 +2226,70 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                     />
 
                   </SubMenu>
+
+                  {/* Payroll */}
+                  <SubMenu
+                    title="Payroll"
+                    icon={<KeyIcon />}
+                    style={{
+                      color: colors.grey[100],
+                    }}
+                    onOpenChange={() => {
+                      handleChange("payroll");
+                    }}
+                    open={opened[25].isOpen}
+                  >
+                    <Item
+                      title="Contract"
+                      to="/payroll/contract"
+                      icon={<ReceiptIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+                    <Item
+                      title="Allowances"
+                      to="/payroll/allowances"
+                      icon={<ReceiptIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+
+                    <Item
+                      title="Leave Types"
+                      to="/payroll/leaveType"
+                      icon={<ReceiptIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+
+                    <Item
+                      title="Assigned Leave"
+                      to="/payroll/assignedLeave"
+                      icon={<ReceiptIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+
+                    <Item
+                      title="Leave Allocation Request"
+                      to="/payroll/leaveAllocationRequest"
+                      icon={<ReceiptIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+
+                  </SubMenu>
+
                 </>
               )}
             </Box>
