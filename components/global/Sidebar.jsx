@@ -2288,6 +2288,16 @@ const Sidebar = ({ name, roles, company, isCollapsed }) => {
                       width={width}
                     />
 
+                    <Item
+                      title="Report"
+                      to="/payroll/report"
+                      icon={<ReceiptIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                      change={change}
+                      width={width}
+                    />
+
                   </SubMenu>
 
                 </>
